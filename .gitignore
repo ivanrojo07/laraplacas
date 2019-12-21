@@ -4,7 +4,15 @@
 /storage/*.key
 /vendor
 .env
+.editorconfig
+config~HEAD
+description
+HEAD
 .env.backup
+/hooks
+/info
+/.idea
+/.phpintel
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
