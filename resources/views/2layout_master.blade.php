@@ -138,7 +138,18 @@
                 </div>
             </div>
       </header3>
-      <main>
+      <nav class="nav nav-tabs " id="nav-tab" style="">
+        <div style="">
+              <!--span class="glbl glbl-search" role="button" style=" float:right" title="Buscar"></span-->
+          <a href="{{ route('home') }}"><span role="button" class="glbl glbl-home" title="Inicio"></span></a>
+          <a href="{{ route('home') }}"><span role="button" class="glbl glbl-search" title="Inicio"></span></a>
+          <a href="{{ route('home') }}"><span role="button" class="glbl glbl-more" title="Inicio"></span></a>
+        </div>
+      </nav>
+      <nav3 id="sidebar">
+        @yield('sidebar')
+      </nav3> 
+      <main class="py-2">
         <!-- modal de login -->
         <div id="miModal" href="{{ route('logout') }}" >
             <div class="logoutbutton" style="text-align: end">
@@ -154,8 +165,14 @@
                         @endguest
                       </div>
             </div>
-            <h3 style="border-bottom:  double #f5f5f5;font-size: 16px;text-align: start">Contacto</h3>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link nav-option" href="#">Posibles Multas</a>
+                <a class="nav-link nav-option" href="#">Busqueda de Placas</a>
+              </li>
+            </ul>
                <div id="textologin">
+                  <h3 style="border-bottom:  double #f5f5f5;font-size: 16px;text-align: start; margin-bottom: 0px;">Contacto</h3>
                   @yield('contenidosession')
                   Centro de Tecnologías Unificadas<br><br>
                   Lago Zurich No. 245<br>
@@ -173,47 +190,47 @@
                 </div>
         </div>
           <!-- modal de login close -->
-        <div id="contenidor">
+        <div id="container-fluid">
         {{-- Contenido General de cada vista  --}}
-        @guest
-        <div class="content">
-            <div class="title m-b-md incidentes" >
+          @guest
+            <div class="content">
+              <div class="title m-b-md incidentes" >
                 <a href="{{ route('login') }}">Login</a>
                 <a href="{{ route('register') }}">Registrar</a>
+              </div>
             </div>
+          @else
+          @endguest
+          <div class="container-fluid contenido">
+              @yield('contenido')
           </div>
-            @else
-            @endguest
-            <div class="container-fluid contenido">
-                @yield('contenido')
-            </div>
-            <!-- /.modal de Mensajes -->
-            <div class="modal fade" id="modalMensajes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Mensaje:</h5>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                           </button>
-                        </div><!-- /.modal-header -->
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    <span aria-hidden="true"></span>
-                                </div>
-                                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    <h4 id="mensaje"></h4>
-                                 </div>
-                            </div>
-                        </div><!-- /.modal-body -->
-                         <div class="modal-footer">
-                             <button type="button" class="btn btn-primary" id="bttn-modal-a">Aceptar</button>
-                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        </div><!-- /.modal-footer -->
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+          <!-- /.modal de Mensajes -->
+          <div class="modal fade" id="modalMensajes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title">Mensaje:</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                      </div><!-- /.modal-header -->
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                  <span aria-hidden="true"></span>
+                              </div>
+                               <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                  <h4 id="mensaje"></h4>
+                               </div>
+                          </div>
+                      </div><!-- /.modal-body -->
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-primary" id="bttn-modal-a">Aceptar</button>
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      </div><!-- /.modal-footer -->
+                  </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
         </div>
       </main>
       <footer >
@@ -225,11 +242,7 @@
           </div-->
       </footer>
     </section>
-    <script type="text/javascript" src="{{ asset('js/vendor/jquery-3.2.1.slim.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/vendor/popper-1.12.9.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset("js/app.js") }}"> </script>
     <script type="text/javascript" src="{{ asset('js/controlmodal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/togglefect.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/vendor/modernizr-3.5.0.min.js') }}"></script>

@@ -167,3 +167,13 @@ Auth::routes();
 
 Route::get('/home', 'vistaController@usuarios')->name('home');
 
+
+// Grupo de rutas para Historial de Placas
+Route::namespace('Historial')->prefix('historial')->name('historial.')->group(function(){
+    Route::get('','HistorialMultasController@index')->name('index');
+    Route::post('/placa','HistorialMultasController@buscarPlaca')->name('buscar');
+});
+Route::get('placas',function(){
+    return view('vista_previa.placas');
+});
+

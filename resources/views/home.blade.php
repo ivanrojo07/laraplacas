@@ -278,9 +278,9 @@
                             </thead>
                              <tbody class="plateList">
                                  @foreach($usuarios as $key=>$usuario)
-                                     @if($usuario->nombres)
+                                     @if($usuario->name)
                                  <tr>
-                                     <th>{{$usuario->nombres}}</th>
+                                     <th>{{$usuario->name}}</th>
                                     <th>{{ $usuario->apellido_paterno }}</th>
                                     <th>{{ $usuario->apellido_materno}}</th>
                                     <th>{{ $usuario->telefono}}</th>

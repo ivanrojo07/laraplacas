@@ -15,8 +15,20 @@ body{
 ::-webkit-scrollbar {
     display: none;
 }
-/*************** Cabecera ************/
+.contenedor-datos-carro-info {
 
+    background-color: #54595e;
+    font-size: 14px;
+    border: 0.5px solid #2a313a;
+    background-color: #3f444b; 
+    font-weight: normal;
+    color: white;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-bottom: 1px solid #f5f5f5;
+
+}
+/*************** Cabecera ************/
 .cabecera{
   /*background-image: url("../images/banner.png");*/
     width: 100%;
@@ -283,6 +295,7 @@ background-color: #ff0000;
 
   }
   #page > main {
+
     grid-area: main;
    /* grid-column: 1;
    grid-row: 3 / 7;*/
@@ -6293,11 +6306,12 @@ background-color: #ff0000;
       height:80%;
       max-height:100%;
       overflow:auto;
+      padding-top: calc(112vh - 630px);
     }
     #salidasesion{
       align:middle;
       /*font-size:25px;*/
-      padding-top: 16%;
+      padding-top: 5%;
       height:16%
     }
 
@@ -6321,21 +6335,21 @@ background-color: #ff0000;
         width: 30%;
         float:right;
         /*margin-top: 1px;*/
-        .logofoter{
-          width: 80px;
+  .logofoter{
+    width: 80px;
     height: 16px;
-    }
-   .imagenlogo{
-    text-align: end;
-    margin-top: -25px;
+  }
+ .imagenlogo{
+  text-align: end;
+  margin-top: -25px;
 
-    }
-    .textfoter{
-       color: white;
+  }
+  .textfoter{
+     color: white;
     text-align: start;
     padding-top: 12px;
     font-size: 10px;
-    }
+  }
 
 }
 @media only screen and (min-width: 2300px) and (max-width: 2599px) and (orientation : landscape){
