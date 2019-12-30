@@ -55,6 +55,7 @@ Route::middleware(['admin'])->group(function () {
         //Route::get('/desarrollo', 'developerController@select')->name('developer.select')->middleware('permission:role.index');
         Route::post('/validarCorreo', 'developerController@validarCorreo')->name('developer.validarCorreo');
     });
+
 });
 Auth::routes();
 Route::get('/home', 'vistaController@usuarios')->name('home');
