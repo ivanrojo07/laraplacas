@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0a9f811-3a33-4da4-a237-5db0ca4d9fb4" name="Default Changelist" comment="" />
+    <list default="true" id="b0a9f811-3a33-4da4-a237-5db0ca4d9fb4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/inicio.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/inicio.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +23,9 @@
         <option value="CSS File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -139,7 +146,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prueba/index.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../incidentes" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
@@ -170,6 +177,7 @@
         </serviceView>
       </list>
     </option>
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -186,6 +194,11 @@
       <workItem from="1576685245872" duration="22393000" />
       <workItem from="1576767419713" duration="19060000" />
       <workItem from="1576855098310" duration="3712000" />
+      <workItem from="1577469655734" duration="3619000" />
+      <workItem from="1577718201464" duration="889000" />
+      <workItem from="1577720014148" duration="44000" />
+      <workItem from="1577720352895" duration="16379000" />
+      <workItem from="1577805162104" duration="3375000" />
     </task>
     <servers />
   </component>
@@ -193,19 +206,28 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2506" y="169" width="737" height="739" key="#Posibles_Multas" timestamp="1576685365836">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="633" y="192" width="751" height="721" key="#Posibles_Multas" timestamp="1577744872344">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="2506" y="169" width="737" height="739" key="#Posibles_Multas/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576685365836" />
+    <state x="633" y="192" width="751" height="721" key="#Posibles_Multas/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1577744872344" />
+    <state x="703" y="357" width="570" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577745583854">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="703" y="357" width="570" height="390" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1577745583854" />
+    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1577733556256">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="726" y="301" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1577733556256" />
     <state x="2508" y="187" width="737" height="704" key="#phpunit.xml" timestamp="1576543356770">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2508" y="187" width="737" height="704" key="#phpunit.xml/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576543356770" />
-    <state x="2663" y="297" width="424" height="484" key="FileChooserDialogImpl" timestamp="1576799692437">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="784" y="317" width="424" height="484" key="FileChooserDialogImpl" timestamp="1577721149681">
+      <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="2663" y="297" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576799692437" />
-    <state x="784" y="317" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1576769139452" />
+    <state x="784" y="317" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1577721149681" />
     <state width="1807" height="278" key="GridCell.Tab.0.bottom" timestamp="1576539551530">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -231,14 +253,18 @@
     </state>
     <state x="2523" y="362" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576855102942" />
     <state x="649" y="380" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1576767450105" />
-    <state x="2525" y="143" width="709" height="792" key="find.popup" timestamp="1576800059445">
-      <screen x="1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="2525" y="143" width="709" height="792" key="find.popup/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576800059445" />
-    <state x="617" y="169" width="709" height="773" key="find.popup/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1576777055814" />
-    <state x="656" y="257" key="search.everywhere.popup" timestamp="1576775633322">
+    <state x="761" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577734744044">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="656" y="257" key="search.everywhere.popup/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1576775633322" />
+    <state x="761" y="472" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1577734744044" />
+    <state x="617" y="169" width="709" height="773" key="find.popup" timestamp="1577734503652">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="2525" y="143" width="709" height="792" key="find.popup/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1576800059445" />
+    <state x="617" y="169" width="709" height="773" key="find.popup/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1577734503652" />
+    <state x="656" y="257" key="search.everywhere.popup" timestamp="1577734747090">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="656" y="257" key="search.everywhere.popup/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1577734747090" />
   </component>
 </project>

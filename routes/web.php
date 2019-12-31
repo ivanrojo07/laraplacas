@@ -24,7 +24,7 @@ Route::middleware(['admin'])->group(function () {
     //**************************************************
     //**************************************************
     //******RUTAS DE USUARIOS ********************
-    Route::prefix('/usuario')->group(function () {
+    /* Route::prefix('/usuario')->group(function () {
         Route::get('/insert','adminusrController@insert')->name('usuario.insert')->middleware('permission:role.index');
         Route::get('/select','adminusrController@select')->name('usuario.select')->middleware('permission:role.index');
         Route::get('/delete','adminusrController@delete')->name('usuario.delete')->middleware('permission:role.index');
@@ -33,12 +33,12 @@ Route::middleware(['admin'])->group(function () {
         //Route::post('/test',function(){
         //  return "Hola esto es una prueba";
         //});
-    });
+    }); */
 
     //**************************************************
     //**************************************************
     //******RUTAS DE USUARIOS DESARROLLO ***************
-    Route::prefix('/developer')->group(function () {
+    /*Route::prefix('/developer')->group(function () {
         Route::get('/registrar', 'developerController@registrar')->name('developer.registrar')->middleware('permission:role.index');
         Route::post('/insertdevelop', 'developerController@insertdevelop')->name('developer.insertdevelop');
 
@@ -54,7 +54,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/select', 'developerController@select')->name('developer.select');
         //Route::get('/desarrollo', 'developerController@select')->name('developer.select')->middleware('permission:role.index');
         Route::post('/validarCorreo', 'developerController@validarCorreo')->name('developer.validarCorreo');
-    });
+    }); */
 
 });
 Auth::routes();
@@ -63,6 +63,9 @@ Route::get('/home', 'vistaController@usuarios')->name('home');
 Route::namespace('Historial')->prefix('historial')->name('historial.')->group(function(){
     Route::get('','HistorialMultasController@index')->name('index');
     Route::post('/placa','HistorialMultasController@buscarPlaca')->name('buscar');
+});
+Route::prefix('/usuario')->name('usuario.')->group(function (){
+   Route::post('/users','UsuarioController@nuevo')->name('nuevo');
 });
 Route::get('placas',function(){
     return view('vista_previa.placas');
