@@ -15,6 +15,7 @@ class RegistroPlaca extends Model
 {
     // Propiedades que pueden ser asignadas en masa
 	protected $fillable=[
+		'tipo_servicio_id',
 		'placa',
 		'verificada',
 		'marca',
@@ -26,6 +27,10 @@ class RegistroPlaca extends Model
 		'version',
 		'robado'
 	];
+
+	public function setPlacaAttribute($value){
+		$this->attributes['placa'] = strtoupper($value);
+	}
 
 	// Relación con el tipo de servicio del vehiculo
 	public function tipo_servicio(){
