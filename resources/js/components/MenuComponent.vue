@@ -33,7 +33,7 @@
                 </div>
                 <div class="card col-12" v-if="!(Object.keys(placa_response).length === 0 )">
                     <div class="card-header">
-                        <h3>Placa: {{ placa_response.placa }}</h3>
+                        <h3>Placa: {{ repuve_response.placa ? repuve_response.placa : 'Registro no encontrado en REPUVE' }}</h3>
                     </div>
                     <div class="card-body" style="padding: 0 !important;">
                         <div class="col-md-12 contenedor-datos-carro-info">
@@ -42,7 +42,7 @@
                                     Marca 
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.marca ? placa_response.marca : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.marca ? repuve_response.marca : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                     Modelo
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.modelo ? placa_response.modelo : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.modelo ? repuve_response.modelo : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                     Año
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.anio ? placa_response.anio : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.año ? repuve_response.año : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     Clase
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.clase ? placa_response.clase : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.clase ? repuve_response.clase : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                                     NIV
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.niv ? placa_response.niv : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.niv ? repuve_response.niv : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                     Version
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.version ? placa_response.version : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.version ? repuve_response.version : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                                     Tipo
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.tipo ? placa_response.tipo : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.tipo ? repuve_response.tipo : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                                     Robado
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ placa_response.placa ? (placa_response.robado ? 'SI' : 'NO') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.robado ? repuve_response.robado : 'NO') : 'N/A'}}
                                     <a class="" href="#robado" @click="setTab('robado')">Más detalles</a>
                                 </div>
                             </div>
@@ -167,6 +167,7 @@
             placa : "",
             placa_response : {},
             activeItem:'velocidad',
+            repuve_response:{},
           }
         },
         methods:{
@@ -181,20 +182,29 @@
                 if (!this.errors.length) {
                     axios.post('api/placa',{placa:this.placa}).then(response=>{
                         this.placa_response = {};
-                        console.log(response.data);
                         this.placa_response = response.data.placa
+                        this.$root.$emit('set-placa-info',this.placa_response);
                     }).catch(error=>{
                         if (error.response) {
                             this.placa_response = {};
                             var errs = error.response.data.errors.placa;
-                            console.log(errs);
                             errs.forEach(item=>this.errors.push(item));
-                            console.log(error.response.data);
                         }
                         console.log(error);
                     });
+                    this.getRepuve(this.placa);
                 }
                 e.preventDefault();
+            },
+            getRepuve(placa){
+                axios.post('api/repuve',{placa:placa}).then(res=>{
+                    this.repuve_response = res.data.result;
+                    this.$root.$emit('set-repuve-info',this.repuve_response);
+
+                }).catch(err=>{
+                    console.log(err.response.data);
+                    this.repuve_response = {};
+                });
             },
             validPlaca(placa){
                 var reg= /^[A-Ha-hJ-Nj-nP-Zp-z0-9]{4,7}$/;

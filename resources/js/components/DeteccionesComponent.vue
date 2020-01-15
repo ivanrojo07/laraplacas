@@ -21,23 +21,8 @@
     				</tr>
     			</thead>
     			<tbody>
-    				<tr class="text-white">
-    					<td>Hola</td>
-    					<td>Mundo</td>
-    					<td>Nuevo</td>
-    				</tr>
-    				<tr class="text-white">
-    					<td>Hola</td>
-    					<td>Mundo</td>
-    					<td>Nuevo</td>
-    				</tr>
-    				<tr class="text-white">
-    					<td>Hola</td>
-    					<td>Mundo</td>
-    					<td>Nuevo</td>
-    				</tr>
-    				<tr class="text-white">
-    					<td>Hola</td>
+    				<tr class="text-white" v-for="registro in registros">
+    					<td>Hola/td>
     					<td>Mundo</td>
     					<td>Nuevo</td>
     				</tr>
@@ -46,3 +31,29 @@
         </div>
 	</div>
 </template>
+<script>
+    export default{
+        data(){
+            return {
+                registros: Object
+            }
+        },
+        methods: {
+            setHistorial(res){
+                console.log('set historial',res);
+                this.registros = res;
+                console.log(this.registros)
+            }
+        },
+        props:{
+            response: Object
+        },
+        watch: {
+            'response': function(newValue,oldValue){
+                this.setHistorial(newValue);
+            }
+        },
+        mounted(){
+        }
+    }
+</script>
