@@ -77,17 +77,260 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
-
-        'sqlsrv' => [
+        // BD DE REGISTROS DEL REPUVE
+        'sqlsrv_repuve' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_REPUVE_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
             'charset' => 'utf8',
             'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // BD SISTEMA -1s
+        'sqlsrv_sistema_menos_1' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_MENOS_1_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // BD SISTEMA -1
+        'sqlsrv_sistema_0' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_0_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA_11
+        'sqlsrv_sistema_11' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_11_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 13
+        'sqlsrv_sistema_13' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_13_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 14
+        'sqlsrv_sistema_14' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_14_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 15
+        'sqlsrv_sistema_15' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_15_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 16
+        'sqlsrv_sistema_16' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_16_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 17
+        'sqlsrv_sistema_17' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_17_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 18
+        'sqlsrv_sistema_18' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_18_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 19
+        'sqlsrv_sistema_19' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_19_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 19
+        'sqlsrv_sistema_19' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_19_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 21
+        'sqlsrv_sistema_21' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_21_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 22
+        'sqlsrv_sistema_22' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_22_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 43
+        'sqlsrv_sistema_43' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_43_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
+        // SISTEMA 44
+        'sqlsrv_sistema_44' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_SISTEMA_44_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
             'prefix_indexes' => true,
         ],
 
