@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Sistemas;
 
 use App\Http\Controllers\Controller;
+use App\Sistema_11\Imagenes;
 use App\SistemaMenos1\Ticket;
 use App\Sistema_0\Reconocimiento;
 use App\Sistema_11\ImagenPlaca as ImagenPlaca11;
@@ -17,6 +18,7 @@ use App\Sistema_21\ImagenPlaca as ImagenPlaca21;
 use App\Sistema_22\ImagenPlaca as ImagenPlaca22;
 use App\Sistema_43\ImagenPlaca as ImagenPlaca43;
 use App\Sistema_44\ImagenPlaca as ImagenPlaca44;
+use App\Sistema_11\Imagenes as ImagenesPlacas;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -121,5 +123,11 @@ class SistemaController extends Controller
     		$query->where('placa_original',$request->placa);
     	})->get();
     	return response()->json(['result'=>$result->load('velocidad')],200);
+    }
+    public function ImagenSistema_11(Request $request ){
+
+        $result = ImagenesPlacas::where('placa_original',"LIKE" ,"%$request->placa%")->get();
+        /*dd($result);*/
+        return response()->json(['result'=>$result],200);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\PlacasSQL;
+use App\Sistema_11\ImagenVelocidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -42,5 +44,10 @@ class vistaController extends Controller
         ];
 
         return view('home', $datos);
+    }
+    public function PlacasSQL(Request $request){
+        $result = PlacasSQL::find('14')->inRandomOrder()->take(6)->get();
+        /*dd($result[0]->imagen2);*/
+        return response()->json(['placa'=>$result],200);
     }
 }

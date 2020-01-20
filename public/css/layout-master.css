@@ -20,7 +20,7 @@ body{
     background-color: #54595e;
     font-size: 14px;
     border: 0.5px solid #2a313a;
-    background-color: #3f444b; 
+    background-color: #3f444b;
     font-weight: normal;
     color: white;
     padding-top: 3%;
@@ -5947,9 +5947,9 @@ background-color: #ff0000;
       display: grid;
       width: 100%;
       height: 100%;
-      grid-template-areas: "head head2 head3"
-                           "main  main main"
-                           "main  main main"
+      grid-template-areas:  "head head2 head3"
+                             "nav  main main"
+                            "nav3  main main"
                             "foot foot foot";
      /* grid-template-rows: 60px 70px 83vh 30px;*/
      /* grid-template-rows: 6.302521008vh 7.352941176vh 83.193277312vh 3.151260504vh;*/

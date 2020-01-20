@@ -13,6 +13,9 @@ class ImagenVelocidad extends Model
 
     public function placa()
     {
-    	return $this->hasOne('App\Sistema_11\ImagenPlaca','id_img');
+    	return $this->hasOne('App\Sistema_11\ImagenPlaca','id_img','id_img');
+    }
+    public function def(){
+        return $this->hasOne('App\PlacasSQL','id_img');
     }
 }
