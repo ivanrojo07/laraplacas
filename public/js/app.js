@@ -1829,38 +1829,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChildMarker.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ChildMarker.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  inject: ['google', 'map'],
-  props: {
-    position: Object
-  },
-  data: function data() {
-    return {
-      marker: null
-    };
-  },
-  mounted: function mounted() {
-    var Marker = this.google.maps.Marker;
-    this.marker = new Marker({
-      position: this.position,
-      map: this.map,
-      title: "marcador hijo."
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeteccionesComponent.vue?vue&type=script&lang=js& ***!
@@ -1870,6 +1838,78 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1913,7 +1953,6 @@ __webpack_require__.r(__webpack_exports__);
     setHistorial: function setHistorial(res) {
       console.log('set historial', res);
       this.registros = res;
-      console.log(this.registros);
     }
   },
   props: {
@@ -1986,9 +2025,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      registros: Object
+    };
+  },
+  props: {
+    response: Object
+  },
+  watch: {
+    'response': function response(newVal, oldVal) {
+      this.setExcesoVelocidad(newVal);
+    }
+  },
+  methods: {
+    'setExcesoVelocidad': function setExcesoVelocidad(values) {
+      this.registros = values;
+    }
   }
 });
 
@@ -2016,11 +2127,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      ubicacion: Array,
+      ubicacion: [],
       map: null,
       camaras: []
     };
@@ -2034,7 +2144,9 @@ __webpack_require__.r(__webpack_exports__);
         array_response.forEach(function (item) {
           _this.camaras.push({
             lat: parseFloat(item.lat),
-            lng: parseFloat(item["long"])
+            lng: parseFloat(item["long"]),
+            ubicacion: item.ubicacion,
+            referencia: item.referencia
           });
         });
       })["catch"](function (err) {
@@ -2042,70 +2154,217 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     setUbicacion: function setUbicacion(res) {
-      this.ubicacion = [];
-      var array = []; // PARA SISTEMA 0 Y SISTEMA -1
+      var arreglo = []; // PARA SISTEMA 0 Y SISTEMA -1
 
-      if (res['sistema-1']['result'].length > 0 || res['sistema_0']['result'].length > 0) {
-        array.push(this.camaras[0]);
+      if (res['sistema_1']['result'].length > 0 || res['sistema_0']['result'].length > 0) {
+        var detecciones_0 = res.sistema_1.result.length + res.sistema_0.result.length;
+        var alta_velocidad_0 = 0;
+        res.sistema_0.result.forEach(function (registro) {
+          if (registro.AltaVelocidad == 1) {
+            alta_velocidad_0 += 1;
+          }
+        });
+        res.sistema_1.result.forEach(function (registro) {
+          if (registro.Velocidad >= 81) {
+            alta_velocidad_0 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[0],
+          'detecciones': detecciones_0,
+          'multas': alta_velocidad_0
+        });
       }
 
       if (res['sistema_11']['result'].length > 0) {
-        array.push(this.camaras[1]);
+        var detecciones_1 = res.sistema_11.result.length;
+        var alta_velocidad_1 = 0;
+        res.sistema_11.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_1 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[1],
+          'detecciones': detecciones_1,
+          'multas': alta_velocidad_1
+        });
       }
 
       if (res['sistema_13']['result'].length > 0) {
-        array.push(this.camaras[2]);
+        var detecciones_2 = res.sistema_13.result.length;
+        var alta_velocidad_2 = 0;
+        res.sistema_13.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_2 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[2],
+          'detecciones': detecciones_2,
+          'multas': alta_velocidad_2
+        });
       }
 
       if (res['sistema_14']['result'].length > 0) {
-        array.push(this.camaras[3]);
+        var detecciones_3 = res.sistema_14.result.length;
+        var alta_velocidad_3 = 0;
+        res.sistema_14.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_3 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[3],
+          'detecciones': detecciones_3,
+          'multas': alta_velocidad_3
+        });
       }
 
       if (res['sistema_15']['result'].length > 0) {
-        array.push(this.camaras[4]);
+        var detecciones_4 = res.sistema_15.result.length;
+        var alta_velocidad_4 = 0;
+        res.sistema_15.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_4 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[4],
+          'detecciones': detecciones_4,
+          'multas': alta_velocidad_4
+        });
       }
 
       if (res['sistema_16']['result'].length > 0) {
-        array.push(this.camaras[5]);
+        var detecciones_5 = res.sistema_16.result.length;
+        var alta_velocidad_5 = 0;
+        res.sistema_16.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_5 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[5],
+          'detecciones': detecciones_5,
+          'multas': alta_velocidad_5
+        });
       }
 
       if (res['sistema_17']['result'].length > 0) {
-        array.push(this.camaras[6]);
+        var detecciones_6 = res.sistema_17.result.length;
+        var alta_velocidad_6 = 0;
+        res.sistema_17.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_6 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[6],
+          'detecciones': detecciones_6,
+          'multas': alta_velocidad_6
+        });
       }
 
       if (res['sistema_18']['result'].length > 0) {
-        array.push(this.camaras[7]);
+        var detecciones_7 = res.sistema_18.result.length;
+        var alta_velocidad_7 = 0;
+        res.sistema_18.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_7 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[7],
+          'detecciones': detecciones_7,
+          'multas': alta_velocidad_7
+        });
       }
 
       if (res['sistema_19']['result'].length > 0) {
-        array.push(this.camaras[8]);
+        var detecciones_8 = res.sistema_19.result.length;
+        var alta_velocidad_8 = 0;
+        res.sistema_19.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_8 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[8],
+          'detecciones': detecciones_8,
+          'multas': alta_velocidad_8
+        });
       }
 
       if (res['sistema_21']['result'].length > 0) {
-        array.push(this.camaras[9]);
+        var detecciones_9 = res.sistema_21.result.length;
+        var alta_velocidad_9 = 0;
+        res.sistema_21.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_9 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[9],
+          'detecciones': detecciones_9,
+          'multas': alta_velocidad_9
+        });
       }
 
       if (res['sistema_22']['result'].length > 0) {
-        array.push(this.camaras[10]);
+        var detecciones_10 = res.sistema_22.result.length;
+        var alta_velocidad_10 = 0;
+        res.sistema_22.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_10 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[10],
+          'detecciones': detecciones_10,
+          'multas': alta_velocidad_10
+        });
       }
 
       if (res['sistema_43']['result'].length > 0) {
-        array.push(this.camaras[12]);
+        var detecciones_11 = res.sistema_43.result.length;
+        var alta_velocidad_11 = 0;
+        res.sistema_43.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_11 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[11],
+          'detecciones': detecciones_11,
+          'multas': alta_velocidad_11
+        });
       }
 
       if (res['sistema_44']['result'].length > 0) {
-        array.push(this.camaras[13]);
+        var detecciones_12 = res.sistema_44.result.length;
+        var alta_velocidad_12 = 0;
+        res.sistema_44.result.forEach(function (registro) {
+          if (registro.velocidad.velocidad >= 81) {
+            alta_velocidad_12 += 1;
+          }
+        });
+        arreglo.push({
+          'camaras': this.camaras[12],
+          'detecciones': detecciones_12,
+          'multas': alta_velocidad_12
+        });
       }
 
-      this.ubicacion = array;
-      console.log(array['sistema-1']['result'].length);
+      this.ubicacion = arreglo;
     }
   },
   props: {
-    response: Object
+    response: {}
   },
   watch: {
     'response': function response(newVal, oldVal) {
+      this.ubicacion = [];
       this.setUbicacion(newVal);
     }
   },
@@ -2147,7 +2406,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     mapConfig: Object,
-    apiKey: String
+    apiKey: String,
+    markers: Array
   },
   components: {
     MapProvider: _MapProvider__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -2155,7 +2415,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       google: null,
-      map: null
+      map: null,
+      google_puntos: []
     };
   },
   mounted: function mounted() {
@@ -2175,6 +2436,75 @@ __webpack_require__.r(__webpack_exports__);
       var mapContainer = this.$el.querySelector("#map");
       var Map = this.google.maps.Map;
       this.map = new Map(mapContainer, this.mapConfig);
+    },
+    setGooglePuntos: function setGooglePuntos(res) {
+      var _this2 = this;
+
+      this.google_puntos.forEach(function (punto) {
+        punto.setMap(null);
+      });
+      this.google_puntos = [];
+      console.log('result ', res);
+      res.forEach(function (point) {
+        _this2.createGooglePoint(point);
+      });
+    },
+    pinSymbol: function pinSymbol(color, punto) {
+      var ruta = "";
+
+      if (punto) {
+        ruta = 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0';
+      } else {
+        ruta = 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z';
+      }
+
+      return {
+        path: ruta,
+        fillColor: color,
+        fillOpacity: 1,
+        strokeColor: '#000',
+        strokeWeight: 3,
+        scale: 1.5
+      };
+    },
+    createGooglePoint: function createGooglePoint(point) {
+      var Marker = this.google.maps.Marker;
+      var marker = new Marker({
+        position: {
+          lat: parseFloat(point.camaras.lat),
+          lng: parseFloat(point.camaras.lng)
+        },
+        title: point.camaras.referencia
+      });
+      marker.setMap(this.map);
+      var punto = false;
+
+      if (point.multas > 0) {
+        punto = true;
+      }
+
+      if (point.detecciones < 5) {
+        marker.setIcon(this.pinSymbol('rgb(255,255,0)', punto));
+      } else if (point.detecciones < 10) {
+        marker.setIcon(this.pinSymbol('rgb(255,153,0)', punto));
+      } else {
+        marker.setIcon(this.pinSymbol('rgb(255,0,0)', punto));
+      }
+
+      this.map.setZoom(12);
+      this.map.setCenter(marker.position);
+      this.google.maps.event.addListener(marker, 'click', function () {
+        var infoWindow = new google.maps.InfoWindow(); // infoWindow.setContent(" Multas: " + fines + "<br>  Detecciones: " +detecciones + "<br>  Ubicación: " + addr);
+
+        infoWindow.setContent("Multas: ".concat(point.multas, "<br>Detecciones: ").concat(point.detecciones, "<br>  Ubicaci\xF3n: ").concat(point.camaras.ubicacion, " <br>"));
+        infoWindow.open(map, marker);
+      });
+      this.google_puntos.push(marker);
+    }
+  },
+  watch: {
+    'markers': function markers(newVal, oldVal) {
+      this.setGooglePuntos(newVal);
     }
   }
 });
@@ -2379,7 +2709,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2387,7 +2716,10 @@ __webpack_require__.r(__webpack_exports__);
       placa: "",
       placa_response: {},
       activeItem: 'velocidad',
-      repuve_response: {}
+      repuve_response: {},
+      velocidad_promedio: "",
+      exceso_velocidad: "",
+      detecciones: ""
     };
   },
   methods: {
@@ -2431,6 +2763,14 @@ __webpack_require__.r(__webpack_exports__);
     getRepuve: function getRepuve(placa) {
       var _this2 = this;
 
+      var repuve = this.repuve_response.placa ? this.repuve_response.placa : "";
+
+      if (this.placa != repuve.trim()) {
+        this.velocidad_promedio = "CARGANDO...";
+        this.exceso_velocidad = "CARGANDO...";
+        this.detecciones = "CARGANDO...";
+      }
+
       axios.post('api/repuve', {
         placa: placa
       }).then(function (res) {
@@ -2451,7 +2791,15 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this3 = this;
+
     console.log('Component mounted.');
+    this.$root.$on('info-sistemas', function (velocidad_promedio, exceso_velocidad, detecciones) {
+      // console.log('menu componente velocidad',velocidad_promedio);
+      _this3.velocidad_promedio = velocidad_promedio.toFixed(2) + " Km/h";
+      _this3.exceso_velocidad = exceso_velocidad;
+      _this3.detecciones = detecciones;
+    });
   }
 });
 
@@ -2467,7 +2815,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MapLoader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MapLoader.vue */ "./resources/js/components/MapLoader.vue");
-/* harmony import */ var _ChildMarker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChildMarker */ "./resources/js/components/ChildMarker.vue");
 //
 //
 //
@@ -2478,9 +2825,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2753,14 +3097,24 @@ __webpack_require__.r(__webpack_exports__);
             visibility: "off"
           }]
         }]
-      }
+      },
+      puntos: []
     };
   },
   components: {
-    MapLoader: _MapLoader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ChildMarker: _ChildMarker__WEBPACK_IMPORTED_MODULE_1__["default"]
+    MapLoader: _MapLoader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: {},
+  methods: {
+    'setPuntos': function setPuntos(puntos) {
+      this.puntos = [];
+      this.puntos = puntos;
+    }
+  },
+  watch: {
+    'markers': function markers(newVal, oldVal) {
+      this.setPuntos(newVal);
+    }
+  },
   mounted: function mounted() {
     console.log('MiMapaComponent mounted');
   }
@@ -2813,6 +3167,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2822,7 +3185,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setRobo: function setRobo(res) {
       this.robo_details = res;
-      console.log(this.robo_details);
     }
   },
   props: {
@@ -2859,15 +3221,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      load: false,
       tab: 'velocidad',
       placa: String,
-      historial: Object,
-      robo: Object,
+      historial: {},
+      robo: {},
       url_sistema_menos_1: "api/sistema-1",
       url_sistema_0: "api/sistema_0",
       url_sistema_11: "api/sistema_11",
@@ -2897,6 +3277,7 @@ __webpack_require__.r(__webpack_exports__);
     'getHistorico': function getHistorico(placa) {
       var _this = this;
 
+      this.load = true;
       var sistema_0 = this.setSistema0(placa);
       var sistema_menos_1 = this.setSistemaMenos1(placa);
       var sistema_11 = this.setSistema11(placa);
@@ -2918,7 +3299,7 @@ __webpack_require__.r(__webpack_exports__);
           responses[_key] = arguments[_key];
         }
 
-        _this.historial['sistema-1'] = responses[0].data;
+        _this.historial['sistema_1'] = responses[0].data;
         _this.historial['sistema_0'] = responses[1].data;
         _this.historial["sistema_11"] = responses[2].data;
         _this.historial["sistema_13"] = responses[3].data;
@@ -2932,107 +3313,248 @@ __webpack_require__.r(__webpack_exports__);
         _this.historial["sistema_22"] = responses[11].data;
         _this.historial["sistema_43"] = responses[12].data;
         _this.historial["sistema_44"] = responses[13].data;
+        _this.load = false;
+
+        _this.setSistemasInfo();
       }))["catch"](function (errors) {
         console.log(errors);
+        _this.load = false;
       });
     },
     'setSistema0': function setSistema0(placa) {
       return axios.post(this.url_sistema_0, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistemaMenos1': function setSistemaMenos1(placa) {
       return axios.post(this.url_sistema_menos_1, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema11': function setSistema11(placa) {
       return axios.post(this.url_sistema_11, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema13': function setSistema13(placa) {
       return axios.post(this.url_sistema_13, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema14': function setSistema14(placa) {
       return axios.post(this.url_sistema_14, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema15': function setSistema15(placa) {
       return axios.post(this.url_sistema_15, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema16': function setSistema16(placa) {
       return axios.post(this.url_sistema_16, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema17': function setSistema17(placa) {
       return axios.post(this.url_sistema_17, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema18': function setSistema18(placa) {
       return axios.post(this.url_sistema_18, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema19': function setSistema19(placa) {
       return axios.post(this.url_sistema_19, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema21': function setSistema21(placa) {
       return axios.post(this.url_sistema_21, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema22': function setSistema22(placa) {
       return axios.post(this.url_sistema_22, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema43': function setSistema43(placa) {
       return axios.post(this.url_sistema_43, {
         placa: placa
-      }, {
-        timeout: 60000
       });
     },
     'setSistema44': function setSistema44(placa) {
       return axios.post(this.url_sistema_44, {
         placa: placa
-      }, {
-        timeout: 60000
       });
+    },
+    'setSistemasInfo': function setSistemasInfo() {
+      var velocidades = [];
+      var exceso_velocidad = 0;
+
+      if (this.historial.sistema_1.result.length > 0) {
+        for (var i = this.historial.sistema_1.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_1.result[i].Velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          velocidades.push(this.historial.sistema_1.result[i].Velocidad);
+        }
+      }
+
+      if (this.historial.sistema_0.result.length > 0) {
+        for (var i = this.historial.sistema_0.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_0.result[i].Velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          velocidades.push(this.historial.sistema_0.result[i].Velocidad);
+        }
+      }
+
+      if (this.historial.sistema_11.result.length > 0) {
+        for (var i = this.historial.sistema_11.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_11.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_11.result[i]);
+          velocidades.push(this.historial.sistema_11.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_13.result.length > 0) {
+        for (var i = this.historial.sistema_13.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_13.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_13.result[i]);
+          velocidades.push(this.historial.sistema_13.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_14.result.length > 0) {
+        for (var i = this.historial.sistema_14.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_14.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_14.result[i]);
+          velocidades.push(this.historial.sistema_14.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_15.result.length > 0) {
+        for (var i = this.historial.sistema_15.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_15.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_15.result[i]);
+          velocidades.push(this.historial.sistema_15.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_16.result.length > 0) {
+        for (var i = this.historial.sistema_16.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_16.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_16.result[i]);
+          velocidades.push(this.historial.sistema_16.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_17.result.length > 0) {
+        for (var i = this.historial.sistema_17.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_17.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_17.result[i]);
+          velocidades.push(this.historial.sistema_17.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_18.result.length > 0) {
+        for (var i = this.historial.sistema_18.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_18.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_18.result[i]);
+          velocidades.push(this.historial.sistema_18.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_19.result.length > 0) {
+        for (var i = this.historial.sistema_19.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_19.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_19.result[i]);
+          velocidades.push(this.historial.sistema_19.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_21.result.length > 0) {
+        for (var i = this.historial.sistema_21.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_21.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_21.result[i]);
+          velocidades.push(this.historial.sistema_21.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_22.result.length > 0) {
+        for (var i = this.historial.sistema_22.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_22.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_22.result[i]);
+          velocidades.push(this.historial.sistema_22.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_43.result.length > 0) {
+        for (var i = this.historial.sistema_43.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_43.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_43.result[i]);
+          velocidades.push(this.historial.sistema_43.result[i].velocidad.velocidad);
+        }
+      }
+
+      if (this.historial.sistema_44.result.length > 0) {
+        for (var i = this.historial.sistema_44.result.length - 1; i >= 0; i--) {
+          if (this.historial.sistema_44.result[i].velocidad.velocidad >= 81.00) {
+            exceso_velocidad += 1;
+          }
+
+          console.log(this.historial.sistema_44.result[i]);
+          velocidades.push(this.historial.sistema_44.result[i].velocidad.velocidad);
+        }
+      }
+
+      var velocidad_final = 0;
+      var detecciones = 0;
+      velocidades.forEach(function (res) {
+        velocidad_final += res;
+      });
+      velocidad_final = velocidad_final / velocidades.length;
+      detecciones = velocidades.length;
+      this.$root.$emit('info-sistemas', velocidad_final, exceso_velocidad, detecciones);
     }
   },
   mounted: function mounted() {
@@ -7636,6 +8158,44 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#rec[data-v-3df53264]{\n    min-height: 80vh; \n    max-height: 80vh;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#rec[data-v-0a5cacf1]{\n    min-height: 80vh; \n    max-height: 80vh;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MapLoader.vue?vue&type=style&index=0&id=52651734&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MapLoader.vue?vue&type=style&index=0&id=52651734&scoped=true&lang=css& ***!
@@ -7648,7 +8208,45 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#map[data-v-52651734]{\n\tmin-height: 600px; \n\tmax-height: 600px;\n}\n", ""]);
+exports.push([module.i, "\n#map[data-v-52651734]{\n\tmin-height: 80vh; \n\tmax-height: 80vh;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#rec[data-v-d5e66a10]{\n    min-height: 80vh; \n    max-height: 80vh;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#loading {\n  display: block ;\n  position: absolute ;\n  top: 0 ;\n  left: 0 ;\n  z-index: 1000 ;\n  width: 100% ;\n  height: 100% ;\n  background-color: rgba(0, 0, 0, 0.75) ;\n  background-image: url(\"/Placas/public/images/load.gif\") ;\n  background-size: 15%;\n  background-repeat: no-repeat ;\n  background-position: center ;\n}\n", ""]);
 
 // exports
 
@@ -39843,6 +40441,66 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MapLoader.vue?vue&type=style&index=0&id=52651734&scoped=true&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MapLoader.vue?vue&type=style&index=0&id=52651734&scoped=true&lang=css& ***!
@@ -39852,6 +40510,66 @@ process.umask = function() { return 0; };
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./MapLoader.vue?vue&type=style&index=0&id=52651734&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MapLoader.vue?vue&type=style&index=0&id=52651734&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -40457,34 +41175,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChildMarker.vue?vue&type=template&id=61e2005b&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ChildMarker.vue?vue&type=template&id=61e2005b& ***!
-  \**************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div")
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -40505,15 +41199,494 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.registros, function(registro) {
-            return _c("tr", { staticClass: "text-white" }, [
-              _c("td", [_vm._v("Hola/td>\n    \t\t\t\t\t")]),
-              _c("td", [_vm._v("Mundo")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Nuevo")])
-            ])
-          }),
-          0
+          [
+            _vm._l(_vm.registros.sistema_0.result, function(registro) {
+              return _vm.registros.sistema_0.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.Velocidad >= 81 ? "text-warning" : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(_vm._s(registro.date + " " + registro.hora))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_1.result, function(registro) {
+              return _vm.registros.sistema_1.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.Velocidad >= 81 ? "text-warning" : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(_vm._s(registro.date + " " + registro.hora))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_11.result, function(registro) {
+              return _vm.registros.sistema_11.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_13.result, function(registro) {
+              return _vm.registros.sistema_13.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_14.result, function(registro) {
+              return _vm.registros.sistema_14.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_15.result, function(registro) {
+              return _vm.registros.sistema_15.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_16.result, function(registro) {
+              return _vm.registros.sistema_16.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_17.result, function(registro) {
+              return _vm.registros.sistema_17.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_18.result, function(registro) {
+              return _vm.registros.sistema_18.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_19.result, function(registro) {
+              return _vm.registros.sistema_19.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_21.result, function(registro) {
+              return _vm.registros.sistema_21.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_22.result, function(registro) {
+              return _vm.registros.sistema_22.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_43.result, function(registro) {
+              return _vm.registros.sistema_43.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_44.result, function(registro) {
+              return _vm.registros.sistema_44.result.length > 0
+                ? _c(
+                    "tr",
+                    {
+                      class:
+                        registro.velocidad.velocidad >= 81
+                          ? "text-warning"
+                          : "text-white"
+                    },
+                    [
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            registro.velocidad.date +
+                              " " +
+                              registro.velocidad.hora
+                          )
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                            " Km/h"
+                        )
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            })
+          ],
+          2
         )
       ])
     ])
@@ -40559,10 +41732,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1& ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -40574,73 +41747,435 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "box row", attrs: { id: "rec" } }, [
+      _c("table", { staticClass: "table table-default" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          [
+            _vm._l(_vm.registros.sistema_0.result, function(registro) {
+              return _vm.registros.sistema_0.result.length > 0 &&
+                registro.Velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(_vm._s(registro.date + " " + registro.hora))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_1.result, function(registro) {
+              return _vm.registros.sistema_1.result.length > 0 &&
+                registro.Velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(_vm._s(registro.date + " " + registro.hora))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_11.result, function(registro) {
+              return _vm.registros.sistema_11.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_13.result, function(registro) {
+              return _vm.registros.sistema_13.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_14.result, function(registro) {
+              return _vm.registros.sistema_14.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_15.result, function(registro) {
+              return _vm.registros.sistema_15.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_16.result, function(registro) {
+              return _vm.registros.sistema_16.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_17.result, function(registro) {
+              return _vm.registros.sistema_17.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_18.result, function(registro) {
+              return _vm.registros.sistema_18.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_19.result, function(registro) {
+              return _vm.registros.sistema_19.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_21.result, function(registro) {
+              return _vm.registros.sistema_21.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_22.result, function(registro) {
+              return _vm.registros.sistema_22.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_43.result, function(registro) {
+              return _vm.registros.sistema_43.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.registros.sistema_44.result, function(registro) {
+              return _vm.registros.sistema_44.result.length > 0 &&
+                registro.velocidad.velocidad >= 81
+                ? _c("tr", { staticClass: "text-white" }, [
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(
+                          registro.velocidad.date +
+                            " " +
+                            registro.velocidad.hora
+                        )
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                          " Km/h"
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            })
+          ],
+          2
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "row encabezado-aseguradoras" }, [
-        _c("div", { staticClass: "col-lg-12 mt-3" }, [
-          _c("h3", { staticClass: "text-left" }, [
-            _vm._v("Detalle de Exceso de Velocidad")
-          ])
+    return _c("div", { staticClass: "row encabezado-aseguradoras" }, [
+      _c("div", { staticClass: "col-lg-12 mt-3" }, [
+        _c("h3", { staticClass: "text-left" }, [
+          _vm._v("Detalle de Exceso de Velocidad")
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box row", attrs: { id: "rec" } }, [
-        _c("table", { staticClass: "table table-default" }, [
-          _c("thead", { attrs: { align: "center" } }, [
-            _c("tr", [
-              _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
-                _vm._v("\n    \t\t\t\t\t\tFecha\n    \t\t\t\t\t")
-              ]),
-              _vm._v(" "),
-              _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
-                _vm._v("\n    \t\t\t\t\t\tUbicación\n    \t\t\t\t\t")
-              ]),
-              _vm._v(" "),
-              _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
-                _vm._v("\n    \t\t\t\t\t\tVelocidad(KPH)\n    \t\t\t\t\t")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("tbody", [
-            _c("tr", { staticClass: "text-white" }, [
-              _c("td", [_vm._v("Hola")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Mundo")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Nuevo")])
-            ]),
-            _vm._v(" "),
-            _c("tr", { staticClass: "text-white" }, [
-              _c("td", [_vm._v("Hola")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Mundo")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Nuevo")])
-            ]),
-            _vm._v(" "),
-            _c("tr", { staticClass: "text-white" }, [
-              _c("td", [_vm._v("Hola")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Mundo")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Nuevo")])
-            ]),
-            _vm._v(" "),
-            _c("tr", { staticClass: "text-white" }, [
-              _c("td", [_vm._v("Hola")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Mundo")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Nuevo")])
-            ])
-          ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { attrs: { align: "center" } }, [
+      _c("tr", [
+        _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
+          _vm._v(
+            "\n                            Fecha\n                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
+          _vm._v(
+            "\n                            Ubicación\n                        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
+          _vm._v(
+            "\n                            Velocidad(KPH)\n                        "
+          )
         ])
       ])
     ])
@@ -41105,7 +42640,13 @@ var render = function() {
                           { staticClass: "col text-right text-warning" },
                           [
                             _vm._v(
-                              "\n                                N/A\n                                "
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.velocidad_promedio
+                                    ? _vm.velocidad_promedio
+                                    : "N/A"
+                                ) +
+                                "\n                                "
                             ),
                             _c(
                               "a",
@@ -41141,7 +42682,13 @@ var render = function() {
                           { staticClass: "col text-right text-warning" },
                           [
                             _vm._v(
-                              "\n                                N/A\n                                "
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.exceso_velocidad
+                                    ? _vm.exceso_velocidad
+                                    : "N/A"
+                                ) +
+                                "\n                                "
                             ),
                             _c(
                               "a",
@@ -41221,9 +42768,14 @@ var render = function() {
                           { staticClass: "col text-right text-warning" },
                           [
                             _vm._v(
-                              "\n                                N/A\n                                "
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.detecciones
+                                    ? _vm.detecciones
+                                    : _vm.N / _vm.A
+                                ) +
+                                "\n                                "
                             ),
-                            _vm._v(" "),
                             _c(
                               "a",
                               {
@@ -41303,21 +42855,13 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "map-loader",
-        {
-          attrs: {
-            "map-config": _vm.mapConfig,
-            apiKey: "AIzaSyD_Ev0haW8nP_ToX5KahzvGPWrqT02PWRI"
-          }
-        },
-        [
-          _vm._l(_vm.markers, function(marker) {
-            return [_c("child-marker", { attrs: { position: marker } })]
-          })
-        ],
-        2
-      )
+      _c("map-loader", {
+        attrs: {
+          "map-config": _vm.mapConfig,
+          apiKey: "AIzaSyD_Ev0haW8nP_ToX5KahzvGPWrqT02PWRI",
+          markers: _vm.puntos
+        }
+      })
     ],
     1
   )
@@ -41329,10 +42873,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -41352,26 +42896,39 @@ var render = function() {
         ? _c(
             "div",
             {
-              staticClass: "alert alert-danger w-100",
+              staticClass: "alert alert-danger w-100 h-25",
               attrs: { role: "alert" }
             },
             [_c("h1", [_vm._v(" Este vehículo cuenta con reporte de robo")])]
           )
-        : _vm._e(),
+        : _c(
+            "div",
+            {
+              staticClass: "alert alert-info w-100 h-25",
+              attrs: { role: "alert" }
+            },
+            [
+              _c("h1", [
+                _vm._v("Este vehículo no cuenta con ningún tipo de reporte")
+              ])
+            ]
+          ),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-default" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("tbody", [
-          _c("tr", { staticClass: "text-white" }, [
-            _c("td", [_vm._v(_vm._s(_vm.robo_details.entidad))]),
+      !(Object.keys(_vm.robo_details).length === 0)
+        ? _c("table", { staticClass: "table table-default" }, [
+            _vm._m(1),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.robo_details.fecha_averiguacion))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(_vm.robo_details.fecha_robo))])
+            _c("tbody", [
+              _c("tr", { staticClass: "text-white" }, [
+                _c("td", [_vm._v(_vm._s(_vm.robo_details.entidad))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.robo_details.fecha_averiguacion))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(_vm.robo_details.fecha_robo))])
+              ])
+            ])
           ])
-        ])
-      ])
+        : _vm._e()
     ])
   ])
 }
@@ -41431,6 +42988,18 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.load,
+            expression: "load"
+          }
+        ],
+        attrs: { id: "loading" }
+      }),
+      _vm._v(" "),
       _c("historial-component", {
         directives: [
           {
@@ -41440,7 +43009,8 @@ var render = function() {
             expression: "tab == 'velocidad'"
           }
         ],
-        staticClass: "w-100",
+        staticClass: "w-100 h-100",
+        staticStyle: { "min-height": "83vh !important" },
         attrs: { response: _vm.historial }
       }),
       _vm._v(" "),
@@ -41453,7 +43023,9 @@ var render = function() {
             expression: "tab == 'exceso'"
           }
         ],
-        staticClass: "w-100"
+        staticClass: "w-100 h-100",
+        staticStyle: { "min-height": "83vh !important" },
+        attrs: { response: _vm.historial }
       }),
       _vm._v(" "),
       _c("robo-component", {
@@ -41465,7 +43037,8 @@ var render = function() {
             expression: "tab == 'robado'"
           }
         ],
-        staticClass: "w-100",
+        staticClass: "w-100 h-100",
+        staticStyle: { "min-height": "83vh !important" },
         attrs: { response: _vm.robo }
       }),
       _vm._v(" "),
@@ -41478,7 +43051,8 @@ var render = function() {
             expression: "tab == 'detecciones'"
           }
         ],
-        staticClass: "w-100",
+        staticClass: "w-100 h-100",
+        staticStyle: { "min-height": "83vh !important" },
         attrs: { response: _vm.historial }
       })
     ],
@@ -53688,7 +55262,6 @@ Vue.component('menu-component', __webpack_require__(/*! ./components/MenuCompone
 Vue.component('mi-mapa', __webpack_require__(/*! ./components/MiMapaComponent */ "./resources/js/components/MiMapaComponent.vue")["default"]);
 Vue.component('map-loader', __webpack_require__(/*! ./components/MapLoader */ "./resources/js/components/MapLoader.vue")["default"]);
 Vue.component('map-provider', __webpack_require__(/*! ./components/MapProvider */ "./resources/js/components/MapProvider.vue")["default"]);
-Vue.component('child-marker', __webpack_require__(/*! ./components/ChildMarker */ "./resources/js/components/ChildMarker.vue")["default"]);
 Vue.component('tabcontent-component', __webpack_require__(/*! ./components/TabContentComponent */ "./resources/js/components/TabContentComponent.vue")["default"]);
 Vue.component('historial-component', __webpack_require__(/*! ./components/HistorialComponent */ "./resources/js/components/HistorialComponent.vue")["default"]);
 Vue.component('exceso-component', __webpack_require__(/*! ./components/ExcesoComponent */ "./resources/js/components/ExcesoComponent.vue")["default"]);
@@ -53745,75 +55318,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/ChildMarker.vue":
-/*!*************************************************!*\
-  !*** ./resources/js/components/ChildMarker.vue ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ChildMarker_vue_vue_type_template_id_61e2005b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChildMarker.vue?vue&type=template&id=61e2005b& */ "./resources/js/components/ChildMarker.vue?vue&type=template&id=61e2005b&");
-/* harmony import */ var _ChildMarker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChildMarker.vue?vue&type=script&lang=js& */ "./resources/js/components/ChildMarker.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ChildMarker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ChildMarker_vue_vue_type_template_id_61e2005b___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ChildMarker_vue_vue_type_template_id_61e2005b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/ChildMarker.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/ChildMarker.vue?vue&type=script&lang=js&":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/ChildMarker.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildMarker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ChildMarker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChildMarker.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildMarker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/ChildMarker.vue?vue&type=template&id=61e2005b&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/ChildMarker.vue?vue&type=template&id=61e2005b& ***!
-  \********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildMarker_vue_vue_type_template_id_61e2005b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ChildMarker.vue?vue&type=template&id=61e2005b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChildMarker.vue?vue&type=template&id=61e2005b&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildMarker_vue_vue_type_template_id_61e2005b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChildMarker_vue_vue_type_template_id_61e2005b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/DeteccionesComponent.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/components/DeteccionesComponent.vue ***!
@@ -53823,9 +55327,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DeteccionesComponent_vue_vue_type_template_id_3df53264___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeteccionesComponent.vue?vue&type=template&id=3df53264& */ "./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&");
+/* harmony import */ var _DeteccionesComponent_vue_vue_type_template_id_3df53264_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true& */ "./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true&");
 /* harmony import */ var _DeteccionesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeteccionesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/DeteccionesComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _DeteccionesComponent_vue_vue_type_style_index_0_id_3df53264_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css& */ "./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -53833,13 +55339,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _DeteccionesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DeteccionesComponent_vue_vue_type_template_id_3df53264___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _DeteccionesComponent_vue_vue_type_template_id_3df53264___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _DeteccionesComponent_vue_vue_type_template_id_3df53264_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DeteccionesComponent_vue_vue_type_template_id_3df53264_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "3df53264",
   null
   
 )
@@ -53865,19 +55371,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264& ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_style_index_0_id_3df53264_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=style&index=0&id=3df53264&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_style_index_0_id_3df53264_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_style_index_0_id_3df53264_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_style_index_0_id_3df53264_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_style_index_0_id_3df53264_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_style_index_0_id_3df53264_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true& ***!
+  \*****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_template_id_3df53264___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DeteccionesComponent.vue?vue&type=template&id=3df53264& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_template_id_3df53264___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_template_id_3df53264_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/DeteccionesComponent.vue?vue&type=template&id=3df53264&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_template_id_3df53264_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_template_id_3df53264___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeteccionesComponent_vue_vue_type_template_id_3df53264_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -53892,9 +55414,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ExcesoComponent_vue_vue_type_template_id_0a5cacf1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExcesoComponent.vue?vue&type=template&id=0a5cacf1& */ "./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&");
+/* harmony import */ var _ExcesoComponent_vue_vue_type_template_id_0a5cacf1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true& */ "./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true&");
 /* harmony import */ var _ExcesoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExcesoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ExcesoComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _ExcesoComponent_vue_vue_type_style_index_0_id_0a5cacf1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css& */ "./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -53902,13 +55426,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ExcesoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ExcesoComponent_vue_vue_type_template_id_0a5cacf1___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ExcesoComponent_vue_vue_type_template_id_0a5cacf1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ExcesoComponent_vue_vue_type_template_id_0a5cacf1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ExcesoComponent_vue_vue_type_template_id_0a5cacf1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "0a5cacf1",
   null
   
 )
@@ -53934,19 +55458,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1& ***!
-  \************************************************************************************/
+/***/ "./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css& ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_style_index_0_id_0a5cacf1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=style&index=0&id=0a5cacf1&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_style_index_0_id_0a5cacf1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_style_index_0_id_0a5cacf1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_style_index_0_id_0a5cacf1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_style_index_0_id_0a5cacf1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_style_index_0_id_0a5cacf1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_template_id_0a5cacf1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ExcesoComponent.vue?vue&type=template&id=0a5cacf1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_template_id_0a5cacf1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_template_id_0a5cacf1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExcesoComponent.vue?vue&type=template&id=0a5cacf1&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_template_id_0a5cacf1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_template_id_0a5cacf1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExcesoComponent_vue_vue_type_template_id_0a5cacf1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -54324,9 +55864,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _RoboComponent_vue_vue_type_template_id_d5e66a10___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoboComponent.vue?vue&type=template&id=d5e66a10& */ "./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&");
+/* harmony import */ var _RoboComponent_vue_vue_type_template_id_d5e66a10_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true& */ "./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true&");
 /* harmony import */ var _RoboComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoboComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoboComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _RoboComponent_vue_vue_type_style_index_0_id_d5e66a10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css& */ "./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -54334,13 +55876,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _RoboComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _RoboComponent_vue_vue_type_template_id_d5e66a10___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _RoboComponent_vue_vue_type_template_id_d5e66a10___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _RoboComponent_vue_vue_type_template_id_d5e66a10_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _RoboComponent_vue_vue_type_template_id_d5e66a10_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "d5e66a10",
   null
   
 )
@@ -54366,19 +55908,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css& ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_style_index_0_id_d5e66a10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=style&index=0&id=d5e66a10&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_style_index_0_id_d5e66a10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_style_index_0_id_d5e66a10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_style_index_0_id_d5e66a10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_style_index_0_id_d5e66a10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_style_index_0_id_d5e66a10_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true& ***!
+  \**********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_template_id_d5e66a10___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./RoboComponent.vue?vue&type=template&id=d5e66a10& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_template_id_d5e66a10___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_template_id_d5e66a10_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/RoboComponent.vue?vue&type=template&id=d5e66a10&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_template_id_d5e66a10_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_template_id_d5e66a10___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoboComponent_vue_vue_type_template_id_d5e66a10_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -54395,7 +55953,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=template&id=18a7d39e& */ "./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&");
 /* harmony import */ var _TabContentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TabContentComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -54403,7 +55963,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _TabContentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__["render"],
   _TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -54432,6 +55992,22 @@ component.options.__file = "resources/js/components/TabContentComponent.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

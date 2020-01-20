@@ -112,7 +112,7 @@
                                     Velocidad Promedio
                                 </div>
                                 <div class="col text-right text-warning">
-                                    N/A
+                                    {{ velocidad_promedio ? velocidad_promedio : "N/A"}}
                                     <a class="" @click="setTab('velocidad')" href="#velocidad">Más detalles</a>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                     Excesos de Velocidad
                                 </div>
                                 <div class="col text-right text-warning">
-                                    N/A
+                                    {{exceso_velocidad ? exceso_velocidad : "N/A"}}
                                     <a class="" @click="setTab('exceso')" href="#exceso">Más detalles</a>
                                 </div>
                             </div>
@@ -145,8 +145,7 @@
                                     Detecciones
                                 </div>
                                 <div class="col text-right text-warning">
-                                    N/A
-                                    <!-- {{-- TODO --}} -->
+                                    {{detecciones ? detecciones : N/A}}
                                     <a class="" href="#detecciones" @click="setTab('detecciones')">Más detalles </a>
                                 </div>
                             </div>
@@ -168,6 +167,9 @@
             placa_response : {},
             activeItem:'velocidad',
             repuve_response:{},
+            velocidad_promedio:"",
+            exceso_velocidad:"",
+            detecciones: "",
           }
         },
         methods:{
@@ -197,9 +199,16 @@
                 e.preventDefault();
             },
             getRepuve(placa){
+                let repuve = (this.repuve_response.placa ? this.repuve_response.placa : "" )
+                if (this.placa != repuve.trim()) {
+                    this.velocidad_promedio = "CARGANDO...";
+                    this.exceso_velocidad = "CARGANDO...";
+                    this.detecciones = "CARGANDO...";
+                }
                 axios.post('api/repuve',{placa:placa}).then(res=>{
                     this.repuve_response = res.data.result;
                     this.$root.$emit('set-repuve-info',this.repuve_response);
+                    
 
                 }).catch(err=>{
                     console.log(err.response.data);
@@ -216,6 +225,13 @@
         },
         mounted() {
             console.log('Component mounted.');
+            this.$root.$on('info-sistemas',(velocidad_promedio,exceso_velocidad,detecciones)=>{
+                // console.log('menu componente velocidad',velocidad_promedio);
+                this.velocidad_promedio = velocidad_promedio.toFixed(2)+" Km/h";
+                this.exceso_velocidad = exceso_velocidad;
+                this.detecciones = detecciones;
+
+            })
 
         }
     }

@@ -1,21 +1,39 @@
 <template>
 	<div>
-		<historial-component class="w-100" v-show="tab == 'velocidad'" :response="historial"></historial-component>
-		<exceso-component class="w-100" v-show="tab == 'exceso'"></exceso-component>
-		<robo-component class="w-100" v-show="tab == 'robado'" :response="robo"></robo-component>
-		<detecciones-component class="w-100" v-show="tab == 'detecciones'" :response="historial"></detecciones-component>
+		<div id="loading" v-show="load"></div>
+		<historial-component class="w-100 h-100" style="min-height: 83vh !important;" v-show="tab == 'velocidad'" :response="historial"></historial-component>
+		<exceso-component class="w-100 h-100" style="min-height: 83vh !important;" v-show="tab == 'exceso'" :response="historial"></exceso-component>
+		<robo-component class="w-100 h-100" style="min-height: 83vh !important;" v-show="tab == 'robado'" :response="robo"></robo-component>
+		<detecciones-component class="w-100 h-100" style="min-height: 83vh !important;" v-show="tab == 'detecciones'" :response="historial"></detecciones-component>
 	</div>
 </template>
+<style>
+#loading {
+  display: block ;
+  position: absolute ;
+  top: 0 ;
+  left: 0 ;
+  z-index: 1000 ;
+  width: 100% ;
+  height: 100% ;
+  background-color: rgba(0, 0, 0, 0.75) ;
+  background-image: url("/Placas/public/images/load.gif") ;
+  background-size: 15%;
+  background-repeat: no-repeat ;
+  background-position: center ;
+}
+</style>
 <script>
 import DeteccionesComponent from "./DeteccionesComponent";
 import HistorialComponent from "./HistorialComponent";
 	export default{
 		data(){
 			return {
+				load: false,
 				tab : 'velocidad',
 				placa: String,
-				historial: Object,
-				robo: Object,
+				historial: {},
+				robo: {},
 				url_sistema_menos_1: "api/sistema-1",
 				url_sistema_0: "api/sistema_0",
 				url_sistema_11: "api/sistema_11",
@@ -29,7 +47,7 @@ import HistorialComponent from "./HistorialComponent";
 				url_sistema_21: "api/sistema_21",
 				url_sistema_22: "api/sistema_22",
 				url_sistema_43: "api/sistema_43",
-				url_sistema_44: "api/sistema_44"
+				url_sistema_44: "api/sistema_44",
 			}
 		},
 		watch:{
@@ -43,6 +61,7 @@ import HistorialComponent from "./HistorialComponent";
 		},
 		methods:{
 			'getHistorico':function(placa){
+				this.load = true;
 				const sistema_0 = this.setSistema0(placa);
 				const sistema_menos_1 = this.setSistemaMenos1(placa);
 				const sistema_11 = this.setSistema11(placa);
@@ -75,7 +94,7 @@ import HistorialComponent from "./HistorialComponent";
 					sistema_44
 					]).then(axios.spread((...responses)=>{
 						this.historial = {};
-						this.historial['sistema-1']=responses[0].data;
+						this.historial['sistema_1']=responses[0].data;
 						this.historial['sistema_0']=responses[1].data;
 						this.historial["sistema_11"]=responses[2].data;
 						this.historial["sistema_13"]=responses[3].data;
@@ -89,54 +108,193 @@ import HistorialComponent from "./HistorialComponent";
 						this.historial["sistema_22"]=responses[11].data;
 						this.historial["sistema_43"]=responses[12].data;
 						this.historial["sistema_44"]=responses[13].data;
+						this.load = false;
+						this.setSistemasInfo();
 				})).catch(errors=>{
 					console.log(errors);
+					this.load =false;
 				})
 
 
 			},
 			'setSistema0':function (placa) {
-				return axios.post(this.url_sistema_0,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_0,{placa:placa});
 			},
 			'setSistemaMenos1':function (placa) {
-				return axios.post(this.url_sistema_menos_1,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_menos_1,{placa:placa});
 			},
 			'setSistema11':function (placa) {
-				return axios.post(this.url_sistema_11,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_11,{placa:placa});
 			},
 			'setSistema13':function (placa) {
-				return axios.post(this.url_sistema_13,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_13,{placa:placa});
 			},
 			'setSistema14':function (placa) {
-				return axios.post(this.url_sistema_14,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_14,{placa:placa});
 			},
 			'setSistema15':function (placa) {
-				return axios.post(this.url_sistema_15,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_15,{placa:placa});
 			},
 			'setSistema16':function (placa) {
-				return axios.post(this.url_sistema_16,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_16,{placa:placa});
 			},
 			'setSistema17':function (placa) {
-				return axios.post(this.url_sistema_17,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_17,{placa:placa});
 			},
 			'setSistema18':function (placa) {
-				return axios.post(this.url_sistema_18,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_18,{placa:placa});
 			},
 			'setSistema19':function (placa) {
-				return axios.post(this.url_sistema_19,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_19,{placa:placa});
 			},
 			'setSistema21':function (placa) {
-				return axios.post(this.url_sistema_21,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_21,{placa:placa});
 			},
 			'setSistema22':function (placa) {
-				return axios.post(this.url_sistema_22,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_22,{placa:placa});
 			},
 			'setSistema43':function (placa) {
-				return axios.post(this.url_sistema_43,{placa:placa},{timeout:60000});
+				return axios.post(this.url_sistema_43,{placa:placa});
 			},
 			'setSistema44':function (placa) {
-				return axios.post(this.url_sistema_44,{placa:placa},{timeout:60000});
-			}
+				return axios.post(this.url_sistema_44,{placa:placa});
+			},
+			'setSistemasInfo': function(){
+				var velocidades =[];
+				var exceso_velocidad = 0;
+				if(this.historial.sistema_1.result.length > 0){
+					for (var i = this.historial.sistema_1.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_1.result[i].Velocidad >=81.00) {
+							exceso_velocidad += 1;
+						}
+						velocidades.push(this.historial.sistema_1.result[i].Velocidad);
+					}
+				}
+				if(this.historial.sistema_0.result.length > 0){
+					for (var i = this.historial.sistema_0.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_0.result[i].Velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						velocidades.push(this.historial.sistema_0.result[i].Velocidad);
+					}
+				}
+				if(this.historial.sistema_11.result.length > 0){
+					for (var i = this.historial.sistema_11.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_11.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_11.result[i]);
+						velocidades.push(this.historial.sistema_11.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_13.result.length > 0){
+					for (var i = this.historial.sistema_13.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_13.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_13.result[i]);
+						velocidades.push(this.historial.sistema_13.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_14.result.length > 0){
+					for (var i = this.historial.sistema_14.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_14.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_14.result[i]);
+						velocidades.push(this.historial.sistema_14.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_15.result.length > 0){
+					for (var i = this.historial.sistema_15.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_15.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_15.result[i]);
+						velocidades.push(this.historial.sistema_15.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_16.result.length > 0){
+					for (var i = this.historial.sistema_16.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_16.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_16.result[i]);
+						velocidades.push(this.historial.sistema_16.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_17.result.length > 0){
+					for (var i = this.historial.sistema_17.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_17.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_17.result[i]);
+						velocidades.push(this.historial.sistema_17.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_18.result.length > 0){
+					for (var i = this.historial.sistema_18.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_18.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_18.result[i]);
+						velocidades.push(this.historial.sistema_18.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_19.result.length > 0){
+					for (var i = this.historial.sistema_19.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_19.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_19.result[i]);
+						velocidades.push(this.historial.sistema_19.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_21.result.length > 0){
+					for (var i = this.historial.sistema_21.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_21.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_21.result[i]);
+						velocidades.push(this.historial.sistema_21.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_22.result.length > 0){
+					for (var i = this.historial.sistema_22.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_22.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_22.result[i]);
+						velocidades.push(this.historial.sistema_22.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_43.result.length > 0){
+					for (var i = this.historial.sistema_43.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_43.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_43.result[i]);
+						velocidades.push(this.historial.sistema_43.result[i].velocidad.velocidad);
+					}
+				}
+				if(this.historial.sistema_44.result.length > 0){
+					for (var i = this.historial.sistema_44.result.length - 1; i >= 0; i--) {
+						if (this.historial.sistema_44.result[i].velocidad.velocidad >= 81.00) {
+							exceso_velocidad +=1;
+						}
+						console.log(this.historial.sistema_44.result[i]);
+						velocidades.push(this.historial.sistema_44.result[i].velocidad.velocidad);
+					}
+				}
+				var velocidad_final = 0;
+				var detecciones = 0
+				velocidades.forEach(res=>{
+					velocidad_final += res;
+				});
+				velocidad_final = velocidad_final/velocidades.length;
+				detecciones = velocidades.length;
+				this.$root.$emit('info-sistemas',velocidad_final,exceso_velocidad, detecciones);
+			},
 		},
 		mounted(){
 			// Escucha el evento setTab del MenuComponent

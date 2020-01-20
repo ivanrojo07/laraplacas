@@ -3,19 +3,16 @@
 		<map-loader
 			:map-config="mapConfig"
 			apiKey="AIzaSyD_Ev0haW8nP_ToX5KahzvGPWrqT02PWRI"
+			:markers="puntos"
 		>
-			<template v-for="marker in markers">
-				<child-marker :position="marker"/>
-			</template>		
 		</map-loader>
 	</div>
 </template>
 <script>
  	import MapLoader from "./MapLoader.vue";
- 	import ChildMarker from "./ChildMarker";
 	export	default {
 		props:{
-			markers:Array
+			markers:Array,
 		},
 		data(){
 			return{
@@ -224,15 +221,23 @@
 			              stylers: [{visibility: "off"}]
 			            },
 		          	]
-				}
+				},
+				puntos:[],
 			}
 		},
 		components: {
 			MapLoader,
-			ChildMarker
 		},
 		methods:{
-
+			'setPuntos':function(puntos){
+				this.puntos = [];
+				this.puntos = puntos;
+			}
+		},
+		watch:{
+			'markers':function(newVal,oldVal){
+				this.setPuntos(newVal);
+			}
 		},
 		mounted(){
 			console.log('MiMapaComponent mounted');

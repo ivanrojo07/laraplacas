@@ -17,4 +17,18 @@ class Ticket extends Model
     protected $guarded =[];
 
 	protected $fillable = [];
+
+	protected $appends = ['date','hora'];
+
+    public function getDateAttribute(){
+    	$cadena = explode('_',$this->Imagen1);
+    	$fecha = date('l d/m/Y',strtotime($cadena[0]));
+    	return $fecha;
+    }
+
+    public function getHoraAttribute(){
+        $cadena = explode('_',$this->Imagen1);
+        $hora = date('g:i:s a',strtotime($cadena[1]));
+        return $hora;
+    }
 }

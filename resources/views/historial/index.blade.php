@@ -160,7 +160,7 @@
         <!--================================================
         ==           RECONOCIMIENTO SECTION               ==
         =================================================-->
-        <div class="col-12">
+        <div class="col-12 mt-3">
             <div class="capsula">
               <tabcontent-component></tabcontent-component>  
             </div>
