@@ -37,3 +37,4 @@ Route::post('sistema_21','Api\Sistemas\SistemaController@searchSistema_21');
 Route::post('sistema_22','Api\Sistemas\SistemaController@searchSistema_22');
 Route::post('sistema_43','Api\Sistemas\SistemaController@searchSistema_43');
 Route::post('sistema_44','Api\Sistemas\SistemaController@searchSistema_44');
+Route::post('/crearusuario', 'UsuarioController@nuevo');

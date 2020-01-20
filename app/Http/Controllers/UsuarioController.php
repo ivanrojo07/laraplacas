@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\RegistroPlaca;
+use App\User;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,16 +36,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = new User;
+
+        $usuario->name = $request->name;
+        $usuario->apellido_paterno = $request->apellido_paterno;
+        $usuario->apellido_materno = $request->apellido_materno;
+        $usuario->email = $request->email;
+        $usuario->password = $request->password;
+
+
+        $usuario->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
         //
     }
@@ -52,10 +62,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +74,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,11 +85,29 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         //
+    }
+    public function nuevo(Request $request){
+
+        $placa = new RegistroPlaca;
+
+        $placa->placa= $request->placa;
+        $placa->marca= $request->marca;
+        $placa->marca= $request->marca;
+        $placa->anio= $request->anio;
+        $placa->modelo= $request->modelo;
+        $placa->tipo= $request->tipo;
+        $placa->clase= $request->clase;
+        $placa->niv= $request->niv;
+        $placa->version= $request->version;
+
+        $placa->save();
+
+        return response()->json(['placa'=>$placa],201);
     }
 }

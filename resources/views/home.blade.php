@@ -266,54 +266,43 @@
                     </div>
 
                     <div class="box row">
-                        <table class="encabezado-plateList">
-                            <thead>
+                        <table class="encabezado-plateList" style="width:100%; color: #f58220; margin-bottom: 1%;" >
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apelido Materno</th>
-                                <th>Apelido Paterno</th>
-                                <th>Telefono</th>
-                                <th>Email</th>
+                                <td align="center" style="padding-left: 14%;  padding-top: 1%;  "><strong> Placa</strong></td>
+                                <td align="center" style="padding-right: 15%;  padding-top: 1%; "><strong> Información</strong></td>
                             </tr>
-                            </thead>
-                             <tbody class="plateList">
-                                 @foreach($usuarios as $key=>$usuario)
-                                     @if($usuario->name)
-                                 <tr>
-                                     <th>{{$usuario->name}}</th>
-                                    <th>{{ $usuario->apellido_paterno }}</th>
-                                    <th>{{ $usuario->apellido_materno}}</th>
-                                    <th>{{ $usuario->telefono}}</th>
-                                    <th>{{ $usuario->email}}</th>
-                                 </tr>
-                                     @endif
-                                 @endforeach
-                             </tbody>
                         </table>
-                        <div align="center barra" id="ListaPlacas">
-                            <!--div style="overflow-y: scroll;">
+
+                        <div align="center" id="ListaPlacas" style="font-size: 5px; text-align:left; background-color: transparent; width: 100%; height: 100%; "  >
+                            <div align="left" style=" width: 100%; height: 102%; overflow-y: scroll;">
+
                                 <table class="plateList" style="width: 100%; height: 100%; color:white">
                                     <tbody>
+                                    @foreach($usuarios as $key=>$usuario)
+                                        @if($usuario->name)
                                     <tr style=" cursor:pointer; border-top: 1px solid white;">
                                         <td align="center" style=" padding-left: 5%;">
-                                            <span style="color:#ff8200; font-weight:bold; padding-top:5%">3918</span>
+                                            <span style="color:#ff8200; font-weight:bold; padding-top:5%">{{$usuario->name}}</span>
                                         </td>
                                         <td align="left">
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Sistema: </span>11</span>
+                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Sistema: </span>{{ $usuario->email }} 11 </span>
                                             <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Fecha: </span>30/09/2014 </span>
+                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Fecha: </span>{{ $usuario->apellido_paterno }}30/09/2014 </span>
                                             <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Hora: </span>06:19:09 </span>
+                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Hora: </span> {{ $usuario->apellido_paterno }} 06:19:09 </span>
                                             <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Carril: </span>1</span>
+                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Carril: </span> {{ $usuario->apellido_paterno }} 1 </span>
                                             <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Velocidad: </span> 139</span>
+                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Velocidad: </span> {{ $usuario->apellido_paterno }} 121 </span>
                                             <br>
                                         </td>
                                     </tr>
+                                    @endif
+                                    @endforeach
                                     </tbody>
+
                                 </table>
-                            </div-->
+                            </div>
                         </div>
                     </div>
 

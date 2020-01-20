@@ -9,7 +9,7 @@
 @section('contenido')
 
   <div class=" formulario">
-    <h2>Incidencias</h2>
+    <h2>Placas</h2>
     <form class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" method="POST" action="{{ route('login') }}">
       {{ csrf_field() }}
       <label class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"for="email">E-Mail:</label>

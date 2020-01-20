@@ -24,38 +24,6 @@
 
 
     <style type="text/css">
-
-
-    /*.ocultar{
-          display:none;
-        }
-        body{
-            color: white;
-        }
-        div{
-        /* border: 1px solid gray;*/
-       /*  color: white;
-        }
-        .list-group-item{
-         padding-top: 3%;
-         padding-bottom:3%;
-          margin-top: 1%;
-          margin-bottom: 1%;
-          background-color: #737373;
-          color: white;
-          border: 1px solid gray;
-        }
-        span{
-          padding-left:3%;
-        }
-        .encabezado{
-          background-color: black;
-          padding-top: 2%;
-          padding-bottom: 2%;
-          font-size: 20px !important;
-          font-family: Arial, Helvetica, sans-serif;
-          border: 1px solid gray;
-        }*/
     </style>
     @yield('estilos')
   </head>
@@ -142,14 +110,6 @@
   </div><!-- /.modal -->
 </main>
 </section>
-
-    {{-- <!--**** Scripts:CDN ****-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <!--**** Apartado de JQuery-UI:CDN ****-->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
-    {{-- Apartado Js locales --}}
     <script type="text/javascript" src="{{ asset('js/vendor/jquery-3.2.1.slim.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/vendor/popper-1.12.9.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap4.min.js') }}"></script>
@@ -183,8 +143,6 @@
 
     <script type="text/javascript">
       var iplocal=" {{ Session::get('iplocal') }}";
-     // console.log("ip local");
-     // console.log("ip de consulta=="+iplocal);
     </script>
 
 
