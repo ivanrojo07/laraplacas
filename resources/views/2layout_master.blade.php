@@ -67,7 +67,7 @@
   </head>
   <body>
     <div id="app">
-      
+
       <!-- parte superior izquierda en la que se contendra el logo del cliente -->
       <section id="page">
         <header  class="cabecera text-center">
@@ -150,7 +150,7 @@
         </nav>
         <nav3 id="sidebar">
           @yield('sidebar')
-        </nav3> 
+        </nav3>
         <main class="py-2">
           <!-- modal de login -->
           <div id="miModal" href="{{ route('logout') }}" >
@@ -236,12 +236,12 @@
           </div>
         </main>
         <footer >
-           <!--div class="col-12 textolicencia text-center" >
+           <div class="col-12 textolicencia text-center" >
                 <h6 class="textfoter"> &copy; 360 HQ S.A de C.V 2019. Todos los derechos reservados </h6>
             </div>
             <div class="col-12 imagenlogo" >
                 <img src="{{ asset('images/claro2min.png') }}" class="img-fluid logofoter" alt="claro-360" >
-            </div-->
+            </div>
         </footer>
       </section>
     </div>

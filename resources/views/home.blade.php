@@ -155,19 +155,7 @@
         <div class="col-md-6 col-lg-6 ">
             <div class="capsula">
                 <article id="imagenes">
-                    <div class="row encabezado-aseguradoras">
-                        <div class="col-lg-12">
-                            <span><strong>Detección</strong></span>
-                        </div>
-                    </div>
-                    <div class="box row">
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <img id="imgVel" alt="Imagen Velocidad" name="imgvelocidad" src="images/CAMvel.png" >
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <img id="imgPlaca" alt="Imagen Placa" name = "imgplacas" align="center" src="images/CAMpla.png">
-                        </div>
-                    </div>
+                    <imgvelplaca-component></imgvelplaca-component>
                 </article>
             </div>
         </div>
@@ -178,51 +166,7 @@
         <div class="col-md-6 col-lg-6">
             <div class="capsula">
                 <article id="reconocimiento">
-                    <div class="row encabezado-aseguradoras">
-                        <div class="col-lg-12">
-                            <!--img align="left" style="" src="img/reconocimiento.png" id="imgPalomita"-->
-                            <span><strong>Reconocimiento</strong></span>
-                        </div>
-                    </div>
-                    <div id="rec" class=" box row">
-                        <div>
-                            <form id="formvalidacion" name="formulariovalidacion">
-                                <!--@@ Agregado por Catalina -->
-                                <!--Input para mostrar y editar la placa-->
-                                <div name="caracteres">
-                                    <input readonly type="text"  name="PlacaEdit" id="idEdit" maxlength="8" minlength="5" onclick="valida()"  class="uppercase" >
-                                </div>
-                                <!--Fin de input para mostrar y editar la placa-->
-                                <div>
-                                    <input id="textmotivos" name="textmotivos" class="esconder texto-contenedor" placeholder="Introduce los motivos" onclick="valida()">
-                                </div>
-                                <!--++++++++++++++++++++++++++++++++++++++++++-->
-                                <!-- BOTONES "DESCARTAR", "FIRMAR" y "EDITAR" -->
-                                <!--++++++++++++++++++++++++++++++++++++++++++-->
-                                <div class="row rowButtons" align="center">
-                                    <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4" id="btnDivDescartar">
-                                        <button class="btn btn-default botonExportar btn-md" id="buttondescartar2" name="buttondescartar2" type="button" onclick="descarta();"> Descartar </button>
-                                        <!-- MENSAJES DE VALIDACIÓN -->
-                                        <div class="errorPlaca" style="margin-top: 5%; margin-left: 10%;" >
-                                            <label id="msjerror" class="error esconder"></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4" id="btncambiar">
-                                        <button class="btn btn-default botonExportar btn-md" id="buttonfirmar" name="buttonfirmar" onblur="valestatus(-1)" onclick="valestatus(3);enviaForm();"
-                                        > &nbsp; Firmar &nbsp;</button>
-                                        <input type="hidden" name="valores" id="valores">
-                                        <input type="hidden" name="estatus" id="estatus">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4" id="refcambiar"  >
-                                        <button class="btn btn-default botonExportar btn-md pull-right" id="buttoneditar"  style="border-radius: 2px;" onclick="editable();">Editar</button>
-                                    </div>
-                                    <div>
-                                        <label id="msjerror" class="error esconder"></label>
-                                    </div>
-                                </div>
-                            </form> <!--Fin del formulario-->
-                        </div>
-                    </div>
+                    <reconocimiento-component></reconocimiento-component>
                 </article>
             </div>
         </div>
@@ -233,75 +177,12 @@
        =================================================-->
         <div class=" col-lg-6 col-md-6">
             <div class="capsula">
-                <article class="" id="placas">
-                    <div class="row encabezado-aseguradoras">
-                        <div class="col-lg-12" >
-                            <!--img align="left" style="" src="img/registro.png" id="imgRegistro"-->
-                            <span align="center" >
-                                <strong> Registro </strong>
-                            </span>
-                        </div>
-                        <div class="" id="winBusqueda" align="center">
-                            <form  name="formBuscarPlaca" method="post"  >
-                                <div id="ver">
-                                    <div class="col-lg-12">
-                                        <h2>
-                                            <span>
-                                                <strong> Buscar placa</strong>
-                                            </span>
-                                            <span>
-                                                <button id="HideBusqueda">
-
-                                                </button>
-                                            </span>
-                                        </h2>
-                                    </div>
-                                    <div>
-                                        <input id="siglePlate" minlength="5" maxlength="7" type="text" name="bucaPlate" class="uppercase">
-                                        <input type="submit" value="buscar" name="btnBuscar" id="findSingle">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
+                <article id="placas">
                     <div class="box row">
-                        <table class="encabezado-plateList" style="width:100%; color: #f58220; margin-bottom: 1%;" >
-                            <tr>
-                                <td align="center" style="padding-left: 14%;  padding-top: 1%;  "><strong> Placa</strong></td>
-                                <td align="center" style="padding-right: 15%;  padding-top: 1%; "><strong> Información</strong></td>
-                            </tr>
-                        </table>
 
                         <div align="center" id="ListaPlacas" style="font-size: 5px; text-align:left; background-color: transparent; width: 100%; height: 100%; "  >
                             <div align="left" style=" width: 100%; height: 102%; overflow-y: scroll;">
-
-                                <table class="plateList" style="width: 100%; height: 100%; color:white">
-                                    <tbody>
-                                    @foreach($usuarios as $key=>$usuario)
-                                        @if($usuario->name)
-                                    <tr style=" cursor:pointer; border-top: 1px solid white;">
-                                        <td align="center" style=" padding-left: 5%;">
-                                            <span style="color:#ff8200; font-weight:bold; padding-top:5%">{{$usuario->name}}</span>
-                                        </td>
-                                        <td align="left">
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Sistema: </span>{{ $usuario->email }} 11 </span>
-                                            <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Fecha: </span>{{ $usuario->apellido_paterno }}30/09/2014 </span>
-                                            <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Hora: </span> {{ $usuario->apellido_paterno }} 06:19:09 </span>
-                                            <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Carril: </span> {{ $usuario->apellido_paterno }} 1 </span>
-                                            <br>
-                                            <span style="color:#f58220; padding-left: 30%; "><span style="color: white;"> Velocidad: </span> {{ $usuario->apellido_paterno }} 121 </span>
-                                            <br>
-                                        </td>
-                                    </tr>
-                                    @endif
-                                    @endforeach
-                                    </tbody>
-
-                                </table>
+                                <tablaplacas-component></tablaplacas-component>
                             </div>
                         </div>
                     </div>
@@ -315,169 +196,15 @@
         <div class=" col-lg-6 col-md-6">
             <div class="capsula">
             <article id="informacion">
-                <div class="row encabezado-aseguradoras">
-                    <div class="col-lg-12">
-                        <!--img align="left" style="" src="img/informacion.png" id="imgLapicito"-->
-                        <span><strong> Información</strong></span>
-                    </div>
-                </div>
-                <div class="box row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="cajita divrepuve"> <!--AGREGADO RECINETEMENTE 24_1_2017-->
-                            <div class="row ajustar">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ">
-                                            <span id="marca" > Marca </span>
-                                        </div>
-
-                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                                <span id="marcaRepuve" style="color: white;">-</span>
-                                            </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                            <span id="clase">Clase</span>
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                            <span id="claseRepuve" style="color: white;">-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row ajustar">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                            <span id="modelo">Modelo</span>
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                            <span id="modeloRepuve" style="color: white;">-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                            <span id="niv">NIV</span>
-                                        </div>
-                                        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                            <span id="nivRepuve" style="color: white;">-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row ajustar">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                            <span id="anio">Año</span>
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                            <span id="anioRepuve" style="color: white;">-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                            <span id="version">Versión</span>
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                            <span id="versionRepuve" style="color: white;">-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row ajustar">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                            <span id="tipo">Tipo</span>
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                            <span id="tipoRepuve" style="color: white;">-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="divRobado" class="col-lg-6 col-md-6 col-sm-6 col-xs-6 contenedor-datos-carro">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                            <span id="robado" >Robado</span>
-                                        </div>
-                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                            <div id="divColorRobado" class="indicadorRobo" style="overflow: hidden;">
-                                                <span id="robadoRepuve" style="color: white;">-</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 3%; margin-bottom: 8%">
-                            <div class="row" >
-                                <div class=" col-lg-7 col-md-7 col-sm-7 col-xs-7" >
-                                    <div id="app">
-                                        <mapa-vias>
-
-                                        </mapa-vias>
-                                    </div>
-                            </div>
-                                <div class=" col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-                                <div class="cajita infoCaja">
-                                    <div class="contInformacion">
-                                        <div style="margin-top:0%;margin-left:0%;" align="center"> <!-- agregadorecientemente -->
-                                            <span style="margin-top:30%;" id="encabezado-infor" ><strong > Información</strong></span>
-                                        </div>
-                                    </div>
-                                    <div class="" style="padding-top:0%;height:87%">
-                                        <table class="tableInfo" style="width:100%;height:100%;margin-top:0%;"> <!--AGREGADO RECIENTEMENTE se quito el style de la tabla-->
-                                            <tr >
-                                                <td>
-                                                    <span style="color: #f58220; padding-left: 1.5%;">Placa: </span>
-                                                    <span id="inPlate" style="color: white;">PLACA</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span style="color: #f58220; padding-left: 1.5%;">Sistema: </span>
-                                                    <span id="inSistema" style="color: white;">SISTEMA</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span style="color: #f58220; padding-left: 1.5%;">Direccion: </span><span id="inUbicacion" style="color: white;"> UBICACIÓN</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span style="color: #f58220; padding-left: 1.5%;">Carril: </span><span id="inCarril" style="color: white;">CARRIL</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span style="color: #f58220; padding-left: 1.5%;">Velocidad: </span><span id="inVelocidad" style="color: white;">VELOCIDAD</span > <span style="color: white;"> km/h </span>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                <infoplaca-component></infoplaca-component>
+            </article>
             </div>
         </div>
     </div> <!-- fin de div que engloba todo-->
 @endsection
 @section('scripts')
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_Ev0haW8nP_ToX5KahzvGPWrqT02PWRI" ></script>
-    <script src="{{ asset("js/app.js") }}"> </script>
+
+    {{--<script src="{{ asset("js/app.js") }}"> </script>--}}
 
     <script type="text/x-template" id="modal-template">
         <transition name="modal">

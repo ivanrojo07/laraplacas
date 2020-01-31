@@ -77,6 +77,22 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
+        // BD DE DEF DE SQL SERVER
+        'sqlsrv_pm' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_SQLSRV', 'localhost'),
+            'port' => env('DB_PORT_SQLSRV', '1433'),
+            'database' => env('DB_DATABASE_SQLSRV', 'forge'),
+            'username' => env('DB_USERNAME_SQLSRV', 'forge'),
+            'password' => env('DB_PASSWORD_SQLSRV', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_TIMEOUT=>600
+            ],
+            'prefix_indexes' => true,
+        ],
         // BD DE REGISTROS DEL REPUVE
         'sqlsrv_repuve' => [
             'driver' => 'sqlsrv',

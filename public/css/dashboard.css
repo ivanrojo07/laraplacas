@@ -1,10 +1,237 @@
+.encabezado-aseguradoras{
+    background-color: #2a313a;
+    color: #fff;
+    font-size: 22px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+    text-align:center;
+}
+.box-left{
+    float:left;
+    margin: 1%;
+    width: 50%;
+}
+.capsula{
+    width:100%;
+    height:100%;
+    margin-top: 10px;
+
+}
+.box-contenedor {
+    float:left;
+    width: 50%;
+}
+.elementos {
+    display:table-cell;
+    vertical-align:middle;
+}
+.caja-encabezado-fomulario{
+    background-color: #3f444b;
+    margin-top: 8%;
+    padding-bottom: 0%;
+}
+.box {
+    margin-left:30px;
+    margin-bottom:3%;
+    height: 100%
+}
+.centrando {
+    display: flex;
+    margin-left:30%;
+    margin-right:25%;
+    margin-top:7%
+}
+div[name="btnform"] {
+    word-wrap: break-word;
+}
+div[name="btnform-descartar2"]{
+    height:110%;
+    width:30%;
+    text-align: center;
+    word-wrap: break-word;
+}
+div[name="btnform-firmar"]{
+    height:110%;
+    width:30%;
+    text-align: center;
+    word-wrap: break-word;
+}
+div[name="buttonConfirmar"]{
+    height:110%;
+    width:30%;
+    text-align: center;
+    word-wrap: break-word;
+    margin-left: -12%;
+}
+.btn-ref {
+    color: red;
+    text-decoration: underline;
+    font-size: 17px;
+}
+.texto-contenedor {
+    font-size: 15px;
+    border-top: 0px;
+    width:82%;
+    border-radius: 5px;
+    text-align: center;
+    color: rgb(128, 128, 128);
+    background-color:#FAFAFA;
+    margin-left: 8%;
+    margin-bottom: 1%;
+}
+
+input[name="PlacaEdit"]{
+    font-size: 18px;
+    margin-top: 2%;
+    margin-left: 8%;
+    margin-bottom:0.2em ;
+    width:82%;
+    height: 50px;
+    border-radius: 5px;
+    text-align: center;
+}
+.divrepuve{
+    margin-top: 1%;
+    margin-left: 5%;
+    width: 90%;
+    margin-bottom: 1%;
+    font-size: 15px;
+    height: 85%
+}
+.info {
+    font-family: arial;
+    font-size: 15px;
+}
+.contenedor-datos-carro{
+    background-color: #54595e;
+    border: 0.5px solid orange;
+    font-size: 15px;
+    color:white;
+    height: 100%;
+    text-align: left;
+}
+.ajustar{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    height: 25%;
+}
+.divMapa{
+    margin-top: 0%;
+    margin-left: 11%;
+    height: 95%;
+    margin-right: 2%;
+    width: 90%;
+}
+.cajita{
+    border: 1px solid orange;
+}
+.infoCaja{
+    width: 90%;
+    height: 95%;
+}
+.infoRepuve{
+    margin-top: 4% !important;
+}
+.indicadorRobo{
+    text-align: center;
+    font-size: 15px;
+    background-color: #54595e;
+    width: 36%;
+}
+.rowButtons{
+    height: 62px;
+    padding: 14px;
+}
+/*ADAPTATIVAS*/
+@media screen and (min-device-width: 1028px) and (max-device-width: 1600px){
+    .rowButtons {
+        height: 61px;
+        margin: -18px -5px;
+    }
+    .navbar-nav>li>a {
+        padding-top: 25px;
+        padding-bottom: 0px;
+    }
+    .errorPlaca {
+        margin-top: -37%!important;
+        margin-left: 10%;
+    }
+    button#buttonConfirmar {
+        margin-top: 1px!important;
+        margin-left: -351px!important;
+    }
+    button#buttoncancelar {
+        margin-top: 1px!important;
+        margin-left: 84px;
+    }
+    .tableInfo {
+        font-size: 12px !important;
+    }
+    span#encabezado-infor {
+        font-size: 13px!important;
+    }
+    .contInformacion{
+        height: 16%!important;
+    }
+    .indicadorRobo {
+        width: 57%!important;
+    }
+    body {
+        margin-top: -1%!important;
+    }
+    #pie {
+        font-size: 13px !important;
+    }
+}
+
+@media screen and (min-device-width: 1028px) and (max-device-width: 1600px){
+    .rowButtons {
+        height: 61px;
+        margin: -18px -5px;
+    }
+    .navbar-nav>li>a {
+        padding-top: 25px;
+        padding-bottom: 0px;
+    }
+    .errorPlaca {
+        margin-top: -37%!important;
+        margin-left: 10%;
+    }
+    button#buttonConfirmar {
+        margin-top: 1px!important;
+        margin-left: -351px!important;
+    }
+    button#buttoncancelar {
+        margin-top: 1px!important;
+        margin-left: 84px;
+    }
+    .tableInfo {
+        font-size: 12px !important;
+    }
+    span#encabezado-infor {
+        font-size: 13px!important;
+    }
+    .contInformacion{
+        height: 16%!important;
+    }
+    .indicadorRobo {
+        width: 57%!important;
+    }
+    body {
+        margin-top: -1%!important;
+    }
+    #pie {
+        font-size: 13px !important;
+    }
+}
 img{
     vertical-align: middle;
     border: 0;
 }
 
 .nav-option{
-    color: #40474f; 
+    color: #40474f;
     font-size: 16px;
     text-align: start;
     margin-bottom: 3px
@@ -104,18 +331,6 @@ img#imgPlaca {
     height: 74px;
 
 }
-div[name="btnform-descartar2"]{
-    height:110%;
-    width:30%;
-    text-align: center;
-    word-wrap: break-word;
-}
-div[name="btnform-firmar"]{
-    height:110%;
-    width:30%;
-    text-align: center;
-    word-wrap: break-word;
-}
 div[name="btnform-edicion"] {
     height:110%;
     width:30%;
@@ -127,6 +342,18 @@ div[name="buttonConfirmar"]{
     text-align: center;
     word-wrap: break-word;
     margin-left: -12%;
+}
+div[name="btnform-descartar2"]{
+    height:110%;
+    width:30%;
+    text-align: center;
+    word-wrap: break-word;
+}
+div[name="btnform-firmar"]{
+    height:110%;
+    width:30%;
+    text-align: center;
+    word-wrap: break-word;
 }
 #buttondescartar2 {
     height:auto;
@@ -212,9 +439,10 @@ article#placas{
 }
 .infoCaja {
     width: 90%;
-    height: 95%;
+    height: 100%;
     border: #242935 2px solid;
     border-radius: 10px 10px 10px 10px;
+    margin-left: 20px;
 }
 .contInformacion {
     background-color: #a5a7a8;
@@ -234,6 +462,12 @@ span{
     height: 250px;
     margin-right: -1%;
     width: initial;
+}
+.input-group > .form-control, .btn{
+    border-radius: 0px;
+    border-color: red !important;
+    background-color: red !important;
+    color:white;
 }
 @media (min-width: 1200px) {
     .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
@@ -391,6 +625,111 @@ span{
     }
     .col-lg-offset-0 {
         margin-left: 0%;
+    }
+}
+@media only screen and (max-width: 1400px) {
+    /*---- ENCABEZADO PRINCIPAL ------*/
+    .contenedor-cuerpo {
+        height: 15%;
+    }
+    .contenedor-aseguradoras{
+        font-size: 25px;
+        /*font-style: arial;*/
+        height: 50%;
+    }
+
+    .contenedor-logo {
+        height: 36%;
+    }
+    .logo-claro-360 {
+        margin-top: 1%;
+        margin-left: 0%;
+        height: 43px;
+        width: auto;
+    }
+    .contenedor-aseguradoras-salir {
+        height: 50%;
+    }
+    .contenedor-aseguradoras-salir .row {
+        height: 100%;
+    }
+    .contenedor-salir {
+        height: 50%;
+        text-align: right;
+    }
+    /*---- ENCABEZADOS SECCIONES ------*/
+    .encabezado-aseguradoras{
+        font-size: 24px;
+    }
+    /*---- SECCION DE RECONOCIMIENTO ------*/
+    .input-group > .form-control, .btn{
+        border-radius: 0px;
+        border-color: red !important;
+        background-color: red !important;
+        color:white;
+        /*font-style: arial;*/
+        font-size: 15px;
+    }
+    input[name="PlacaEdit"]{
+        /*font-style: arial;*/
+        font-size: 25px;
+        margin-top: 4%;
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-bottom: 0.5%;
+        width:140%;
+        height:50%;
+        border-radius: 5px;
+        text-align: center;
+    }
+    input[name="textmotivos"]{
+        font-size: 18px;
+        /*font-style: arial;*/
+    }
+    #buttoneditar{
+        font-size: 20px;
+    }
+    #buttoncancelar{
+        font-size: 20px;
+    }
+    #msjerror{
+        font-size: 15px;
+        /*font-style: arial;*/
+    }
+    /*---- SECCION LISTA DE PLACAS ------*/
+    .encabezado-plateList{
+        font-size: 22px;
+    }
+    .contenedor-busqueda, .espacio-bottom-busqueda {
+        height: 12%;
+        margin-top: 0%;
+    }
+    .plateList{
+        font-size: 18px;
+/*        font-style: arial;*/
+    }
+    /*---- SECCION INFORMACION ------*/
+    .contenedor-resultados-repuve {
+        font-size: 16px;
+        padding-top: 1%;
+    }
+    .tableInfo{
+        font-size: 15px;
+        background-color: transparent;
+    }
+    .divrepuve{
+        font-size: 20px;
+        text-align: center;
+    }
+    #pie{
+        font-size: 20px;
+        /*font-style: arial;/*/
+        height: 53px;
+        padding-top: 5px;
+    }
+    #encabezado-infor{
+ /*       font-style: arial;*/
+        font-size: 18px;
     }
 }
 /*# sourceMappingURL=bootstrap.css.map */
