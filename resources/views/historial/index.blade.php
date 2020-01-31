@@ -148,11 +148,11 @@
     </style>
 @endsection
 @section('sidebar')
-	{{-- expr --}}
 	<!--=====================================================
     ==               Sección de información                ==
     ==                    y busqueda                       ==
     ======================================================-->
+    <!-- LLAMADA AL COMPONENTE MENUCOMPONENT -->
     <menu-component></menu-component>
 @endsection
 @section('contenido')
@@ -162,7 +162,8 @@
         =================================================-->
         <div class="col-12 mt-3">
             <div class="capsula">
-              <tabcontent-component></tabcontent-component>  
+                <!-- LLAMADA AL COMPONENTE TABCONTENT COMPONENT -->
+                <tabcontent-component></tabcontent-component>  
             </div>
         </div>
     </div>

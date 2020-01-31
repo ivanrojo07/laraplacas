@@ -1946,7 +1946,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      registros: Object
+      registros: {
+        sistema_0: {
+          result: []
+        },
+        sistema_1: {
+          result: []
+        },
+        sistema_11: {
+          result: []
+        },
+        sistema_13: {
+          result: []
+        },
+        sistema_14: {
+          result: []
+        },
+        sistema_15: {
+          result: []
+        },
+        sistema_16: {
+          result: []
+        },
+        sistema_17: {
+          result: []
+        },
+        sistema_18: {
+          result: []
+        },
+        sistema_19: {
+          result: []
+        },
+        sistema_21: {
+          result: []
+        },
+        sistema_22: {
+          result: []
+        },
+        sistema_43: {
+          result: []
+        },
+        sistema_44: {
+          result: []
+        }
+      }
     };
   },
   methods: {
@@ -1963,7 +2006,11 @@ __webpack_require__.r(__webpack_exports__);
       this.setHistorial(newValue);
     }
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    _.debounce(function () {
+      return alert('detecciones component mounted');
+    }, 500);
+  }
 });
 
 /***/ }),
@@ -2085,7 +2132,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      registros: Object
+      registros: {
+        sistema_0: {
+          result: []
+        },
+        sistema_1: {
+          result: []
+        },
+        sistema_11: {
+          result: []
+        },
+        sistema_13: {
+          result: []
+        },
+        sistema_14: {
+          result: []
+        },
+        sistema_15: {
+          result: []
+        },
+        sistema_16: {
+          result: []
+        },
+        sistema_17: {
+          result: []
+        },
+        sistema_18: {
+          result: []
+        },
+        sistema_19: {
+          result: []
+        },
+        sistema_21: {
+          result: []
+        },
+        sistema_22: {
+          result: []
+        },
+        sistema_43: {
+          result: []
+        },
+        sistema_44: {
+          result: []
+        }
+      }
     };
   },
   props: {
@@ -2416,7 +2506,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       google: null,
       map: null,
-      google_puntos: []
+      google_puntos: [],
+      infoWindow: null,
+      bounds: null
     };
   },
   mounted: function mounted() {
@@ -2440,14 +2532,16 @@ __webpack_require__.r(__webpack_exports__);
     setGooglePuntos: function setGooglePuntos(res) {
       var _this2 = this;
 
+      this.bounds = null;
+      this.bounds = new google.maps.LatLngBounds();
       this.google_puntos.forEach(function (punto) {
         punto.setMap(null);
       });
       this.google_puntos = [];
-      console.log('result ', res);
       res.forEach(function (point) {
         _this2.createGooglePoint(point);
       });
+      this.map.fitBounds(this.bounds);
     },
     pinSymbol: function pinSymbol(color, punto) {
       var ruta = "";
@@ -2468,6 +2562,10 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     createGooglePoint: function createGooglePoint(point) {
+      this.bounds.extend({
+        lat: parseFloat(point.camaras.lat),
+        lng: parseFloat(point.camaras.lng)
+      });
       var Marker = this.google.maps.Marker;
       var marker = new Marker({
         position: {
@@ -2493,11 +2591,16 @@ __webpack_require__.r(__webpack_exports__);
 
       this.map.setZoom(12);
       this.map.setCenter(marker.position);
+      marker.infowindow = new google.maps.InfoWindow({
+        content: "\n\t\t\t\t\t<div style=\"padding: 12px !important;\">\n\t\t\t\t\t\tMultas: ".concat(point.multas, "<br>Detecciones: ").concat(point.detecciones, "<br>  Ubicaci\xF3n: ").concat(point.camaras.ubicacion, " <br>\n\t\t\t\t\t</div>")
+      });
+      var self = this;
       this.google.maps.event.addListener(marker, 'click', function () {
-        var infoWindow = new google.maps.InfoWindow(); // infoWindow.setContent(" Multas: " + fines + "<br>  Detecciones: " +detecciones + "<br>  Ubicación: " + addr);
+        for (var i = self.google_puntos.length - 1; i >= 0; i--) {
+          self.google_puntos[i].infowindow.close();
+        }
 
-        infoWindow.setContent("Multas: ".concat(point.multas, "<br>Detecciones: ").concat(point.detecciones, "<br>  Ubicaci\xF3n: ").concat(point.camaras.ubicacion, " <br>"));
-        infoWindow.open(map, marker);
+        marker.infowindow.open(map, marker);
       });
       this.google_puntos.push(marker);
     }
@@ -2709,93 +2812,140 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      // LISTA DE ERRORES CAPTURADOS.
       errors: [],
+      // MODELO DE LA PLACA BUSCADA.
       placa: "",
+      // RESPUESTA RECIBIDA POR EL SERVIDOR.
       placa_response: {},
+      // PESTANIA ACTIVADA.
       activeItem: 'velocidad',
+      // RESPUESTA RECIBIDA POR EL SERVIDOR DEL LA BUSQUEDA DE INFORMACIÓN DEL AUTO POR REPUVE.
       repuve_response: {},
+      // RESPUESTA RECIBIDA PARA LA ETIQUETA DE VELOCIDAD PROMEDIO.
       velocidad_promedio: "",
+      // RESPUESTA RECIBIDA PARA LA ETIQUETA DE EXCESO DE VELOCIDAD.
       exceso_velocidad: "",
+      // RESPUESTA RECIBIDA PARA LA ETIQUETA DE DETECCIONES.
       detecciones: ""
     };
   },
   methods: {
+    // VERIFICA SI EL MODELO PLACA ES VALIDADA Y CUMPLE CON LOS REQUISITOS 
     checkPlaca: function checkPlaca(e) {
       var _this = this;
 
-      this.errors = [];
+      // vaciamos el arreglo de errores previamente capturados
+      this.errors = []; // si el modelo de la placa esta vacio o es nulo
 
       if (!this.placa) {
+        // agregamos un mensaje de error
         this.errors.push('La placa es requerido.');
-      }
+      } // verificamos si no pasa la función de verificar placa
+
 
       if (!this.validPlaca(this.placa)) {
+        // mostramos un mensaje de error 
         this.errors.push('Es necesario una placa valida. Sólo se permite el uso de letras (excepto la I y O) y numeros. Con longitud de 4 a 7');
-      }
+      } // verificamos si no tenemos mensajes de errores anteriores
+
 
       if (!this.errors.length) {
+        // realizamos un llamado al api de placas para agregar un registro de la placa buscada.
         axios.post('api/placa', {
           placa: this.placa
         }).then(function (response) {
-          _this.placa_response = {};
-          _this.placa_response = response.data.placa;
+          // Vaciamos respuesta anterior de la placa.
+          _this.placa_response = {}; // capturamos la respuesta en el data placa response
+
+          _this.placa_response = response.data.placa; // lanzamos el evento en root con la placa response
 
           _this.$root.$emit('set-placa-info', _this.placa_response);
         })["catch"](function (error) {
+          // Si existe error con respuesta
           if (error.response) {
-            _this.placa_response = {};
-            var errs = error.response.data.errors.placa;
+            // vaciamos la respuesta anterior de la placa
+            _this.placa_response = {}; // capturamos el error en una variable
+
+            var errs = error.response.data.errors.placa; // recorremos el arreglo y lo agregamos al arreglo del data error
+
             errs.forEach(function (item) {
               return _this.errors.push(item);
             });
           }
 
           console.log(error);
-        });
+        }); // llamamos a la funcion para obtener información del repuve 
+
         this.getRepuve(this.placa);
-      }
+      } // para no llamar a la función post (evita recargar la pagina)
+
 
       e.preventDefault();
     },
+    // realiza una busqueda a la base de datos de repuve sobre la placa buscada.
     getRepuve: function getRepuve(placa) {
       var _this2 = this;
 
-      var repuve = this.repuve_response.placa ? this.repuve_response.placa : "";
+      // variable con la placa anterior del repuve. de lo contrario dejar vacio
+      var repuve = this.repuve_response.placa ? this.repuve_response.placa : ""; // verificamos si es diferente la placa actual buscada y la anterior
 
       if (this.placa != repuve.trim()) {
+        // agregar leyendas de cargando a velocidad promedio, exceso velocidad y detecciones.
         this.velocidad_promedio = "CARGANDO...";
         this.exceso_velocidad = "CARGANDO...";
         this.detecciones = "CARGANDO...";
-      }
+      } // Llamada a la api de repuve con la placa a buscar
+
 
       axios.post('api/repuve', {
         placa: placa
       }).then(function (res) {
-        _this2.repuve_response = res.data.result;
+        // guardar la respuesta en el objeto repuve_response
+        _this2.repuve_response = res.data.result; // Lanzamos un evento a root con el repuve response.
 
         _this2.$root.$emit('set-repuve-info', _this2.repuve_response);
       })["catch"](function (err) {
-        console.log(err.response.data);
+        // console.log con los errores capturado
+        console.log(err.response.data); // igualamos el objeto repuve response a vacio.
+
         _this2.repuve_response = {};
       });
     },
+    // Función para validar si la placa cumple una primera expresión regular.
     validPlaca: function validPlaca(placa) {
-      var reg = /^[A-Ha-hJ-Nj-nP-Zp-z0-9]{4,7}$/;
+      // expresion regular para que no agregue I y O
+      var reg = /^[A-Ha-hJ-Nj-nP-Zp-z0-9]{4,7}$/; // retornamos un booleano para que haya pasado la expresión regular.
+
       return reg.test(placa);
     },
+    // función que cambia las pestañas del tabcomponent
     setTab: function setTab(menuItem) {
+      // lanzamos un evento con la pestaña seleccionada.
       this.$root.$emit('set-tab', menuItem);
     }
   },
   mounted: function mounted() {
     var _this3 = this;
 
-    console.log('Component mounted.');
+    console.log('Component mounted.'); // capturamos el evento info-sistema cuando se lance desde el componente
+    // (capturamos los strings de velocidad promedio, contador de excesos de velocidad
+    // y detecciones)
+
     this.$root.$on('info-sistemas', function (velocidad_promedio, exceso_velocidad, detecciones) {
-      // console.log('menu componente velocidad',velocidad_promedio);
+      // agregamos la velocidad promedio,contador de exceso de velocidad y detecciones al data
       _this3.velocidad_promedio = velocidad_promedio.toFixed(2) + " Km/h";
       _this3.exceso_velocidad = exceso_velocidad;
       _this3.detecciones = detecciones;
@@ -3213,6 +3363,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DeteccionesComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeteccionesComponent */ "./resources/js/components/DeteccionesComponent.vue");
 /* harmony import */ var _HistorialComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HistorialComponent */ "./resources/js/components/HistorialComponent.vue");
+/* harmony import */ var _ExcesoComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ExcesoComponent */ "./resources/js/components/ExcesoComponent.vue");
+/* harmony import */ var _RoboComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoboComponent */ "./resources/js/components/RoboComponent.vue");
 //
 //
 //
@@ -3238,62 +3390,133 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// IMPORTAMOS LOS COMPONENTES A UTILIZAR
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      // booleano para cargar el spinner loading
       load: false,
+      // bandera para cambiar de pestaña/componente
       tab: 'velocidad',
+      // Placa que obtendremos del reporte repuve
       placa: String,
+      // objeto con las respuestas de la busqueda a los sistemas
       historial: {},
+      // Objeto sobre la información de reportes de robo del automovil
       robo: {},
+      // url sistema -1 (CHURUBUSCO)
       url_sistema_menos_1: "api/sistema-1",
+      // url sistema 0 (CHUBURUSCO)
       url_sistema_0: "api/sistema_0",
+      // url sistema 11 (Patriotismo)
       url_sistema_11: "api/sistema_11",
+      // url sistema 13 (Consulado)
       url_sistema_13: "api/sistema_13",
+      // url sistema 14 (Ciudad Universitaria)
       url_sistema_14: "api/sistema_14",
+      // url sistema 15 (Soriana)
       url_sistema_15: "api/sistema_15",
+      // url sistema 16 (Xotepingo)
       url_sistema_16: "api/sistema_16",
+      // url sistema 17 (Xotepingo)
       url_sistema_17: "api/sistema_17",
+      // url sistema 18 (General Anaya)
       url_sistema_18: "api/sistema_18",
+      // url sistema 19 (Fonda Argentina)
       url_sistema_19: "api/sistema_19",
+      // url sistema 21 (Eje 3)
       url_sistema_21: "api/sistema_21",
+      // url sistema 22 (Dakota)
       url_sistema_22: "api/sistema_22",
+      // url sistema 43 (Las Flores)
       url_sistema_43: "api/sistema_43",
+      // url sistema 44 (Las Flores)
       url_sistema_44: "api/sistema_44"
     };
   },
   watch: {
+    //  observer que realiza una función cuando se modifica la placa
     'placa': function placa(newVal, oldVal) {
+      // lanza función de getHistorico
       this.getHistorico(this.placa);
     }
   },
   components: {
     DeteccionesComponent: _DeteccionesComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
-    HistorialComponent: _HistorialComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
+    HistorialComponent: _HistorialComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ExcesoComponent: _ExcesoComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
+    RoboComponent: _RoboComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   methods: {
+    // Función que busca la placa en todos los sistemas.
     'getHistorico': function getHistorico(placa) {
       var _this = this;
 
-      this.load = true;
-      var sistema_0 = this.setSistema0(placa);
-      var sistema_menos_1 = this.setSistemaMenos1(placa);
-      var sistema_11 = this.setSistema11(placa);
-      var sistema_13 = this.setSistema13(placa);
-      var sistema_14 = this.setSistema14(placa);
-      var sistema_15 = this.setSistema15(placa);
-      var sistema_16 = this.setSistema16(placa);
-      var sistema_17 = this.setSistema17(placa);
-      var sistema_18 = this.setSistema18(placa);
-      var sistema_19 = this.setSistema19(placa);
-      var sistema_21 = this.setSistema21(placa);
-      var sistema_22 = this.setSistema22(placa);
-      var sistema_43 = this.setSistema43(placa);
-      var sistema_44 = this.setSistema44(placa);
+      // lanzamos la vista de loading
+      this.load = true; // llamamos la función setSistema0
+
+      var sistema_0 = this.setSistema0(placa); // llamamos la función setSistema-1
+
+      var sistema_menos_1 = this.setSistemaMenos1(placa); // llamamos la función setSistema11
+
+      var sistema_11 = this.setSistema11(placa); // llamamos la función setSistema13
+
+      var sistema_13 = this.setSistema13(placa); // llamamos la función setSistema14
+
+      var sistema_14 = this.setSistema14(placa); // llamamos la función setSistema15
+
+      var sistema_15 = this.setSistema15(placa); // llamamos la función setSistema16
+
+      var sistema_16 = this.setSistema16(placa); // llamamos la función setSistema17
+
+      var sistema_17 = this.setSistema17(placa); // llamamos la función setSistema18
+
+      var sistema_18 = this.setSistema18(placa); // llamamos la función setSistema19
+
+      var sistema_19 = this.setSistema19(placa); // llamamos la función setSistema21
+
+      var sistema_21 = this.setSistema21(placa); // llamamos la función setSistema22
+
+      var sistema_22 = this.setSistema22(placa); // llamamos la función setSistema43
+
+      var sistema_43 = this.setSistema43(placa); // llamamos la función setSistema44
+
+      var sistema_44 = this.setSistema44(placa); // Realizar una promesa con todos los axios del sistemas
+
       axios.all([sistema_menos_1, sistema_0, sistema_11, sistema_13, sistema_14, sistema_15, sistema_16, sistema_17, sistema_18, sistema_19, sistema_21, sistema_22, sistema_43, sistema_44]).then(axios.spread(function () {
-        _this.historial = {};
+        // limpiamos el objeto historial
+        _this.historial = {}; // agregamos el resultado de los sistemas al objeto historial
 
         for (var _len = arguments.length, responses = new Array(_len), _key = 0; _key < _len; _key++) {
           responses[_key] = arguments[_key];
@@ -3312,15 +3535,19 @@ __webpack_require__.r(__webpack_exports__);
         _this.historial["sistema_21"] = responses[10].data;
         _this.historial["sistema_22"] = responses[11].data;
         _this.historial["sistema_43"] = responses[12].data;
-        _this.historial["sistema_44"] = responses[13].data;
-        _this.load = false;
+        _this.historial["sistema_44"] = responses[13].data; // quitamos el loading spinner de la carga del sistema
+
+        _this.load = false; // llamamos a la función sistema info
 
         _this.setSistemasInfo();
       }))["catch"](function (errors) {
-        console.log(errors);
+        // realizamos un console log del error dado
+        console.log(errors); // quitamos el loading spinner de la carga del sistema.
+
         _this.load = false;
       });
     },
+    // funciones para cargar el axios de los sistemas.
     'setSistema0': function setSistema0(placa) {
       return axios.post(this.url_sistema_0, {
         placa: placa
@@ -3391,169 +3618,248 @@ __webpack_require__.r(__webpack_exports__);
         placa: placa
       });
     },
+    // Función que manda la información del velocidad promedio, exceso de velocidad y detecciones
     'setSistemasInfo': function setSistemasInfo() {
-      var velocidades = [];
-      var exceso_velocidad = 0;
+      // array vacio de velocidades
+      var velocidades = []; // variable para exceso de velocidad (contador)
+
+      var exceso_velocidad = 0; // si el sistema 1 tiene registros de esa placa
 
       if (this.historial.sistema_1.result.length > 0) {
+        // recorremos el array
         for (var i = this.historial.sistema_1.result.length - 1; i >= 0; i--) {
+          // si la velocidad del registro es mayor a 81
           if (this.historial.sistema_1.result[i].Velocidad >= 81.00) {
+            // agregamos un contador a exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // metemos el registro al array de velocidades
+
 
           velocidades.push(this.historial.sistema_1.result[i].Velocidad);
         }
-      }
+      } // Si el sistema 0 tiene registros de esa placa 
+
 
       if (this.historial.sistema_0.result.length > 0) {
+        // recorremos el array
         for (var i = this.historial.sistema_0.result.length - 1; i >= 0; i--) {
+          // si la velocidad del registro es mayor a 81
           if (this.historial.sistema_0.result[i].Velocidad >= 81.00) {
+            // agregamos un contador a exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // metemos el registro al array de velocidades.
+
 
           velocidades.push(this.historial.sistema_0.result[i].Velocidad);
         }
-      }
+      } // si el sistema 11 tiene registros de esa placa
+
 
       if (this.historial.sistema_11.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_11.result.length - 1; i >= 0; i--) {
+          // si la velocidad del registro es mayor a 81
           if (this.historial.sistema_11.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_11.result[i]);
+          // metemos el regitro al array de velocidades.
 
-          console.log(this.historial.sistema_11.result[i]);
+
           velocidades.push(this.historial.sistema_11.result[i].velocidad.velocidad);
         }
-      }
+      } // si el sistema 13 tiene registros de esa placa
+
 
       if (this.historial.sistema_13.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_13.result.length - 1; i >= 0; i--) {
+          // si la velocidad del registro es mayor a 81
           if (this.historial.sistema_13.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_13.result[i]);
+          // metemos el registro al array de velocidades.
 
-          console.log(this.historial.sistema_13.result[i]);
+
           velocidades.push(this.historial.sistema_13.result[i].velocidad.velocidad);
         }
-      }
+      } // si el sistema 14 tiene registros de esa placa
+
 
       if (this.historial.sistema_14.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_14.result.length - 1; i >= 0; i--) {
+          // si el registro tiene una velocidad mayor de 81
           if (this.historial.sistema_14.result[i].velocidad.velocidad >= 81.00) {
+            // Agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_14.result[i]);
+          // Metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_14.result[i]);
+
           velocidades.push(this.historial.sistema_14.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 15 tiene registros de esa placa
+
 
       if (this.historial.sistema_15.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_15.result.length - 1; i >= 0; i--) {
+          // Si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_15.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad.
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_15.result[i]);
+          // Metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_15.result[i]);
+
           velocidades.push(this.historial.sistema_15.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 16 tiene registros de esa placa
+
 
       if (this.historial.sistema_16.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_16.result.length - 1; i >= 0; i--) {
+          // Si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_16.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_16.result[i]);
+          // Metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_16.result[i]);
+
           velocidades.push(this.historial.sistema_16.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 17 tiene registros de esa placa
+
 
       if (this.historial.sistema_17.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_17.result.length - 1; i >= 0; i--) {
+          // Si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_17.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_17.result[i]);
+          // Metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_17.result[i]);
+
           velocidades.push(this.historial.sistema_17.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 18 tiene registros de esa placa
+
 
       if (this.historial.sistema_18.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_18.result.length - 1; i >= 0; i--) {
+          // Si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_18.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_18.result[i]);
+          // Metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_18.result[i]);
+
           velocidades.push(this.historial.sistema_18.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 19 tiene registros de esa placa
+
 
       if (this.historial.sistema_19.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_19.result.length - 1; i >= 0; i--) {
+          // si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_19.result[i].velocidad.velocidad >= 81.00) {
+            // Agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_19.result[i]);
+          // metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_19.result[i]);
+
           velocidades.push(this.historial.sistema_19.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 21 tiene registros de esa placa
+
 
       if (this.historial.sistema_21.result.length > 0) {
+        // recorremos el arreglo
         for (var i = this.historial.sistema_21.result.length - 1; i >= 0; i--) {
+          // Si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_21.result[i].velocidad.velocidad >= 81.00) {
+            // Agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_21.result[i]);
+          // metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_21.result[i]);
+
           velocidades.push(this.historial.sistema_21.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 22 tiene registros de esa placa
+
 
       if (this.historial.sistema_22.result.length > 0) {
+        // recorremos el array
         for (var i = this.historial.sistema_22.result.length - 1; i >= 0; i--) {
+          // si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_22.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_22.result[i]);
+          // Metemos el registro al array de velocidades
 
-          console.log(this.historial.sistema_22.result[i]);
+
           velocidades.push(this.historial.sistema_22.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 43 tiene registros de esa placa
+
 
       if (this.historial.sistema_43.result.length > 0) {
+        // recorremos el array
         for (var i = this.historial.sistema_43.result.length - 1; i >= 0; i--) {
+          // si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_43.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_43.result[i]);
+          // Metemos el registro al array de velocidades.
 
-          console.log(this.historial.sistema_43.result[i]);
+
           velocidades.push(this.historial.sistema_43.result[i].velocidad.velocidad);
         }
-      }
+      } // Si el sistema 44 tiene registros de esa placa
+
 
       if (this.historial.sistema_44.result.length > 0) {
+        // recorremos el array
         for (var i = this.historial.sistema_44.result.length - 1; i >= 0; i--) {
+          // Si el registro tiene una velocidad mayor a 81
           if (this.historial.sistema_44.result[i].velocidad.velocidad >= 81.00) {
+            // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
-          }
+          } // console.log(this.historial.sistema_44.result[i]);
+          // Metemos el registro al array de velocidades.
 
-          console.log(this.historial.sistema_44.result[i]);
+
           velocidades.push(this.historial.sistema_44.result[i].velocidad.velocidad);
         }
-      }
+      } // variable inicial de promedio de velocidad
 
-      var velocidad_final = 0;
-      var detecciones = 0;
+
+      var velocidad_final = 0; // contador de detecciones totales
+
+      var detecciones = 0; // recorremos el array de velocidades
+
       velocidades.forEach(function (res) {
+        // le sumamos la velocidad a velocidad promedio
         velocidad_final += res;
-      });
-      velocidad_final = velocidad_final / velocidades.length;
-      detecciones = velocidades.length;
+      }); // Dividimos el total de velocidad final entre la longitud del array de velocidades
+
+      velocidad_final = velocidad_final / velocidades.length; // contamos la longitud del array de velocidades.
+
+      detecciones = velocidades.length; // emitimos el evento a root para que el menucomponent pueda capturarlo
+
       this.$root.$emit('info-sistemas', velocidad_final, exceso_velocidad, detecciones);
     }
   },
@@ -3562,28 +3868,31 @@ __webpack_require__.r(__webpack_exports__);
 
     // Escucha el evento setTab del MenuComponent
     this.$root.$on('set-tab', function (tab) {
-      // Cambia de modal al activar el pills
-      _this2.tab = tab;
-    });
-    this.$root.$on('set-placa-info', function (placa) {
-      _this2.placa = placa.placa; // alert('placa encontrada ID:'+placa.id);
-      // console.log(placa);
-      // axios.post('api/historial_placa',{'placa':placa.placa}).then((res)=>{
-      // 	// console.log(res.data);
-      // 	var response = res.data
-      // 	this.historial = res.data.historial;
-      // 	console.log(this.historial)
-      // }).catch((err)=>{
-      // 	console.log(err);
-      // });
-      // TODO
-    });
-    this.$root.$on('set-repuve-info', function (res) {
-      if (res.robado.trim() == "SI") {
-        _this2.robo = res.reporte_robo;
-      } else {
-        _this2.robo = {};
+      // activa la pestaña enviada por el menucomponent
+      if (_this2.tab != tab) {
+        _this2.tab = "";
+        var self = _this2;
+        setTimeout(function () {
+          self.tab = tab;
+        }, 300);
       }
+    }); // Escucha el evento SetPlacInfo del menucomponent
+
+    this.$root.$on('set-placa-info', function (placa) {
+      // Igualamos la placa del repuve en el menu component a la data placa del componente principal
+      _this2.placa = placa.placa;
+    }); // Escucha el evento SetRepuveInfo del menu componente
+
+    this.$root.$on('set-repuve-info', function (res) {
+      // Si el objeto dado res tiene afirmativo el metodo robado
+      if (res.robado.trim() == "SI") {
+        // Igualamos la respuesta dada por el evento a la data robo del componente principal
+        _this2.robo = res.reporte_robo;
+      } // De lo contrario
+      else {
+          // Igualamos el data robo como un objeto vacio.
+          _this2.robo = {};
+        }
     });
   }
 });
@@ -8227,17 +8536,17 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#rec[data-v-d5e66a10]{\n    min-height: 80vh; \n    max-height: 80vh;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*#rec{\n    min-height: 80vh; \n    max-height: 80vh;\n}*/\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8246,7 +8555,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#loading {\n  display: block ;\n  position: absolute ;\n  top: 0 ;\n  left: 0 ;\n  z-index: 1000 ;\n  width: 100% ;\n  height: 100% ;\n  background-color: rgba(0, 0, 0, 0.75) ;\n  background-image: url(\"/Placas/public/images/load.gif\") ;\n  background-size: 15%;\n  background-repeat: no-repeat ;\n  background-position: center ;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*clase del loading spinner*/\n#loading[data-v-18a7d39e] {\n  display: block ;\n  position: absolute ;\n  top: 0 ;\n  left: 0 ;\n  z-index: 1000 ;\n  width: 100% ;\n  height: 100% ;\n  background-color: rgba(0, 0, 0, 0.75) ;\n  /*TODO modificar ruta del background-image en producción*/\n  background-image: url(\"/Placas/public/images/load.gif\") ;\n  background-size: 15%;\n  background-repeat: no-repeat ;\n  background-position: center ;\n}\n/*clases para la transición*/\n.component-fade-enter-active[data-v-18a7d39e], .component-fade-leave-active[data-v-18a7d39e] {\n  -webkit-transition: opacity 0.30s ease;\n  transition: opacity 0.30s ease;\n}\n.component-fade-enter[data-v-18a7d39e], .component-fade-leave-to[data-v-18a7d39e]\n/* .component-fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -40561,15 +40870,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -42648,6 +42957,7 @@ var render = function() {
                                 ) +
                                 "\n                                "
                             ),
+                            _vm._v(" "),
                             _c(
                               "a",
                               {
@@ -42690,6 +43000,7 @@ var render = function() {
                                 ) +
                                 "\n                                "
                             ),
+                            _vm._v(" "),
                             _c(
                               "a",
                               {
@@ -42734,6 +43045,7 @@ var render = function() {
                                 ) +
                                 "\n                                "
                             ),
+                            _vm._v(" "),
                             _c(
                               "a",
                               {
@@ -42776,6 +43088,7 @@ var render = function() {
                                 ) +
                                 "\n                                "
                             ),
+                            _vm._v(" "),
                             _c(
                               "a",
                               {
@@ -42915,19 +43228,28 @@ var render = function() {
           ),
       _vm._v(" "),
       !(Object.keys(_vm.robo_details).length === 0)
-        ? _c("table", { staticClass: "table table-default" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", { staticClass: "text-white" }, [
-                _c("td", [_vm._v(_vm._s(_vm.robo_details.entidad))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm.robo_details.fecha_averiguacion))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(_vm.robo_details.fecha_robo))])
+        ? _c(
+            "table",
+            {
+              staticClass: "table table-default",
+              staticStyle: { height: "70vh" }
+            },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", { staticClass: "text-white" }, [
+                  _c("td", [_vm._v(_vm._s(_vm.robo_details.entidad))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.robo_details.fecha_averiguacion))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.robo_details.fecha_robo))])
+                ])
               ])
-            ])
-          ])
+            ]
+          )
         : _vm._e()
     ])
   ])
@@ -42970,10 +43292,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&":
-/*!**********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e& ***!
-  \**********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -43000,61 +43322,88 @@ var render = function() {
         attrs: { id: "loading" }
       }),
       _vm._v(" "),
-      _c("historial-component", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.tab == "velocidad",
-            expression: "tab == 'velocidad'"
-          }
+      _c(
+        "transition",
+        { attrs: { name: "component-fade", mode: "out-in" } },
+        [
+          _c("historial-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.tab == "velocidad",
+                expression: "tab == 'velocidad'"
+              }
+            ],
+            staticClass: "w-100 h-100",
+            staticStyle: { "min-height": "83vh !important" },
+            attrs: { response: _vm.historial }
+          })
         ],
-        staticClass: "w-100 h-100",
-        staticStyle: { "min-height": "83vh !important" },
-        attrs: { response: _vm.historial }
-      }),
+        1
+      ),
       _vm._v(" "),
-      _c("exceso-component", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.tab == "exceso",
-            expression: "tab == 'exceso'"
-          }
+      _c(
+        "transition",
+        { attrs: { name: "component-fade", mode: "out-in" } },
+        [
+          _c("exceso-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.tab == "exceso",
+                expression: "tab == 'exceso'"
+              }
+            ],
+            staticClass: "w-100 h-100",
+            staticStyle: { "min-height": "83vh !important" },
+            attrs: { response: _vm.historial }
+          })
         ],
-        staticClass: "w-100 h-100",
-        staticStyle: { "min-height": "83vh !important" },
-        attrs: { response: _vm.historial }
-      }),
+        1
+      ),
       _vm._v(" "),
-      _c("robo-component", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.tab == "robado",
-            expression: "tab == 'robado'"
-          }
+      _c(
+        "transition",
+        { attrs: { name: "component-fade", mode: "out-in" } },
+        [
+          _c("robo-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.tab == "robado",
+                expression: "tab == 'robado'"
+              }
+            ],
+            staticClass: "w-100",
+            attrs: { response: _vm.robo }
+          })
         ],
-        staticClass: "w-100 h-100",
-        staticStyle: { "min-height": "83vh !important" },
-        attrs: { response: _vm.robo }
-      }),
+        1
+      ),
       _vm._v(" "),
-      _c("detecciones-component", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.tab == "detecciones",
-            expression: "tab == 'detecciones'"
-          }
+      _c(
+        "transition",
+        { attrs: { name: "component-fade", mode: "out-in" } },
+        [
+          _c("detecciones-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.tab == "detecciones",
+                expression: "tab == 'detecciones'"
+              }
+            ],
+            staticClass: "w-100 h-100",
+            staticStyle: { "min-height": "83vh !important" },
+            attrs: { response: _vm.historial }
+          })
         ],
-        staticClass: "w-100 h-100",
-        staticStyle: { "min-height": "83vh !important" },
-        attrs: { response: _vm.historial }
-      })
+        1
+      )
     ],
     1
   )
@@ -55316,6 +55665,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
+window.funcion_aparecer = function () {
+  //Con esto hacemos referencia al modal y lo guardamos
+  var miModal = document.getElementById('miModal'); //Acá hacemos aparecer al modal
+
+  $("#miModal").fadeIn("3000");
+  miModal.style.display = 'block';
+};
+
+window.funcion_cerrar = function () {
+  $("#miModal").fadeIn("slow"); //Con esto hacemos referencia al modal y lo guardamos
+
+  var miModal = document.getElementById('miModal'); //Acá hacemos invisible al modal
+
+  miModal.style.display = 'none';
+};
+
 /***/ }),
 
 /***/ "./resources/js/components/DeteccionesComponent.vue":
@@ -55951,9 +56316,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=template&id=18a7d39e& */ "./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&");
+/* harmony import */ var _TabContentComponent_vue_vue_type_template_id_18a7d39e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true& */ "./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true&");
 /* harmony import */ var _TabContentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TabContentComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _TabContentComponent_vue_vue_type_style_index_0_id_18a7d39e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css& */ "./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55965,11 +56330,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _TabContentComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TabContentComponent_vue_vue_type_template_id_18a7d39e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TabContentComponent_vue_vue_type_template_id_18a7d39e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "18a7d39e",
   null
   
 )
@@ -55995,35 +56360,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css& ***!
+  \******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_id_18a7d39e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=style&index=0&id=18a7d39e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_id_18a7d39e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_id_18a7d39e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_id_18a7d39e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_id_18a7d39e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_style_index_0_id_18a7d39e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e& ***!
-  \****************************************************************************************/
+/***/ "./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true& ***!
+  \****************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=template&id=18a7d39e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_template_id_18a7d39e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TabContentComponent.vue?vue&type=template&id=18a7d39e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_template_id_18a7d39e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_template_id_18a7d39e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TabContentComponent_vue_vue_type_template_id_18a7d39e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

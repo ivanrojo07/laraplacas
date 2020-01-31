@@ -47,7 +47,7 @@ class CamarasUbicacionsTableSeeder extends Seeder
         		'sistema'          => 14,
 				'fecha_registro'   => '2014-2015',
 				'verificada'       => 0,
-				'ubicacion'        => 'Insurgentes Norte (Ciudad Universitaria)',
+				'ubicacion'        => 'Insurgentes Sur (Ciudad Universitaria)',
 				'referencia'       => 'Ciudad Universitaria',
 				'limite_velocidad' => 80,
 				'lat'              => '19.3235547065',

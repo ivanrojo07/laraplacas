@@ -1,5 +1,4 @@
 window._ = require('lodash');
-
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -39,3 +38,19 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+window.funcion_aparecer = function (){
+    //Con esto hacemos referencia al modal y lo guardamos
+    var miModal = document.getElementById('miModal');
+    //Acá hacemos aparecer al modal
+    $("#miModal").fadeIn("3000");
+    miModal.style.display = 'block';
+}
+
+window.funcion_cerrar = function (){
+  $("#miModal").fadeIn("slow");
+    //Con esto hacemos referencia al modal y lo guardamos
+    var miModal = document.getElementById('miModal');
+    //Acá hacemos invisible al modal
+
+    miModal.style.display = 'none';
+}

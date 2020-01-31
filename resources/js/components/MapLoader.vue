@@ -19,7 +19,7 @@
 		props:{
 			mapConfig: Object,
 			apiKey:String,
-			markers:Array
+			markers:Array,
 		},
 		components:{
 			MapProvider
@@ -29,6 +29,8 @@
 				google:null,
 				map:null,
 				google_puntos:[],
+				infoWindow:null,
+				bounds: null
 			}
 		},
 		mounted(){
@@ -49,14 +51,16 @@
 
 			},
 			setGooglePuntos(res){
+				this.bounds = null;
+				this.bounds = new google.maps.LatLngBounds();
 				this.google_puntos.forEach(punto=>{
 					punto.setMap(null);
 				})
 				this.google_puntos = [];
-				console.log('result ',res);
 				res.forEach(point=>{
 					this.createGooglePoint(point);
 				});
+				this.map.fitBounds(this.bounds)
 
 			},
 			pinSymbol(color,punto){
@@ -78,6 +82,7 @@
 			   	};
 			},
 			createGooglePoint(point){
+				this.bounds.extend({lat:parseFloat(point.camaras.lat),lng:parseFloat(point.camaras.lng)});
 				const {Marker} = this.google.maps;
 				var marker = new Marker({
 					position: {lat:parseFloat(point.camaras.lat),lng:parseFloat(point.camaras.lng)},
@@ -100,12 +105,19 @@
 				}
 				this.map.setZoom(12);
 				this.map.setCenter(marker.position);
+				marker.infowindow = new google.maps.InfoWindow({content:`
+						<div style="padding: 12px !important;">
+							Multas: ${point.multas}<br>Detecciones: ${point.detecciones}<br>  Ubicación: ${point.camaras.ubicacion} <br>
+						</div>`});
+				var self = this;
 				this.google.maps.event.addListener(marker,'click',function(){
-					var infoWindow = new google.maps.InfoWindow();
-					// infoWindow.setContent(" Multas: " + fines + "<br>  Detecciones: " +detecciones + "<br>  Ubicación: " + addr);
-					infoWindow.setContent(`Multas: ${point.multas}<br>Detecciones: ${point.detecciones}<br>  Ubicación: ${point.camaras.ubicacion} <br>`);
-    				infoWindow.open(map,marker);
-				})
+					for (var i = self.google_puntos.length - 1; i >= 0; i--) {
+						self.google_puntos[i].infowindow.close();
+					}
+				  	marker.infowindow.open(map, marker);
+					
+				});
+
 				this.google_puntos.push(marker);
 			}
 		},

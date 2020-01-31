@@ -107,7 +107,22 @@
     export default{
         data(){
             return {
-                registros: Object
+                registros: {
+                    sistema_0:{result:[]},
+                    sistema_1:{result:[]},
+                    sistema_11:{result:[]},
+                    sistema_13:{result:[]},
+                    sistema_14:{result:[]},
+                    sistema_15:{result:[]},
+                    sistema_16:{result:[]},
+                    sistema_17:{result:[]},
+                    sistema_18:{result:[]},
+                    sistema_19:{result:[]},
+                    sistema_21:{result:[]},
+                    sistema_22:{result:[]},
+                    sistema_43:{result:[]},
+                    sistema_44:{result:[]},
+                }
             }
         },
         methods: {
@@ -126,6 +141,7 @@
 
         },
         mounted(){
+            _.debounce(()=>alert('detecciones component mounted'),500);
         }
     }
 </script>

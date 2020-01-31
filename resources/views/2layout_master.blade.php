@@ -246,18 +246,18 @@
       </section>
     </div>
     <script src="{{ asset("js/app.js") }}"> </script>
-    <script type="text/javascript" src="{{ asset('js/controlmodal.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/controlmodal.js') }}"></script> --}}
     {{-- <script type="text/javascript" src="{{ asset('js/togglefect.js') }}"></script> --}}
-    <script type="text/javascript" src="{{ asset('js/vendor/modernizr-3.5.0.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/vendor/jquery-ui.1.12.1.js') }}"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/vendor/modernizr-3.5.0.min.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('js/vendor/jquery-ui.1.12.1.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> --}}
     {{-- <script src="https://unpkg.com/vue-multiselect@2.1.0"></script> --}}
-    <script type="text/javascript" src="{{ asset('js/jquery-validation-1.17.0/jquery.validate.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery-validation-1.17.0/messages_es.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript" src="{{ asset('js/jquery-validation-1.17.0/jquery.validate.min.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('js/jquery-validation-1.17.0/messages_es.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('js/jquery.dataTables.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script> --}}
+    {{-- <script type="text/javascript">
       var rutaApp = '{!! url('/') !!}' + '/';
       $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -277,7 +277,7 @@
         yearSuffix: ''
        };
        $.datepicker.setDefaults($.datepicker.regional['es']);
-    </script>
+    </script> --}}
     @yield('scripts')
   </body>
 </html>

@@ -12,7 +12,7 @@
             <div v-else class="alert alert-info w-100 h-25" role="alert">
                 <h1>Este vehículo no cuenta con ningún tipo de reporte</h1>
             </div>
-        	<table class="table table-default"  v-if="!(Object.keys(robo_details).length === 0 )">
+        	<table class="table table-default"  v-if="!(Object.keys(robo_details).length === 0 )" style="height: 70vh;">
       			<thead align="center">
       				<tr>
       					<th class="col-xs-3 headTable text-warning">

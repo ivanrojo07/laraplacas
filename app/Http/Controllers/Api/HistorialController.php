@@ -73,12 +73,6 @@ class HistorialController extends Controller
 	                    'verificada' =>  true
 	                ]
 	             );
-	        	// BUSCAR INFORMACIÓN DEL REPUVE
-	        	/* 
-	        	 *
-	        	 *	TODO 
-	        	 *
-	        	 */
 	        	// Retornamos el objeto json con la placa resultante y su relación con tipo de servicio
     			return response()->json(['placa'=>$registro_placa->load('tipo_servicio')],201);
 
@@ -144,5 +138,64 @@ class HistorialController extends Controller
     	return response()->json(['prueba'=>$imagen_prueba->load('sistema')],201);
     }
 
+    public function local_sistema(Request $request) {
+        // Validamos que el input placa cumpla
+        // con el formato y sea requerido.
+        $validate = Validator::make(
+                    $request->all(),
+                    [
+                        'placa'=>'required|regex:/^([a-h,A-H,j-n,J-N,p-z,P-Z,0-9]{4,7})$/'
+                    ],
+                    [
+                        'required'=>'La placa es requerida.',
+                        'regex'=>'La placa no es valida.'
+                    ]);
+        // Si la validación falla
+        if ($validate->fails()) {
+            // Retornamos una respuesta en json con el error mostrado
+            return response()->json(['errors'=>$validate->errors()],422);
+        }
+        // Si pasa la validación.
+        else{
+            // Obtenemos la placa en mayuscula (sí hay registros
+            // en minusculas las convertimos en mayusculas).
+            $placa = strtoupper($request->placa);
+            // Obtenemos los tipos de servicio que tenga la longitud de la placa buscada.
+            $tipo_servicios = TipoServicio::where('longitud',strlen($placa))->get();
+            // Recorremos el resultado de los tipos de servicios resultantes
+            foreach ($tipo_servicios as $patron) {
+                // Y verificamos si se verifica con la expresión regular.
+                if(preg_grep($patron->expresion,[$placa])){
+                    // guardamos el tipo de servicio dado a una variable
+                    $servicio = $patron;
+                }
+            }
+            // Verificamos que la variable servicio exista y no sea nula
+            if (isset($servicio)) {
+                // Llamamos a la función para crear o actualizar
+                // el modelo placa que coincida con la placa buscada.
+                $registro_placa = RegistroPlaca::updateOrCreate(
+                    [
+                        'placa'=>$request->placa
+                    ],
+                    [
+                        'placa'=>$request->placa,
+                        'tipo_servicio_id'=>$servicio->id,
+                        'verificada' =>  true
+                    ]
+                 );
+                $placas = $registro_placa->tipo_servicio->sistema0_placas()->where('placa_original','like',"%$registro_placa->placa%")->get();
+                return response()->json(['placas'=>$placas],201);
 
+                // // Retornamos el objeto json con la placa resultante y su relación con tipo de servicio
+                // return response()->json(['placa'=>$registro_placa->load('tipo_servicio')],201);
+
+            } 
+            // Si no encontramos el tipo de servicio significa que la placa no existe
+            else {
+                // Retornamos una respuesta con el error de que la placa no es valida.
+                return response()->json(['errors'=>['placa'=>['La placa no es valida.']]],422);
+            }
+        }
+    }
 }
