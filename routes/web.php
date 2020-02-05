@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('inicio');
-});
+// Route::get('/', function () {
+//     return view('inicio');
+// });
 Route::middleware(['admin'])->group(function () {
     Route::get('/test', function () {
 
@@ -58,11 +58,11 @@ Route::middleware(['admin'])->group(function () {
 
 });
 Auth::routes();
-Route::get('/home', 'vistaController@usuarios')->name('home');
+Route::middleware('auth')->get('/', 'vistaController@usuarios')->name('home');
 // Grupo de rutas para Historial de Placas
-Route::namespace('Historial')->prefix('historial')->name('historial.')->group(function(){
+Route::namespace('Historial')->prefix('historial')->name('historial.')->middleware('auth')->group(function(){
     Route::get('','HistorialMultasController@index')->name('index');
-    Route::post('/placa','HistorialMultasController@buscarPlaca')->name('buscar');
+    // Route::post('/placa','HistorialMultasController@buscarPlaca')->name('buscar');
 });
 Route::prefix('/usuario')->name('usuario.')->group(function (){
    Route::post('/users','UsuarioController@nuevo')->name('nuevo');

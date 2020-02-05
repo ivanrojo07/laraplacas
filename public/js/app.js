@@ -4664,6 +4664,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
+    // axios.get('api/user').then(res=>{
+    // 	console.log(res.data);
+    // }).catch(err=>{
+    // 	console.log(err.response.data);
+    // });
     // Escucha el evento setTab del MenuComponent
     this.$root.$on('set-tab', function (tab) {
       // activa la pestaña enviada por el menucomponent
@@ -57666,6 +57671,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /*Vue.component('mapa-vias', require('./components/mapa').default);*/
 
+Vue.component('menu-component', __webpack_require__(/*! ./components/MenuComponent */ "./resources/js/components/MenuComponent.vue")["default"]);
 Vue.component('menu-component', __webpack_require__(/*! ./components/MenuComponent */ "./resources/js/components/MenuComponent.vue")["default"]);
 Vue.component('mi-mapa', __webpack_require__(/*! ./components/MiMapaComponent */ "./resources/js/components/MiMapaComponent.vue")["default"]);
 Vue.component('map-loader', __webpack_require__(/*! ./components/MapLoader */ "./resources/js/components/MapLoader.vue")["default"]);

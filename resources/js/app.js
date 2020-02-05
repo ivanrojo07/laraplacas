@@ -4,6 +4,7 @@ window.Vue = require('vue');
 
 /*Vue.component('mapa-vias', require('./components/mapa').default);*/
 Vue.component('menu-component',require('./components/MenuComponent').default);
+Vue.component('menu-component',require('./components/MenuComponent').default);
 Vue.component('mi-mapa',require('./components/MiMapaComponent').default);
 Vue.component('map-loader',require('./components/MapLoader').default);
 Vue.component('map-provider',require('./components/MapProvider').default);

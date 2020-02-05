@@ -169,8 +169,8 @@
               </div>
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link nav-option" href="#">Posibles Multas</a>
-                  <a class="nav-link nav-option" href="#">Busqueda de Placas</a>
+                  <a class="nav-link nav-option" href="{{ route('home') }}">Posibles Multas</a>
+                  <a class="nav-link nav-option" href="{{ route('historial.index') }}">Busqueda de Placas</a>
                 </li>
               </ul>
                  <div id="textologin">
