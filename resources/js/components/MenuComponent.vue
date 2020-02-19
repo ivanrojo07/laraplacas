@@ -279,6 +279,7 @@
                 this.velocidad_promedio = velocidad_promedio.toFixed(2)+" Km/h";
                 this.exceso_velocidad = exceso_velocidad;
                 this.detecciones = detecciones;
+                this.placa = "";
 
             })
 

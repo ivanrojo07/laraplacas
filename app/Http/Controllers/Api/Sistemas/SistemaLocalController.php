@@ -25,14 +25,9 @@ class SistemaLocalController extends Controller
 	// 
     public function sistema0(Request $request)
     {
-    	$tipo_servicios = TipoServicio::get();
-    	foreach ($tipo_servicios as $tipo_servicio) {
-    		if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-    			$servicio = $tipo_servicio;
-    		}
-    	}
-    	if (isset($servicio)) {
-    		$result = Sistema0::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+    	$servicio = $request->servicio;
+    	if ($servicio) {
+    		$result = Sistema0::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->get();
     		return response()->json(['result'=>$result],201);
     	} else {
     		$result = Sistema0::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -41,14 +36,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema1(Request $request)
     {
-    	$tipo_servicios = TipoServicio::get();
-    	foreach ($tipo_servicios as $tipo_servicio) {
-    		if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-    			$servicio = $tipo_servicio;
-    		}
-    	}
-    	if (isset($servicio)) {
-    		$result = Sistema1::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+    	$servicio = $request->servicio;
+    	if ($servicio) {
+    		$result = Sistema1::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->get();
     		return response()->json(['result'=>$result],201);
     	} else {
     		$result = Sistema1::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -57,14 +47,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema11(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema11::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema11::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema11::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -73,14 +58,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema13(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema13::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema13::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema13::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -89,14 +69,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema14(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema14::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema14::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema14::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -105,14 +80,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema15(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema15::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema15::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema15::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -121,14 +91,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema16(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema16::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema16::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema16::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -137,14 +102,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema17(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema17::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema17::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema17::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -153,14 +113,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema18(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema18::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema18::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema18::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -169,14 +124,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema19(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema19::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema19::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema19::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -185,14 +135,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema21(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema21::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema21::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema21::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -201,14 +146,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema22(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema22::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema22::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema22::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -217,14 +157,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema43(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema43::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema43::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema43::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
@@ -233,14 +168,9 @@ class SistemaLocalController extends Controller
     }
     public function sistema44(Request $request)
     {
-        $tipo_servicios = TipoServicio::get();
-        foreach ($tipo_servicios as $tipo_servicio) {
-            if (preg_grep($tipo_servicio->expresion,[$request->placa])) {
-                $servicio = $tipo_servicio;
-            }
-        }
-        if (isset($servicio)) {
-            $result = Sistema44::where('tipo_servicio_id',$servicio->id)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
+        $servicio = $request->servicio;
+        if ($servicio) {
+            $result = Sistema44::where('tipo_servicio_id',$servicio)->where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();
             return response()->json(['result'=>$result],201);
         } else {
             $result = Sistema44::where('placa_original',$request->placa)->OrWhere('placa_modificada',$request->placa)->get();

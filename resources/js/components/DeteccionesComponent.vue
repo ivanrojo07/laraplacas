@@ -5,92 +5,94 @@
                 <h3 class="text-left"> Detalle de Detecciones </h3>
             </div>
         </div>
-        <div id="rec" class=" box row">
+        <table class="table table-default" style="background-color: rgb(63, 68, 75);">
+    		<thead align="center">
+    			<tr>
+    				<th class="col-xs-4 headTable text-warning" style="width: 20% !important;">
+    					Fecha
+    				</th>
+    				<th class="col-xs-4 headTable text-warning" style="width: 65% !important;">
+    					Ubicación
+    				</th>
+    				<th class="col-xs-4 headTable text-warning" style="width: 15% !important;">
+    					Velocidad(KPH)
+    				</th>
+    			</tr>
+    		</thead>
+        </table>
+        <div id="rec" class=" box row" style="background-color:#3f444b; border-top: 0px; overflow:auto; text-align: center;">
         	<table class="table table-default">
-    			<thead align="center">
-    				<tr>
-    					<th class="col-xs-3 headTable text-warning">
-    						Fecha
-    					</th>
-    					<th class="col-xs-3 headTable text-warning">
-    						Ubicación
-    					</th>
-    					<th class="col-xs-3 headTable text-warning">
-    						Velocidad(KPH)
-    					</th>
-    				</tr>
-    			</thead>
     			<tbody>
                     <!-- SISTEMA 0 -->
-                    <tr :class="registro.Velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_0.result.length > 0" v-for="registro in registros.sistema_0.result">
-                        <td>{{ registro.date+" "+registro.hora }}</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_0.result.length > 0" v-for="registro in registros.sistema_0.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
                         <td>Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe</td>
-                        <td>{{registro.Velocidad.toFixed(2)}} Km/h</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.Velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_1.result.length > 0" v-for="registro in registros.sistema_1.result">
-                        <td>{{ registro.date+" "+registro.hora }}</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_1.result.length > 0" v-for="registro in registros.sistema_1.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
                         <td>Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe</td>
-                        <td>{{registro.Velocidad.toFixed(2)}} Km/h</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_11.result.length > 0" v-for="registro in registros.sistema_11.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_11.result.length > 0" v-for="registro in registros.sistema_11.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
                         <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_13.result.length > 0" v-for="registro in registros.sistema_13.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_13.result.length > 0" v-for="registro in registros.sistema_13.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Circuito Interior Oriente (Av. Rio Consulado) y Tanger</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_14.result.length > 0" v-for="registro in registros.sistema_14.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_14.result.length > 0" v-for="registro in registros.sistema_14.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Insurgentes Sur (Ciudad Universitaria)</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_15.result.length > 0" v-for="registro in registros.sistema_15.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_15.result.length > 0" v-for="registro in registros.sistema_15.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Circuito Interior Poniente (Av. Rio Consulado) y Chelines</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_16.result.length > 0" v-for="registro in registros.sistema_16.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_16.result.length > 0" v-for="registro in registros.sistema_16.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Av. Tlalpan Sur y Museo (Xotepingo)</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_17.result.length > 0" v-for="registro in registros.sistema_17.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_17.result.length > 0" v-for="registro in registros.sistema_17.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Av. Tlalpan Norte y  Xotepingo</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_18.result.length > 0" v-for="registro in registros.sistema_18.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_18.result.length > 0" v-for="registro in registros.sistema_18.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Av. Tlalpan Norte y Los Atletas (General Anaya)</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_19.result.length > 0" v-for="registro in registros.sistema_19.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_19.result.length > 0" v-for="registro in registros.sistema_19.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Viaducto Miguel Alemán  y Dr. Andrade</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_21.result.length > 0" v-for="registro in registros.sistema_21.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_21.result.length > 0" v-for="registro in registros.sistema_21.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Viaducto Rio de la Piedad  y Eje 3 (Azúcar)</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_22.result.length > 0" v-for="registro in registros.sistema_22.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_22.result.length > 0" v-for="registro in registros.sistema_22.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Av. Tlalpan Sur y Dakota</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_43.result.length > 0" v-for="registro in registros.sistema_43.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_43.result.length > 0" v-for="registro in registros.sistema_43.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Periférico Sur  y Las Flores</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
-                    <tr :class="registro.velocidad.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_44.result.length > 0" v-for="registro in registros.sistema_44.result">
-                        <td>{{ registro.velocidad.date+" "+registro.velocidad.hora }}</td>
-                        <td>Viaducto Miguel Alemán  y Av. Patriotismo</td>
-                        <td>{{registro.velocidad.velocidad.toFixed(2)}} Km/h</td>
+                    <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_44.result.length > 0" v-for="registro in registros.sistema_44.result">
+                        <td>{{ registro.date+" "+registro.time }}</td>
+                        <td>Periferico Norte y Las Flores</td>
+                        <td>{{parseFloat(registro.velocidad).toFixed(2)}} Km/h</td>
                     </tr>
     			</tbody>
     		</table>
@@ -99,8 +101,8 @@
 </template>
 <style scoped>
     #rec{
-        min-height: 80vh; 
-        max-height: 80vh;
+        min-height: 70vh; 
+        max-height: 70vh;
     }
 </style>
 <script>

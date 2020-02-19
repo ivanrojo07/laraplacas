@@ -20,6 +20,19 @@ class Sistema22 extends Model
 		'tipo_servicio_id'
     ];
 
+    protected $appends = ['date','time'];
+    
+    public function getDateAttribute(){
+    	setlocale(LC_ALL, 'es_ES');
+    	$fecha = date('l d/m/Y',strtotime($this->fecha));
+    	return $fecha;
+    }
+
+    public function getTimeAttribute(){
+        $hora = date('g:i:s a',strtotime($this->hora));
+        return $hora;
+    }
+
     public function tipo_servicio()
     {
     	return $this->belongsTo('App\TipoServicio');

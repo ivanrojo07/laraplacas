@@ -39,12 +39,12 @@
 					let detecciones_0 = res.sistema_1.result.length + res.sistema_0.result.length;
 					let alta_velocidad_0 = 0;
 					res.sistema_0.result.forEach(registro=>{
-						if (registro.AltaVelocidad == 1) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_0 +=1;
 						}
 					})
 					res.sistema_1.result.forEach(registro=>{
-						if (registro.Velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_0 +=1;						}
 					})
 					arreglo.push({'camaras':this.camaras[0],'detecciones':detecciones_0,'multas':alta_velocidad_0});
@@ -53,7 +53,7 @@
 					let detecciones_1 = res.sistema_11.result.length;
 					let alta_velocidad_1 = 0;
 					res.sistema_11.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_1 +=1;
 						}
 					})
@@ -63,7 +63,7 @@
 					let detecciones_2 = res.sistema_13.result.length;
 					let alta_velocidad_2 = 0;
 					res.sistema_13.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_2 +=1;
 						}
 					})
@@ -73,7 +73,7 @@
 					let detecciones_3 = res.sistema_14.result.length;
 					let alta_velocidad_3 = 0;
 					res.sistema_14.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_3 +=1;
 						}
 					})
@@ -83,7 +83,7 @@
 					let detecciones_4 = res.sistema_15.result.length;
 					let alta_velocidad_4 = 0;
 					res.sistema_15.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_4 +=1;
 						}
 					})
@@ -93,7 +93,7 @@
 					let detecciones_5 = res.sistema_16.result.length;
 					let alta_velocidad_5 = 0;
 					res.sistema_16.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_5 +=1;
 						}
 					})
@@ -103,7 +103,7 @@
 					let detecciones_6 = res.sistema_17.result.length;
 					let alta_velocidad_6 = 0;
 					res.sistema_17.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_6 +=1;
 						}
 					})
@@ -113,7 +113,7 @@
 					let detecciones_7 = res.sistema_18.result.length;
 					let alta_velocidad_7 = 0;
 					res.sistema_18.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_7 +=1;
 						}
 					})
@@ -123,7 +123,7 @@
 					let detecciones_8 = res.sistema_19.result.length;
 					let alta_velocidad_8 = 0;
 					res.sistema_19.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_8 +=1;
 						}
 					})
@@ -133,7 +133,7 @@
 					let detecciones_9 = res.sistema_21.result.length;
 					let alta_velocidad_9 = 0;
 					res.sistema_21.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_9 +=1;
 						}
 					})
@@ -143,7 +143,7 @@
 					let detecciones_10 = res.sistema_22.result.length;
 					let alta_velocidad_10 = 0;
 					res.sistema_22.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_10 +=1;
 						}
 					})
@@ -153,7 +153,7 @@
 					let detecciones_11 = res.sistema_43.result.length;
 					let alta_velocidad_11 = 0;
 					res.sistema_43.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_11 +=1;
 						}
 					})
@@ -163,7 +163,7 @@
 					let detecciones_12 = res.sistema_44.result.length;
 					let alta_velocidad_12 = 0;
 					res.sistema_44.result.forEach(registro=>{
-						if (registro.velocidad.velocidad >= 81) {
+						if (registro.velocidad >= 81) {
 							alta_velocidad_12 +=1;
 						}
 					})

@@ -30,7 +30,7 @@ class Sistema_0Seeder extends Seeder
 					'velocidad' => $registro['Velocidad'],
         		]);
 				foreach ($tipo_servicios as $patron) {
-					if(preg_grep($patron->expresion,[$localsistema->placa_original]) | preg_grep($patron->expresion,[$localsistema->placa_modificada])){
+					if(preg_grep($patron->expresion,[$localsistema->placa_original])){
 		            	// guardamos el tipo de servicio dado a una variable
 		                $servicio = $patron;
 		            }

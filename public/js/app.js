@@ -1975,6 +1975,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2282,12 +2284,12 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_0 = res.sistema_1.result.length + res.sistema_0.result.length;
         var alta_velocidad_0 = 0;
         res.sistema_0.result.forEach(function (registro) {
-          if (registro.AltaVelocidad == 1) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_0 += 1;
           }
         });
         res.sistema_1.result.forEach(function (registro) {
-          if (registro.Velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_0 += 1;
           }
         });
@@ -2302,7 +2304,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_1 = res.sistema_11.result.length;
         var alta_velocidad_1 = 0;
         res.sistema_11.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_1 += 1;
           }
         });
@@ -2317,7 +2319,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_2 = res.sistema_13.result.length;
         var alta_velocidad_2 = 0;
         res.sistema_13.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_2 += 1;
           }
         });
@@ -2332,7 +2334,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_3 = res.sistema_14.result.length;
         var alta_velocidad_3 = 0;
         res.sistema_14.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_3 += 1;
           }
         });
@@ -2347,7 +2349,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_4 = res.sistema_15.result.length;
         var alta_velocidad_4 = 0;
         res.sistema_15.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_4 += 1;
           }
         });
@@ -2362,7 +2364,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_5 = res.sistema_16.result.length;
         var alta_velocidad_5 = 0;
         res.sistema_16.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_5 += 1;
           }
         });
@@ -2377,7 +2379,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_6 = res.sistema_17.result.length;
         var alta_velocidad_6 = 0;
         res.sistema_17.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_6 += 1;
           }
         });
@@ -2392,7 +2394,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_7 = res.sistema_18.result.length;
         var alta_velocidad_7 = 0;
         res.sistema_18.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_7 += 1;
           }
         });
@@ -2407,7 +2409,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_8 = res.sistema_19.result.length;
         var alta_velocidad_8 = 0;
         res.sistema_19.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_8 += 1;
           }
         });
@@ -2422,7 +2424,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_9 = res.sistema_21.result.length;
         var alta_velocidad_9 = 0;
         res.sistema_21.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_9 += 1;
           }
         });
@@ -2437,7 +2439,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_10 = res.sistema_22.result.length;
         var alta_velocidad_10 = 0;
         res.sistema_22.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_10 += 1;
           }
         });
@@ -2452,7 +2454,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_11 = res.sistema_43.result.length;
         var alta_velocidad_11 = 0;
         res.sistema_43.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_11 += 1;
           }
         });
@@ -2467,7 +2469,7 @@ __webpack_require__.r(__webpack_exports__);
         var detecciones_12 = res.sistema_44.result.length;
         var alta_velocidad_12 = 0;
         res.sistema_44.result.forEach(function (registro) {
-          if (registro.velocidad.velocidad >= 81) {
+          if (registro.velocidad >= 81) {
             alta_velocidad_12 += 1;
           }
         });
@@ -3666,6 +3668,7 @@ __webpack_require__.r(__webpack_exports__);
       _this3.velocidad_promedio = velocidad_promedio.toFixed(2) + " Km/h";
       _this3.exceso_velocidad = exceso_velocidad;
       _this3.detecciones = detecciones;
+      _this3.placa = "";
     });
   }
 });
@@ -4234,33 +4237,33 @@ __webpack_require__.r(__webpack_exports__);
       // Objeto sobre la información de reportes de robo del automovil
       robo: {},
       // url sistema -1 (CHURUBUSCO)
-      url_sistema_menos_1: "api/sistema-1",
+      url_sistema_menos_1: "api/sistema1",
       // url sistema 0 (CHUBURUSCO)
-      url_sistema_0: "api/sistema_0",
+      url_sistema_0: "api/sistema0",
       // url sistema 11 (Patriotismo)
-      url_sistema_11: "api/sistema_11",
+      url_sistema_11: "api/sistema11",
       // url sistema 13 (Consulado)
-      url_sistema_13: "api/sistema_13",
+      url_sistema_13: "api/sistema13",
       // url sistema 14 (Ciudad Universitaria)
-      url_sistema_14: "api/sistema_14",
+      url_sistema_14: "api/sistema14",
       // url sistema 15 (Soriana)
-      url_sistema_15: "api/sistema_15",
+      url_sistema_15: "api/sistema15",
       // url sistema 16 (Xotepingo)
-      url_sistema_16: "api/sistema_16",
+      url_sistema_16: "api/sistema16",
       // url sistema 17 (Xotepingo)
-      url_sistema_17: "api/sistema_17",
+      url_sistema_17: "api/sistema17",
       // url sistema 18 (General Anaya)
-      url_sistema_18: "api/sistema_18",
+      url_sistema_18: "api/sistema18",
       // url sistema 19 (Fonda Argentina)
-      url_sistema_19: "api/sistema_19",
+      url_sistema_19: "api/sistema19",
       // url sistema 21 (Eje 3)
-      url_sistema_21: "api/sistema_21",
+      url_sistema_21: "api/sistema21",
       // url sistema 22 (Dakota)
-      url_sistema_22: "api/sistema_22",
+      url_sistema_22: "api/sistema22",
       // url sistema 43 (Las Flores)
-      url_sistema_43: "api/sistema_43",
+      url_sistema_43: "api/sistema43",
       // url sistema 44 (Las Flores)
-      url_sistema_44: "api/sistema_44"
+      url_sistema_44: "api/sistema44"
     };
   },
   watch: {
@@ -4348,72 +4351,86 @@ __webpack_require__.r(__webpack_exports__);
     // funciones para cargar el axios de los sistemas.
     'setSistema0': function setSistema0(placa) {
       return axios.post(this.url_sistema_0, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistemaMenos1': function setSistemaMenos1(placa) {
       return axios.post(this.url_sistema_menos_1, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema11': function setSistema11(placa) {
       return axios.post(this.url_sistema_11, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema13': function setSistema13(placa) {
       return axios.post(this.url_sistema_13, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema14': function setSistema14(placa) {
       return axios.post(this.url_sistema_14, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema15': function setSistema15(placa) {
       return axios.post(this.url_sistema_15, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema16': function setSistema16(placa) {
       return axios.post(this.url_sistema_16, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema17': function setSistema17(placa) {
       return axios.post(this.url_sistema_17, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema18': function setSistema18(placa) {
       return axios.post(this.url_sistema_18, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema19': function setSistema19(placa) {
       return axios.post(this.url_sistema_19, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema21': function setSistema21(placa) {
       return axios.post(this.url_sistema_21, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema22': function setSistema22(placa) {
       return axios.post(this.url_sistema_22, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema43': function setSistema43(placa) {
       return axios.post(this.url_sistema_43, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     'setSistema44': function setSistema44(placa) {
       return axios.post(this.url_sistema_44, {
-        placa: placa
+        placa: placa.placa,
+        servicio: placa.tipo_servicio
       });
     },
     // Función que manda la información del velocidad promedio, exceso de velocidad y detecciones
@@ -4427,13 +4444,13 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el array
         for (var i = this.historial.sistema_1.result.length - 1; i >= 0; i--) {
           // si la velocidad del registro es mayor a 81
-          if (this.historial.sistema_1.result[i].Velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_1.result[i].velocidad) >= 81.00) {
             // agregamos un contador a exceso de velocidad
             exceso_velocidad += 1;
           } // metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_1.result[i].Velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_1.result[i].velocidad));
         }
       } // Si el sistema 0 tiene registros de esa placa 
 
@@ -4442,13 +4459,13 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el array
         for (var i = this.historial.sistema_0.result.length - 1; i >= 0; i--) {
           // si la velocidad del registro es mayor a 81
-          if (this.historial.sistema_0.result[i].Velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_0.result[i].velocidad) >= 81.00) {
             // agregamos un contador a exceso de velocidad
             exceso_velocidad += 1;
           } // metemos el registro al array de velocidades.
 
 
-          velocidades.push(this.historial.sistema_0.result[i].Velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_0.result[i].velocidad));
         }
       } // si el sistema 11 tiene registros de esa placa
 
@@ -4457,14 +4474,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_11.result.length - 1; i >= 0; i--) {
           // si la velocidad del registro es mayor a 81
-          if (this.historial.sistema_11.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_11.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_11.result[i]);
           // metemos el regitro al array de velocidades.
 
 
-          velocidades.push(this.historial.sistema_11.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_11.result[i].velocidad));
         }
       } // si el sistema 13 tiene registros de esa placa
 
@@ -4473,14 +4490,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_13.result.length - 1; i >= 0; i--) {
           // si la velocidad del registro es mayor a 81
-          if (this.historial.sistema_13.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_13.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_13.result[i]);
           // metemos el registro al array de velocidades.
 
 
-          velocidades.push(this.historial.sistema_13.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_13.result[i].velocidad));
         }
       } // si el sistema 14 tiene registros de esa placa
 
@@ -4489,14 +4506,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_14.result.length - 1; i >= 0; i--) {
           // si el registro tiene una velocidad mayor de 81
-          if (this.historial.sistema_14.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_14.result[i].velocidad) >= 81.00) {
             // Agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_14.result[i]);
           // Metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_14.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_14.result[i].velocidad));
         }
       } // Si el sistema 15 tiene registros de esa placa
 
@@ -4505,14 +4522,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_15.result.length - 1; i >= 0; i--) {
           // Si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_15.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_15.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad.
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_15.result[i]);
           // Metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_15.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_15.result[i].velocidad));
         }
       } // Si el sistema 16 tiene registros de esa placa
 
@@ -4521,14 +4538,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_16.result.length - 1; i >= 0; i--) {
           // Si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_16.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_16.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_16.result[i]);
           // Metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_16.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_16.result[i].velocidad));
         }
       } // Si el sistema 17 tiene registros de esa placa
 
@@ -4537,14 +4554,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_17.result.length - 1; i >= 0; i--) {
           // Si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_17.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_17.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_17.result[i]);
           // Metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_17.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_17.result[i].velocidad));
         }
       } // Si el sistema 18 tiene registros de esa placa
 
@@ -4553,14 +4570,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_18.result.length - 1; i >= 0; i--) {
           // Si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_18.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_18.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_18.result[i]);
           // Metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_18.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_18.result[i].velocidad));
         }
       } // Si el sistema 19 tiene registros de esa placa
 
@@ -4569,14 +4586,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_19.result.length - 1; i >= 0; i--) {
           // si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_19.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_19.result[i].velocidad) >= 81.00) {
             // Agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_19.result[i]);
           // metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_19.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_19.result[i].velocidad));
         }
       } // Si el sistema 21 tiene registros de esa placa
 
@@ -4585,14 +4602,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el arreglo
         for (var i = this.historial.sistema_21.result.length - 1; i >= 0; i--) {
           // Si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_21.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_21.result[i].velocidad) >= 81.00) {
             // Agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_21.result[i]);
           // metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_21.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_21.result[i].velocidad));
         }
       } // Si el sistema 22 tiene registros de esa placa
 
@@ -4601,14 +4618,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el array
         for (var i = this.historial.sistema_22.result.length - 1; i >= 0; i--) {
           // si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_22.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_22.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_22.result[i]);
           // Metemos el registro al array de velocidades
 
 
-          velocidades.push(this.historial.sistema_22.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_22.result[i].velocidad));
         }
       } // Si el sistema 43 tiene registros de esa placa
 
@@ -4617,14 +4634,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el array
         for (var i = this.historial.sistema_43.result.length - 1; i >= 0; i--) {
           // si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_43.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_43.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_43.result[i]);
           // Metemos el registro al array de velocidades.
 
 
-          velocidades.push(this.historial.sistema_43.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_43.result[i].velocidad));
         }
       } // Si el sistema 44 tiene registros de esa placa
 
@@ -4633,14 +4650,14 @@ __webpack_require__.r(__webpack_exports__);
         // recorremos el array
         for (var i = this.historial.sistema_44.result.length - 1; i >= 0; i--) {
           // Si el registro tiene una velocidad mayor a 81
-          if (this.historial.sistema_44.result[i].velocidad.velocidad >= 81.00) {
+          if (parseFloat(this.historial.sistema_44.result[i].velocidad) >= 81.00) {
             // agregamos un contador al exceso de velocidad
             exceso_velocidad += 1;
           } // console.log(this.historial.sistema_44.result[i]);
           // Metemos el registro al array de velocidades.
 
 
-          velocidades.push(this.historial.sistema_44.result[i].velocidad.velocidad);
+          velocidades.push(parseFloat(this.historial.sistema_44.result[i].velocidad));
         }
       } // variable inicial de promedio de velocidad
 
@@ -4664,11 +4681,6 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this2 = this;
 
-    // axios.get('api/user').then(res=>{
-    // 	console.log(res.data);
-    // }).catch(err=>{
-    // 	console.log(err.response.data);
-    // });
     // Escucha el evento setTab del MenuComponent
     this.$root.$on('set-tab', function (tab) {
       // activa la pestaña enviada por el menucomponent
@@ -4683,7 +4695,10 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$root.$on('set-placa-info', function (placa) {
       // Igualamos la placa del repuve en el menu component a la data placa del componente principal
-      _this2.placa = placa.placa;
+      _this2.placa = {
+        'placa': placa.placa,
+        'tipo_servicio': placa.tipo_servicio_id
+      };
     }); // Escucha el evento SetRepuveInfo del menu componente
 
     this.$root.$on('set-repuve-info', function (res) {
@@ -9336,7 +9351,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#rec[data-v-3df53264]{\n    min-height: 80vh; \n    max-height: 80vh;\n}\n", ""]);
+exports.push([module.i, "\n#rec[data-v-3df53264]{\n    min-height: 70vh; \n    max-height: 70vh;\n}\n", ""]);
 
 // exports
 
@@ -42432,503 +42447,452 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: " box row", attrs: { id: "rec" } }, [
-      _c("table", { staticClass: "table table-default" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          [
-            _vm._l(_vm.registros.sistema_0.result, function(registro) {
-              return _vm.registros.sistema_0.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.Velocidad >= 81 ? "text-warning" : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(_vm._s(registro.date + " " + registro.hora))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_1.result, function(registro) {
-              return _vm.registros.sistema_1.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.Velocidad >= 81 ? "text-warning" : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(_vm._s(registro.date + " " + registro.hora))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_11.result, function(registro) {
-              return _vm.registros.sistema_11.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+    _vm._m(1),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: " box row",
+        staticStyle: {
+          "background-color": "#3f444b",
+          "border-top": "0px",
+          overflow: "auto",
+          "text-align": "center"
+        },
+        attrs: { id: "rec" }
+      },
+      [
+        _c("table", { staticClass: "table table-default" }, [
+          _c(
+            "tbody",
+            [
+              _vm._l(_vm.registros.sistema_0.result, function(registro) {
+                return _vm.registros.sistema_0.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_13.result, function(registro) {
-              return _vm.registros.sistema_13.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_14.result, function(registro) {
-              return _vm.registros.sistema_14.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_1.result, function(registro) {
+                return _vm.registros.sistema_1.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "Circuito Interior (Av. Rio Churubusco) y Ex Hacienda de Guadalupe"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_15.result, function(registro) {
-              return _vm.registros.sistema_15.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_16.result, function(registro) {
-              return _vm.registros.sistema_16.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_11.result, function(registro) {
+                return _vm.registros.sistema_11.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_17.result, function(registro) {
-              return _vm.registros.sistema_17.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_13.result, function(registro) {
+                return _vm.registros.sistema_13.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "Circuito Interior Oriente (Av. Rio Consulado) y Tanger"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_18.result, function(registro) {
-              return _vm.registros.sistema_18.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_19.result, function(registro) {
-              return _vm.registros.sistema_19.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_14.result, function(registro) {
+                return _vm.registros.sistema_14.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("Insurgentes Sur (Ciudad Universitaria)")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_21.result, function(registro) {
-              return _vm.registros.sistema_21.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_15.result, function(registro) {
+                return _vm.registros.sistema_15.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "Circuito Interior Poniente (Av. Rio Consulado) y Chelines"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_22.result, function(registro) {
-              return _vm.registros.sistema_22.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_43.result, function(registro) {
-              return _vm.registros.sistema_43.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_16.result, function(registro) {
+                return _vm.registros.sistema_16.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("Av. Tlalpan Sur y Museo (Xotepingo)")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.registros.sistema_44.result, function(registro) {
-              return _vm.registros.sistema_44.result.length > 0
-                ? _c(
-                    "tr",
-                    {
-                      class:
-                        registro.velocidad.velocidad >= 81
-                          ? "text-warning"
-                          : "text-white"
-                    },
-                    [
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            registro.velocidad.date +
-                              " " +
-                              registro.velocidad.hora
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_17.result, function(registro) {
+                return _vm.registros.sistema_17.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Av. Tlalpan Norte y  Xotepingo")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
                           )
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(registro.velocidad.velocidad.toFixed(2)) +
-                            " Km/h"
-                        )
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            })
-          ],
-          2
-        )
-      ])
-    ])
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_18.result, function(registro) {
+                return _vm.registros.sistema_18.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "Av. Tlalpan Norte y Los Atletas (General Anaya)"
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_19.result, function(registro) {
+                return _vm.registros.sistema_19.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("Viaducto Miguel Alemán  y Dr. Andrade")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_21.result, function(registro) {
+                return _vm.registros.sistema_21.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v("Viaducto Rio de la Piedad  y Eje 3 (Azúcar)")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_22.result, function(registro) {
+                return _vm.registros.sistema_22.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Av. Tlalpan Sur y Dakota")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_43.result, function(registro) {
+                return _vm.registros.sistema_43.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Periférico Sur  y Las Flores")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.registros.sistema_44.result, function(registro) {
+                return _vm.registros.sistema_44.result.length > 0
+                  ? _c(
+                      "tr",
+                      {
+                        class:
+                          registro.velocidad >= 81
+                            ? "text-warning"
+                            : "text-white"
+                      },
+                      [
+                        _c("td", [
+                          _vm._v(_vm._s(registro.date + " " + registro.time))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Periferico Norte y Las Flores")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                              " Km/h"
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e()
+              })
+            ],
+            2
+          )
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -42948,21 +42912,45 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { attrs: { align: "center" } }, [
-      _c("tr", [
-        _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
-          _vm._v("\n    \t\t\t\t\t\tFecha\n    \t\t\t\t\t")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
-          _vm._v("\n    \t\t\t\t\t\tUbicación\n    \t\t\t\t\t")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticClass: "col-xs-3 headTable text-warning" }, [
-          _vm._v("\n    \t\t\t\t\t\tVelocidad(KPH)\n    \t\t\t\t\t")
+    return _c(
+      "table",
+      {
+        staticClass: "table table-default",
+        staticStyle: { "background-color": "rgb(63, 68, 75)" }
+      },
+      [
+        _c("thead", { attrs: { align: "center" } }, [
+          _c("tr", [
+            _c(
+              "th",
+              {
+                staticClass: "col-xs-4 headTable text-warning",
+                staticStyle: { width: "20% !important" }
+              },
+              [_vm._v("\n    \t\t\t\t\tFecha\n    \t\t\t\t")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticClass: "col-xs-4 headTable text-warning",
+                staticStyle: { width: "65% !important" }
+              },
+              [_vm._v("\n    \t\t\t\t\tUbicación\n    \t\t\t\t")]
+            ),
+            _vm._v(" "),
+            _c(
+              "th",
+              {
+                staticClass: "col-xs-4 headTable text-warning",
+                staticStyle: { width: "15% !important" }
+              },
+              [_vm._v("\n    \t\t\t\t\tVelocidad(KPH)\n    \t\t\t\t")]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -42998,10 +42986,10 @@ var render = function() {
           [
             _vm._l(_vm.registros.sistema_0.result, function(registro) {
               return _vm.registros.sistema_0.result.length > 0 &&
-                registro.Velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(_vm._s(registro.date + " " + registro.hora))
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
                     _c("td", [
@@ -43011,7 +42999,10 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
+                      _vm._v(
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                          " Km/h"
+                      )
                     ])
                   ])
                 : _vm._e()
@@ -43019,10 +43010,10 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_1.result, function(registro) {
               return _vm.registros.sistema_1.result.length > 0 &&
-                registro.Velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(_vm._s(registro.date + " " + registro.hora))
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
                     _c("td", [
@@ -43032,7 +43023,10 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(registro.Velocidad.toFixed(2)) + " Km/h")
+                      _vm._v(
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
+                          " Km/h"
+                      )
                     ])
                   ])
                 : _vm._e()
@@ -43040,16 +43034,10 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_11.result, function(registro) {
               return _vm.registros.sistema_11.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
                     _c("td", [
@@ -43058,7 +43046,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43068,25 +43056,21 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_13.result, function(registro) {
               return _vm.registros.sistema_13.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
                       _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
+                        "Circuito Interior Oriente (Av. Rio Consulado) y Tanger"
                       )
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43096,25 +43080,19 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_14.result, function(registro) {
               return _vm.registros.sistema_14.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      _vm._v("Insurgentes Sur (Ciudad Universitaria)")
                     ]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43124,25 +43102,21 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_15.result, function(registro) {
               return _vm.registros.sistema_15.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
                       _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
+                        "Circuito Interior Poniente (Av. Rio Consulado) y Chelines"
                       )
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43152,25 +43126,17 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_16.result, function(registro) {
               return _vm.registros.sistema_16.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
+                    _c("td", [_vm._v("Av. Tlalpan Sur y Museo (Xotepingo)")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43180,25 +43146,17 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_17.result, function(registro) {
               return _vm.registros.sistema_17.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
+                    _c("td", [_vm._v("Av. Tlalpan Norte y  Xotepingo")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43208,25 +43166,19 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_18.result, function(registro) {
               return _vm.registros.sistema_18.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      _vm._v("Av. Tlalpan Norte y Los Atletas (General Anaya)")
                     ]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43236,25 +43188,17 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_19.result, function(registro) {
               return _vm.registros.sistema_19.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
+                    _c("td", [_vm._v("Viaducto Miguel Alemán  y Dr. Andrade")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43264,25 +43208,19 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_21.result, function(registro) {
               return _vm.registros.sistema_21.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
+                      _vm._v("Viaducto Rio de la Piedad  y Eje 3 (Azúcar)")
                     ]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43292,25 +43230,17 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_22.result, function(registro) {
               return _vm.registros.sistema_22.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
+                    _c("td", [_vm._v("Av. Tlalpan Sur y Dakota")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43320,25 +43250,17 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_43.result, function(registro) {
               return _vm.registros.sistema_43.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
+                    _c("td", [_vm._v("Periférico Sur  y Las Flores")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -43348,25 +43270,17 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.registros.sistema_44.result, function(registro) {
               return _vm.registros.sistema_44.result.length > 0 &&
-                registro.velocidad.velocidad >= 81
+                registro.velocidad >= 81
                 ? _c("tr", { staticClass: "text-white" }, [
                     _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          registro.velocidad.date +
-                            " " +
-                            registro.velocidad.hora
-                        )
-                      )
+                      _vm._v(_vm._s(registro.date + " " + registro.time))
                     ]),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v("Viaducto Miguel Alemán  y Av. Patriotismo")
-                    ]),
+                    _c("td", [_vm._v("Periferico Norte y Las Flores")]),
                     _vm._v(" "),
                     _c("td", [
                       _vm._v(
-                        _vm._s(registro.velocidad.velocidad.toFixed(2)) +
+                        _vm._s(parseFloat(registro.velocidad).toFixed(2)) +
                           " Km/h"
                       )
                     ])
@@ -45228,7 +45142,7 @@ var render = function() {
               }
             ],
             staticClass: "w-100 h-100",
-            staticStyle: { "min-height": "83vh !important" },
+            staticStyle: { "min-height": "80vh !important" },
             attrs: { response: _vm.historial }
           })
         ],
@@ -45249,7 +45163,7 @@ var render = function() {
               }
             ],
             staticClass: "w-100 h-100",
-            staticStyle: { "min-height": "83vh !important" },
+            staticStyle: { "min-height": "80vh !important" },
             attrs: { response: _vm.historial }
           })
         ],
@@ -45290,7 +45204,7 @@ var render = function() {
               }
             ],
             staticClass: "w-100 h-100",
-            staticStyle: { "min-height": "83vh !important" },
+            staticStyle: { "min-height": "80vh !important" },
             attrs: { response: _vm.historial }
           })
         ],

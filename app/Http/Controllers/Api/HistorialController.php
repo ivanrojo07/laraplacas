@@ -63,18 +63,22 @@ class HistorialController extends Controller
 	        if (isset($servicio)) {
 	        	// Llamamos a la función para crear o actualizar
 	        	// el modelo placa que coincida con la placa buscada.
-	        	$registro_placa = RegistroPlaca::updateOrCreate(
-	                [
-	                    'placa'=>$request->placa
-	                ],
-	                [
-	                    'placa'=>$request->placa,
-	                    'tipo_servicio_id'=>$servicio->id,
-	                    'verificada' =>  true
-	                ]
-	             );
+	        	// $registro_placa = RegistroPlaca::updateOrCreate(
+	         //        [
+	         //            'placa'=>$request->placa
+	         //        ],
+	         //        [
+	         //            'placa'=>$request->placa,
+	         //            'tipo_servicio_id'=>$servicio->id,
+	         //            'verificada' =>  true
+	         //        ]
+	         //     );
 	        	// Retornamos el objeto json con la placa resultante y su relación con tipo de servicio
-    			return response()->json(['placa'=>$registro_placa->load('tipo_servicio')],201);
+                $registro_placa = [
+                    'placa'=>strtoupper($request->placa),
+                    'tipo_servicio'=>$servicio
+                ];
+    			return response()->json(['placa'=>$registro_placa],201);
 
 	        } 
 	        // Si no encontramos el tipo de servicio significa que la placa no existe

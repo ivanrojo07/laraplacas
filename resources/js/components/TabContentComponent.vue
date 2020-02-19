@@ -5,12 +5,12 @@
 		<!-- etiqueta que realiza la animación de transición de un componente a otro -->
 		<transition name="component-fade" mode="out-in">
 			<!-- Llamando al componente HistorialComponent -->
-			<historial-component class="w-100 h-100" style="min-height: 83vh !important;" v-show="tab == 'velocidad'" :response="historial"></historial-component>
+			<historial-component class="w-100 h-100" style="min-height: 80vh !important;" v-show="tab == 'velocidad'" :response="historial"></historial-component>
 		</transition>
 		<!-- transición entre componentes -->
 		<transition name="component-fade" mode="out-in">
 			<!-- Llamando al componente ExcesoComponent -->
-			<exceso-component class="w-100 h-100" style="min-height: 83vh !important;" v-show="tab == 'exceso'" :response="historial"></exceso-component>
+			<exceso-component class="w-100 h-100" style="min-height: 80vh !important;" v-show="tab == 'exceso'" :response="historial"></exceso-component>
 		</transition>
 		<!-- transición entre componentes -->
 		<transition name="component-fade" mode="out-in">
@@ -20,7 +20,7 @@
 		<!-- transición entre componentes -->
 		<transition name="component-fade" mode="out-in">
 			<!-- llamando al componente DeteccionesComponent -->
-			<detecciones-component class="w-100 h-100" style="min-height: 83vh !important;" v-show="tab == 'detecciones'" :response="historial"></detecciones-component>
+			<detecciones-component class="w-100 h-100" style="min-height: 80vh !important;" v-show="tab == 'detecciones'" :response="historial"></detecciones-component>
 		</transition>
 	</div>
 </template>
@@ -70,33 +70,33 @@ import RoboComponent from "./RoboComponent";
 				// Objeto sobre la información de reportes de robo del automovil
 				robo: {},
 				// url sistema -1 (CHURUBUSCO)
-				url_sistema_menos_1: "api/sistema-1",
+				url_sistema_menos_1: "api/sistema1",
 				// url sistema 0 (CHUBURUSCO)
-				url_sistema_0: "api/sistema_0",
+				url_sistema_0: "api/sistema0",
 				// url sistema 11 (Patriotismo)
-				url_sistema_11: "api/sistema_11",
+				url_sistema_11: "api/sistema11",
 				// url sistema 13 (Consulado)
-				url_sistema_13: "api/sistema_13",
+				url_sistema_13: "api/sistema13",
 				// url sistema 14 (Ciudad Universitaria)
-				url_sistema_14: "api/sistema_14",
+				url_sistema_14: "api/sistema14",
 				// url sistema 15 (Soriana)
-				url_sistema_15: "api/sistema_15",
+				url_sistema_15: "api/sistema15",
 				// url sistema 16 (Xotepingo)
-				url_sistema_16: "api/sistema_16",
+				url_sistema_16: "api/sistema16",
 				// url sistema 17 (Xotepingo)
-				url_sistema_17: "api/sistema_17",
+				url_sistema_17: "api/sistema17",
 				// url sistema 18 (General Anaya)
-				url_sistema_18: "api/sistema_18",
+				url_sistema_18: "api/sistema18",
 				// url sistema 19 (Fonda Argentina)
-				url_sistema_19: "api/sistema_19",
+				url_sistema_19: "api/sistema19",
 				// url sistema 21 (Eje 3)
-				url_sistema_21: "api/sistema_21",
+				url_sistema_21: "api/sistema21",
 				// url sistema 22 (Dakota)
-				url_sistema_22: "api/sistema_22",
+				url_sistema_22: "api/sistema22",
 				// url sistema 43 (Las Flores)
-				url_sistema_43: "api/sistema_43",
+				url_sistema_43: "api/sistema43",
 				// url sistema 44 (Las Flores)
-				url_sistema_44: "api/sistema_44",
+				url_sistema_44: "api/sistema44",
 			}
 		},
 		watch:{
@@ -194,46 +194,46 @@ import RoboComponent from "./RoboComponent";
 			},
 			// funciones para cargar el axios de los sistemas.
 			'setSistema0':function (placa) {
-				return axios.post(this.url_sistema_0,{placa:placa});
+				return axios.post(this.url_sistema_0,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistemaMenos1':function (placa) {
-				return axios.post(this.url_sistema_menos_1,{placa:placa});
+				return axios.post(this.url_sistema_menos_1,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema11':function (placa) {
-				return axios.post(this.url_sistema_11,{placa:placa});
+				return axios.post(this.url_sistema_11,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema13':function (placa) {
-				return axios.post(this.url_sistema_13,{placa:placa});
+				return axios.post(this.url_sistema_13,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema14':function (placa) {
-				return axios.post(this.url_sistema_14,{placa:placa});
+				return axios.post(this.url_sistema_14,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema15':function (placa) {
-				return axios.post(this.url_sistema_15,{placa:placa});
+				return axios.post(this.url_sistema_15,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema16':function (placa) {
-				return axios.post(this.url_sistema_16,{placa:placa});
+				return axios.post(this.url_sistema_16,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema17':function (placa) {
-				return axios.post(this.url_sistema_17,{placa:placa});
+				return axios.post(this.url_sistema_17,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema18':function (placa) {
-				return axios.post(this.url_sistema_18,{placa:placa});
+				return axios.post(this.url_sistema_18,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema19':function (placa) {
-				return axios.post(this.url_sistema_19,{placa:placa});
+				return axios.post(this.url_sistema_19,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema21':function (placa) {
-				return axios.post(this.url_sistema_21,{placa:placa});
+				return axios.post(this.url_sistema_21,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema22':function (placa) {
-				return axios.post(this.url_sistema_22,{placa:placa});
+				return axios.post(this.url_sistema_22,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema43':function (placa) {
-				return axios.post(this.url_sistema_43,{placa:placa});
+				return axios.post(this.url_sistema_43,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			'setSistema44':function (placa) {
-				return axios.post(this.url_sistema_44,{placa:placa});
+				return axios.post(this.url_sistema_44,{placa:placa.placa,servicio:placa.tipo_servicio});
 			},
 			// Función que manda la información del velocidad promedio, exceso de velocidad y detecciones
 			'setSistemasInfo': function(){
@@ -246,12 +246,12 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el array
 					for (var i = this.historial.sistema_1.result.length - 1; i >= 0; i--) {
 						// si la velocidad del registro es mayor a 81
-						if (this.historial.sistema_1.result[i].Velocidad >=81.00) {
+						if (parseFloat(this.historial.sistema_1.result[i].velocidad) >=81.00) {
 							// agregamos un contador a exceso de velocidad
 							exceso_velocidad += 1;
 						}
 						// metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_1.result[i].Velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_1.result[i].velocidad));
 					}
 				}
 				// Si el sistema 0 tiene registros de esa placa 
@@ -259,12 +259,12 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el array
 					for (var i = this.historial.sistema_0.result.length - 1; i >= 0; i--) {
 						// si la velocidad del registro es mayor a 81
-						if (this.historial.sistema_0.result[i].Velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_0.result[i].velocidad) >= 81.00) {
 							// agregamos un contador a exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// metemos el registro al array de velocidades.
-						velocidades.push(this.historial.sistema_0.result[i].Velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_0.result[i].velocidad));
 					}
 				}
 				// si el sistema 11 tiene registros de esa placa
@@ -272,13 +272,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_11.result.length - 1; i >= 0; i--) {
 						// si la velocidad del registro es mayor a 81
-						if (this.historial.sistema_11.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_11.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_11.result[i]);
 						// metemos el regitro al array de velocidades.
-						velocidades.push(this.historial.sistema_11.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_11.result[i].velocidad));
 					}
 				}
 				// si el sistema 13 tiene registros de esa placa
@@ -286,13 +286,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_13.result.length - 1; i >= 0; i--) {
 						// si la velocidad del registro es mayor a 81
-						if (this.historial.sistema_13.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_13.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_13.result[i]);
 						// metemos el registro al array de velocidades.
-						velocidades.push(this.historial.sistema_13.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_13.result[i].velocidad));
 					}
 				}
 				// si el sistema 14 tiene registros de esa placa
@@ -300,13 +300,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_14.result.length - 1; i >= 0; i--) {
 						// si el registro tiene una velocidad mayor de 81
-						if (this.historial.sistema_14.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_14.result[i].velocidad) >= 81.00) {
 							// Agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_14.result[i]);
 						// Metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_14.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_14.result[i].velocidad));
 					}
 				}
 				// Si el sistema 15 tiene registros de esa placa
@@ -314,13 +314,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_15.result.length - 1; i >= 0; i--) {
 						// Si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_15.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_15.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad.
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_15.result[i]);
 						// Metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_15.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_15.result[i].velocidad));
 					}
 				}
 				// Si el sistema 16 tiene registros de esa placa
@@ -328,13 +328,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_16.result.length - 1; i >= 0; i--) {
 						// Si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_16.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_16.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_16.result[i]);
 						// Metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_16.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_16.result[i].velocidad));
 					}
 				}
 				// Si el sistema 17 tiene registros de esa placa
@@ -342,13 +342,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_17.result.length - 1; i >= 0; i--) {
 						// Si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_17.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_17.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_17.result[i]);
 						// Metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_17.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_17.result[i].velocidad));
 					}
 				}
 				// Si el sistema 18 tiene registros de esa placa
@@ -356,13 +356,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_18.result.length - 1; i >= 0; i--) {
 						// Si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_18.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_18.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_18.result[i]);
 						// Metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_18.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_18.result[i].velocidad));
 					}
 				}
 				// Si el sistema 19 tiene registros de esa placa
@@ -370,13 +370,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_19.result.length - 1; i >= 0; i--) {
 						// si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_19.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_19.result[i].velocidad) >= 81.00) {
 							// Agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_19.result[i]);
 						// metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_19.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_19.result[i].velocidad));
 					}
 				}
 				// Si el sistema 21 tiene registros de esa placa
@@ -384,13 +384,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el arreglo
 					for (var i = this.historial.sistema_21.result.length - 1; i >= 0; i--) {
 						// Si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_21.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_21.result[i].velocidad) >= 81.00) {
 							// Agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_21.result[i]);
 						// metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_21.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_21.result[i].velocidad));
 					}
 				}
 				// Si el sistema 22 tiene registros de esa placa
@@ -398,13 +398,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el array
 					for (var i = this.historial.sistema_22.result.length - 1; i >= 0; i--) {
 						// si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_22.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_22.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_22.result[i]);
 						// Metemos el registro al array de velocidades
-						velocidades.push(this.historial.sistema_22.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_22.result[i].velocidad));
 					}
 				}
 				// Si el sistema 43 tiene registros de esa placa
@@ -412,13 +412,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el array
 					for (var i = this.historial.sistema_43.result.length - 1; i >= 0; i--) {
 						// si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_43.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_43.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_43.result[i]);
 						// Metemos el registro al array de velocidades.
-						velocidades.push(this.historial.sistema_43.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_43.result[i].velocidad));
 					}
 				}
 				// Si el sistema 44 tiene registros de esa placa
@@ -426,13 +426,13 @@ import RoboComponent from "./RoboComponent";
 					// recorremos el array
 					for (var i = this.historial.sistema_44.result.length - 1; i >= 0; i--) {
 						// Si el registro tiene una velocidad mayor a 81
-						if (this.historial.sistema_44.result[i].velocidad.velocidad >= 81.00) {
+						if (parseFloat(this.historial.sistema_44.result[i].velocidad) >= 81.00) {
 							// agregamos un contador al exceso de velocidad
 							exceso_velocidad +=1;
 						}
 						// console.log(this.historial.sistema_44.result[i]);
 						// Metemos el registro al array de velocidades.
-						velocidades.push(this.historial.sistema_44.result[i].velocidad.velocidad);
+						velocidades.push(parseFloat(this.historial.sistema_44.result[i].velocidad));
 					}
 				}
 				// variable inicial de promedio de velocidad
@@ -467,7 +467,7 @@ import RoboComponent from "./RoboComponent";
 			// Escucha el evento SetPlacInfo del menucomponent
 			this.$root.$on('set-placa-info',(placa)=>{
 				// Igualamos la placa del repuve en el menu component a la data placa del componente principal
-				this.placa = placa.placa;
+				this.placa = {'placa':placa.placa,'tipo_servicio':placa.tipo_servicio_id};
 			});
 			// Escucha el evento SetRepuveInfo del menu componente
 			this.$root.$on('set-repuve-info',(res)=>{
