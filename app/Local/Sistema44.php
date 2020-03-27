@@ -23,7 +23,7 @@ class Sistema44 extends Model
     protected $appends = ['date','time'];
     
     public function getDateAttribute(){
-    	$fecha = date('l d/m/Y',strtotime($this->fecha))->setLocale('es');
+    	$fecha = date('d/m/Y',strtotime($this->fecha))->setLocale('es');
     	return $fecha;
     }
 

@@ -134,14 +134,6 @@ class HistorialController extends Controller
     	}
     }
 
-    public function prueba()
-    {
-    	$imagen_prueba = Imagen::first();
-    	// dd($imagen_prueba->with('sistema'));
-
-    	return response()->json(['prueba'=>$imagen_prueba->load('sistema')],201);
-    }
-
     public function local_sistema(Request $request) {
         // Validamos que el input placa cumpla
         // con el formato y sea requerido.

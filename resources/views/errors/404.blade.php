@@ -1,2 +1,2 @@
-<script>window.location = "/dashboard";</script>
+<script>window.location = "home";</script>
 No Encontrado ...

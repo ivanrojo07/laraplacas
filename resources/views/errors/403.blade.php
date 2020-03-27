@@ -1,3 +1,3 @@
 <script type="text/javascript">
-  window.location.href = "http://localhost/dashboard";
+  window.location.href = "home";
 </script>

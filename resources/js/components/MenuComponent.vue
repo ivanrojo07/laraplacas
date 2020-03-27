@@ -69,7 +69,7 @@
                                     Año
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ repuve_response.placa ? (repuve_response.año ? repuve_response.año : 'No encontrada') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.anio ? (repuve_response.anio == "0" ? "No encontrada" : repuve_response.anio) : 'No encontrada') : 'N/A'}}
                                 </div>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                                     Robado
                                 </div>
                                 <div class="col text-right text-warning">
-                                    {{ repuve_response.placa ? (repuve_response.robado ? repuve_response.robado : 'NO') : 'N/A'}}
+                                    {{ repuve_response.placa ? (repuve_response.robado ? "SI" : 'NO') : 'N/A'}}
                                     <!-- función que lanza evento para cambiar la pestañas en tabcomponent -->
                                     <a class="" href="#robado" @click="setTab('robado')">Más detalles</a>
                                 </div>
@@ -244,7 +244,7 @@
                     this.detecciones = "CARGANDO...";
                 }
                 // Llamada a la api de repuve con la placa a buscar
-                axios.post('api/repuve',{placa:placa}).then(res=>{
+                axios.post('api/repuve_local',{placa:placa}).then(res=>{
                     // guardar la respuesta en el objeto repuve_response
                     this.repuve_response = res.data.result;
                     // Lanzamos un evento a root con el repuve response.

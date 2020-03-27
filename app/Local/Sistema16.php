@@ -24,7 +24,7 @@ class Sistema16 extends Model
     
     public function getDateAttribute(){
     	setlocale(LC_ALL, 'es_ES');
-    	$fecha = date('l d/m/Y',strtotime($this->fecha));
+    	$fecha = date('d/m/Y',strtotime($this->fecha));
     	return $fecha;
     }
 

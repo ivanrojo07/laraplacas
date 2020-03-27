@@ -472,9 +472,9 @@ import RoboComponent from "./RoboComponent";
 			// Escucha el evento SetRepuveInfo del menu componente
 			this.$root.$on('set-repuve-info',(res)=>{
 				// Si el objeto dado res tiene afirmativo el metodo robado
-				if(res.robado.trim() == "SI"){
+				if(res.robado){
 					// Igualamos la respuesta dada por el evento a la data robo del componente principal
-					this.robo = res.reporte_robo;
+					this.robo = res.robado;
 				}
 				// De lo contrario
 				else{

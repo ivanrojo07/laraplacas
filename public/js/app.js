@@ -3629,7 +3629,7 @@ __webpack_require__.r(__webpack_exports__);
       } // Llamada a la api de repuve con la placa a buscar
 
 
-      axios.post('api/repuve', {
+      axios.post('api/repuve_local', {
         placa: placa
       }).then(function (res) {
         // guardar la respuesta en el objeto repuve_response
@@ -4703,9 +4703,9 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$root.$on('set-repuve-info', function (res) {
       // Si el objeto dado res tiene afirmativo el metodo robado
-      if (res.robado.trim() == "SI") {
+      if (res.robado) {
         // Igualamos la respuesta dada por el evento a la data robo del componente principal
-        _this2.robo = res.reporte_robo;
+        _this2.robo = res.robado;
       } // De lo contrario
       else {
           // Igualamos el data robo como un objeto vacio.
@@ -44417,8 +44417,10 @@ var render = function() {
                               "\n                                " +
                                 _vm._s(
                                   _vm.repuve_response.placa
-                                    ? _vm.repuve_response.año
-                                      ? _vm.repuve_response.año
+                                    ? _vm.repuve_response.anio
+                                      ? _vm.repuve_response.anio == "0"
+                                        ? "No encontrada"
+                                        : _vm.repuve_response.anio
                                       : "No encontrada"
                                     : "N/A"
                                 ) +
@@ -44664,7 +44666,7 @@ var render = function() {
                                 _vm._s(
                                   _vm.repuve_response.placa
                                     ? _vm.repuve_response.robado
-                                      ? _vm.repuve_response.robado
+                                      ? "SI"
                                       : "NO"
                                     : "N/A"
                                 ) +

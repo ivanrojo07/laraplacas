@@ -37,6 +37,7 @@ Route::middleware('auth:api')->group(function(){
 	Route::post('historial_placa','Api\HistorialController@search_placa');
 	Route::get('prueba','Api\HistorialController@prueba');
 	Route::post('repuve','Api\Repuve\RepuveController@getPlaca');
+	Route::post("repuve_local","Api\Repuve\RepuveLocalController@getPlaca");
 	Route::post('sistema_0','Api\Sistemas\SistemaController@searchSistema_0');
 	Route::post('sistema-1','Api\Sistemas\SistemaController@searchSistemaMenos1');
 	Route::post('sistema_11','Api\Sistemas\SistemaController@searchSistema_11');

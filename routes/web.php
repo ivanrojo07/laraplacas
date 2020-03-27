@@ -70,4 +70,3 @@ Route::prefix('/usuario')->name('usuario.')->group(function (){
 Route::get('placas',function(){
     return view('vista_previa.placas');
 });
-
