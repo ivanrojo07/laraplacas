@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-    <div id="rec" class=" box row">
+    <div class=" box row">
         <div>
             <form id="formvalidacion" name="formulariovalidacion">
                 <!--@@ Agregado por Catalina -->

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="row encabezado-aseguradoras">
-            <div class="col-lg-12 mt-3">
+            <div class="col-lg-12 ">
                 <h3 class="text-left">Historial</h3>
             </div>
         </div>

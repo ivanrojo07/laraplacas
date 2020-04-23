@@ -5,23 +5,21 @@
                 <h3 class="text-left"> Detalle de Detecciones </h3>
             </div>
         </div>
-        <table class="table table-default" style="background-color: rgb(63, 68, 75);">
-    		<thead align="center">
-    			<tr>
-    				<th class="col-xs-4 headTable text-warning" style="width: 20% !important;">
-    					Fecha
-    				</th>
-    				<th class="col-xs-4 headTable text-warning" style="width: 65% !important;">
-    					Ubicación
-    				</th>
-    				<th class="col-xs-4 headTable text-warning" style="width: 15% !important;">
-    					Velocidad(KPH)
-    				</th>
-    			</tr>
-    		</thead>
-        </table>
-        <div id="rec" class=" box row" style="background-color:#3f444b; border-top: 0px; overflow:auto; text-align: center;">
+        <div id="rec" class=" box row" style="display: block; overflow: auto;">
         	<table class="table table-default">
+                <thead align="center">
+                    <tr>
+                        <th class="col-xs-4 headTable text-warning" style="width: 20% !important;">
+                            Fecha
+                        </th>
+                        <th class="col-xs-4 headTable text-warning" style="width: 65% !important;">
+                            Ubicación
+                        </th>
+                        <th class="col-xs-4 headTable text-warning" style="width: 15% !important;">
+                            Velocidad(KPH)
+                        </th>
+                    </tr>
+                </thead>
     			<tbody>
                     <!-- SISTEMA 0 -->
                     <tr :class="registro.velocidad >= 81 ? 'text-warning' : 'text-white'" v-if="registros.sistema_0.result.length > 0" v-for="registro in registros.sistema_0.result">
@@ -100,10 +98,7 @@
 	</div>
 </template>
 <style scoped>
-    #rec{
-        min-height: 70vh; 
-        max-height: 70vh;
-    }
+    
 </style>
 <script>
     export default{

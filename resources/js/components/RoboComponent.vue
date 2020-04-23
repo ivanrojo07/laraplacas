@@ -38,10 +38,7 @@
 	</div>
 </template>
 <style scoped>
-    #rec{
-        min-height: 80vh; 
-        max-height: 80vh;
-    }
+    
 </style>
 <script>
     export default{

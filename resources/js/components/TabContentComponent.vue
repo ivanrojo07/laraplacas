@@ -5,22 +5,22 @@
 		<!-- etiqueta que realiza la animación de transición de un componente a otro -->
 		<transition name="component-fade" mode="out-in">
 			<!-- Llamando al componente HistorialComponent -->
-			<historial-component class="w-100 h-100" style="min-height: 80vh !important;" v-show="tab == 'velocidad'" :response="historial"></historial-component>
+			<historial-component class="w-100 h-100 py-auto my-auto"  v-show="tab == 'velocidad'" :response="historial"></historial-component>
 		</transition>
 		<!-- transición entre componentes -->
 		<transition name="component-fade" mode="out-in">
 			<!-- Llamando al componente ExcesoComponent -->
-			<exceso-component class="w-100 h-100" style="min-height: 80vh !important;" v-show="tab == 'exceso'" :response="historial"></exceso-component>
+			<exceso-component class="w-100 h-100 py-auto my-auto" v-show="tab == 'exceso'" :response="historial"></exceso-component>
 		</transition>
 		<!-- transición entre componentes -->
 		<transition name="component-fade" mode="out-in">
 			<!-- llamando al componente RoboComponent -->
-			<robo-component class="w-100" v-show="tab == 'robado'" :response="robo"></robo-component>
+			<robo-component class="w-100 h-100 py-auto my-auto " v-show="tab == 'robado'" :response="robo"></robo-component>
 		</transition>
 		<!-- transición entre componentes -->
 		<transition name="component-fade" mode="out-in">
 			<!-- llamando al componente DeteccionesComponent -->
-			<detecciones-component class="w-100 h-100" style="min-height: 80vh !important;" v-show="tab == 'detecciones'" :response="historial"></detecciones-component>
+			<detecciones-component class="w-100 h-100 py-auto my-auto" v-show="tab == 'detecciones'" :response="historial"></detecciones-component>
 		</transition>
 	</div>
 </template>
@@ -468,6 +468,9 @@ import RoboComponent from "./RoboComponent";
 			this.$root.$on('set-placa-info',(placa)=>{
 				// Igualamos la placa del repuve en el menu component a la data placa del componente principal
 				this.placa = {'placa':placa.placa,'tipo_servicio':placa.tipo_servicio_id};
+				// Cambiamos a la pantalla de velocidad.
+				// Para que funcione el zoom.
+				this.tab = "velocidad";
 			});
 			// Escucha el evento SetRepuveInfo del menu componente
 			this.$root.$on('set-repuve-info',(res)=>{

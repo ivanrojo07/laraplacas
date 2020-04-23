@@ -11,7 +11,7 @@
                     <div class="col-12 mt-3 mb-3">
                         <!-- FORMULARIO PARA BUSCAR PLACA -->
                         <form @submit="checkPlaca" method="post">
-                            <div class="input-group">
+                            <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Placa:</span>
                                 </div>
@@ -19,7 +19,7 @@
                                 <input id="placa" v-model="placa" type="search" name="placa" class="form-control uppercase">
                                 <div class="input-group-append">
                                     <!-- BOTON QUE LANZA EL FORMULARIO -->
-                                    <button type="submit" class="btn btn-info">Buscar</button>
+                                    <button type="submit" class="btn btn-info btn-block">Buscar</button>
                                 </div>
                             </div>
                         </form>
@@ -38,7 +38,7 @@
                 =====                                                                   =====
                 ========================================================================== -->
                 <!-- verificamos si existe el objeto placa_response -->
-                <div class="card col-12" v-if="!(Object.keys(placa_response).length === 0 )">
+                <div class="card col-12 pb-3" v-if="!(Object.keys(placa_response).length === 0 )">
                     <div class="card-header">
                         <h3>Placa: {{ repuve_response.placa ? repuve_response.placa : 'Registro no encontrado en REPUVE' }}</h3>
                     </div>

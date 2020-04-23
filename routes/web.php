@@ -11,9 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('inicio');
-// });
 Route::middleware(['admin'])->group(function () {
     Route::get('/test', function () {
 

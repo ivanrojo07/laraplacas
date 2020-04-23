@@ -130,8 +130,5 @@
 </script>
 
 <style scoped>
-	#map{
-		min-height: 80vh; 
-		max-height: 80vh;
-	}
+	
 </style>

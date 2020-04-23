@@ -5,7 +5,7 @@
                 <h3 class="text-left">Detalle de Exceso de Velocidad</h3>
             </div>
         </div>
-        <div id="rec" class="box row">
+        <div id="rec" class="box row" style="display: block; overflow: auto;">
     		<table class="table table-default">
     			<thead align="center">
                     <tr>
@@ -98,10 +98,6 @@
 	</div>
 </template>
 <style scoped>
-    #rec{
-        min-height: 80vh; 
-        max-height: 80vh;
-    }
 </style>
 <script>
 	export default{
