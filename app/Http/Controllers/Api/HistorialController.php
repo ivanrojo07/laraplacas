@@ -183,7 +183,7 @@ class HistorialController extends Controller
                 $placas = $registro_placa->tipo_servicio->sistema0_placas()->where('placa_original','like',"%$registro_placa->placa%")->get();
                 return response()->json(['placas'=>$placas],201);
 
-                // // Retornamos el objeto json con la placa resultante y su relación con tipo de servicio
+                // Retornamos el objeto json con la placa resultante y su relación con tipo de servicio
                 // return response()->json(['placa'=>$registro_placa->load('tipo_servicio')],201);
 
             } 

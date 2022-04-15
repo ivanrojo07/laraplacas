@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::middleware(['admin'])->group(function () {
     Route::get('/test', function () {
 

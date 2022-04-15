@@ -35,7 +35,7 @@
   width: 100% ;
   height: 100% ;
   background-color: rgba(0, 0, 0, 0.75) ;
-  /*TODO modificar ruta del background-image en producción*/
+  /*modificar ruta del background-image en producción*/
   background-image: url("/Placas/public/images/load.gif") ;
   background-size: 15%;
   background-repeat: no-repeat ;
@@ -106,6 +106,7 @@ import RoboComponent from "./RoboComponent";
 				this.getHistorico(this.placa);
 			}
 		},
+		// componentes a cargar
 		components:{
 			DeteccionesComponent,
 			HistorialComponent,

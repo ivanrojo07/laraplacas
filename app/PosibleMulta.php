@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PosibleMulta extends Model
 {
+
     //
     protected $fillable=[
     	'tipo_multa',
@@ -15,7 +16,7 @@ class PosibleMulta extends Model
     ];
 
     /*********************************
-     *			RELACIÓNES
+     *			RELACIONES
      ********************************/
     
     // Imagen placas

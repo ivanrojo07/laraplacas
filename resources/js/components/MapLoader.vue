@@ -26,10 +26,10 @@
 		},
 		data(){
 			return{
-				google:null,
-				map:null,
-				google_puntos:[],
-				infoWindow:null,
+				google: null,
+				map: null,
+				google_puntos: [],
+				infoWindow: null,
 				bounds: null
 			}
 		},

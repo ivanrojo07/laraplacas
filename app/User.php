@@ -44,12 +44,7 @@ class User extends Authenticatable
         'last_login'
     ];
 
-    //protected $fillable = [
-    //    'name','nombres','apellido_paterno','apellido_materno','telefono', 'email', 'password','f_registro','f_alta','f_baja','h_alta','h_baja','h_edicion','roles','status','token','idusr_alta','idusr_baja','idusr_edicion'
-    //];
-
-    /*
-    ,'id','name','apellido_materno','apellido_paterno','alias','f_registro','f_alta','f_baja','f_edicion','password','roles','status','token','telefono','idusr_alta','idusr_baja','idusr_edicion'*/
+    
 
     /**
      * The attributes that should be hidden for arrays.
